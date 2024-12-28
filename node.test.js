@@ -7709,7 +7709,7 @@ var $;
 		}
 		Journal(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => (["📖 ", (this.journal_title())]);
+			(obj.sub) = () => ([(this.journal_title())]);
 			return obj;
 		}
 		open(){
@@ -7758,6 +7758,9 @@ var $;
             },
             flex: {
                 wrap: 'wrap',
+            },
+            justify: {
+                content: 'flex-end',
             },
             Link: {
                 flex: {
