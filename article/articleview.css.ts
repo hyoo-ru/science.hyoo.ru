@@ -14,6 +14,10 @@ namespace $.$$ {
 			wrap: 'wrap',
 		},
 
+		justify: {
+			content: 'flex-end',
+		},
+
 		Link: {
 			flex: {
 				grow: 1,

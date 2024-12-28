@@ -11,5 +11,4 @@ $hyoo_science_article $mol_view
 					haystack <= title \
 		<= Journal $mol_view
 			sub /
-				\📖 
 				<= journal_title \
