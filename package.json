@@ -189,6 +189,7 @@
     "$mol_icon_script_text",
     "$mol_icon_script",
     "$hyoo_science_article",
+    "$mol_chip",
     "$mol_theme_auto",
     "$hyoo_science_elsevier",
     "$mol_data_pipe",
@@ -212,6 +213,7 @@
     "$mol_data_enum",
     "$mol_data_optional",
     "$mol_data_array",
+    "$mol_data_variant",
     "$mol_fetch",
     "$mol_dom_parse"
   ],

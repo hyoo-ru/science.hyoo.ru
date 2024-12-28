@@ -7275,6 +7275,35 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_chip) = class $mol_chip extends ($.$mol_view) {
+		sub(){
+			return [(this.title())];
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($mol_chip, {
+            padding: $mol_gap.text,
+            border: {
+                radius: $mol_gap.round,
+            },
+            background: {
+                color: $mol_theme.card,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$mol_theme_auto) = class $mol_theme_auto extends ($.$mol_plugin) {
 		theme(){
 			return "";
@@ -7440,9 +7469,15 @@ var $;
 		found_rows(){
 			return [(this.Found_row("0"))];
 		}
+		Found_none(){
+			const obj = new this.$.$mol_chip();
+			(obj.title) = () => ("Not Found");
+			return obj;
+		}
 		Found_rows(){
 			const obj = new this.$.$mol_list();
 			(obj.rows) = () => ((this.found_rows()));
+			(obj.Empty) = () => ((this.Found_none()));
 			return obj;
 		}
 		request(){
@@ -7501,6 +7536,7 @@ var $;
 	($mol_mem(($.$hyoo_science_app.prototype), "Lights"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Source"));
 	($mol_mem_key(($.$hyoo_science_app.prototype), "Found_row"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Found_none"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Found_rows"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Request"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Theme"));
@@ -8339,6 +8375,35 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    function $mol_data_variant(...sub) {
+        return $mol_data_setup((val) => {
+            const errors = [];
+            for (const type of sub) {
+                let hidden = $.$mol_fail_hidden;
+                try {
+                    $.$mol_fail = $.$mol_fail_hidden;
+                    return type(val);
+                }
+                catch (error) {
+                    $.$mol_fail = hidden;
+                    if (error instanceof $mol_data_error) {
+                        errors.push(error);
+                    }
+                    else {
+                        return $mol_fail_hidden(error);
+                    }
+                }
+            }
+            return $mol_fail(new $mol_data_error(`${val} is not any of variants`, {}, ...errors));
+        }, sub);
+    }
+    $.$mol_data_variant = $mol_data_variant;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     const moment = $mol_data_pipe($mol_data_string, $mol_time_moment);
     let Link_type;
     (function (Link_type) {
@@ -8352,6 +8417,9 @@ var $;
     $.$hyoo_science_elsevier_link = $mol_data_record({
         '@ref': $mol_data_enum('Link_type', Link_type),
         '@href': $mol_data_string,
+    });
+    $.$hyoo_science_elsevier_error = $mol_data_record({
+        error: $mol_data_string,
     });
     $.$hyoo_science_elsevier_entry = $mol_data_record({
         'openaccess': $mol_data_pipe((v) => Number(v), (v) => Boolean(v)),
@@ -8370,7 +8438,7 @@ var $;
             'opensearch:totalResults': parseInt,
             'opensearch:startIndex': parseInt,
             'opensearch:itemsPerPage': parseInt,
-            'entry': $mol_data_array($.$hyoo_science_elsevier_entry),
+            'entry': $mol_data_variant($mol_data_array($.$hyoo_science_elsevier_entry), $mol_data_array($.$hyoo_science_elsevier_error)),
         }),
     });
     function $hyoo_science_elsevier_search(service, query) {
@@ -8387,7 +8455,9 @@ var $;
         const resp = $.$hyoo_science_elsevier_response(this.$mol_fetch.json(uri.toString()))["search-results"];
         return {
             total: resp["opensearch:totalResults"],
-            article: resp.entry.map(entry => ({
+            article: resp.entry
+                .filter(entry => !('error' in entry))
+                .map(entry => ({
                 link: entry.link.filter(l => ['scidir', 'scopus'].includes(l["@ref"]))[0]["@href"],
                 title: entry["dc:title"],
                 author: entry["dc:creator"] ?? '🥷',

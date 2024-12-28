@@ -2798,6 +2798,18 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
+	export class $mol_chip extends $mol_view {
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=chip.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
 	export class $mol_theme_auto extends $mol_plugin {
 		theme( ): string
 		attr( ): ({ 
@@ -3037,6 +3049,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_data_variant<Sub extends $mol_data_value[]>(...sub: Sub): ((val: Parameters<Sub[number]>[0]) => ReturnType<Sub[number]>) & {
+        config: Sub;
+        Value: ReturnType<Value>;
+    };
+}
+
+declare namespace $ {
     function $mol_dom_parse(text: string, type?: DOMParserSupportedType): Document;
 }
 
@@ -3100,6 +3119,16 @@ declare namespace $ {
                 Value: ReturnType<Value>;
             };
             '@href': (val: string) => string;
+        };
+        Value: ReturnType<Value>;
+    };
+    export let $hyoo_science_elsevier_error: ((val: {
+        error: string;
+    }) => Readonly<{
+        error: string;
+    }>) & {
+        config: {
+            error: (val: string) => string;
         };
         Value: ReturnType<Value>;
     };
@@ -3208,6 +3237,8 @@ declare namespace $ {
                 'prism:startingPage': string;
                 'prism:url': string;
                 'prism:volume': string;
+            }[] | readonly {
+                error: string;
             }[];
         };
     }) => Readonly<{
@@ -3229,6 +3260,8 @@ declare namespace $ {
                 'prism:startingPage': number;
                 'prism:url': string;
                 'prism:volume': number;
+            }>[] | readonly Readonly<{
+                error: string;
             }>[];
         }>;
     }>) & {
@@ -3251,6 +3284,8 @@ declare namespace $ {
                     'prism:startingPage': string;
                     'prism:url': string;
                     'prism:volume': string;
+                }[] | readonly {
+                    error: string;
                 }[];
             }) => Readonly<{
                 'opensearch:totalResults': number;
@@ -3270,6 +3305,8 @@ declare namespace $ {
                     'prism:startingPage': number;
                     'prism:url': string;
                     'prism:volume': number;
+                }>[] | readonly Readonly<{
+                    error: string;
                 }>[];
             }>) & {
                 config: {
@@ -3290,6 +3327,8 @@ declare namespace $ {
                         'prism:startingPage': string;
                         'prism:url': string;
                         'prism:volume': string;
+                    }[] | readonly {
+                        error: string;
                     }[]) => readonly Readonly<{
                         'dc:creator'?: string | undefined;
                         link: readonly Readonly<{
@@ -3304,8 +3343,10 @@ declare namespace $ {
                         'prism:startingPage': number;
                         'prism:url': string;
                         'prism:volume': number;
+                    }>[] | readonly Readonly<{
+                        error: string;
                     }>[]) & {
-                        config: ((val: {
+                        config: [((val: readonly {
                             openaccess?: any;
                             'dc:creator'?: string | undefined;
                             link: readonly {
@@ -3319,7 +3360,7 @@ declare namespace $ {
                             'prism:startingPage': string;
                             'prism:url': string;
                             'prism:volume': string;
-                        }) => Readonly<{
+                        }[]) => readonly Readonly<{
                             'dc:creator'?: string | undefined;
                             link: readonly Readonly<{
                                 '@ref': Link_type;
@@ -3333,64 +3374,111 @@ declare namespace $ {
                             'prism:startingPage': number;
                             'prism:url': string;
                             'prism:volume': number;
-                        }>) & {
-                            config: {
-                                openaccess: ((this: any, input: any) => boolean) & {
-                                    config: {
-                                        funcs: [(v: any) => number, (v: number) => boolean] & [(input: any) => number, (input: number) => unknown];
-                                    };
-                                    Value: ReturnType<Value>;
-                                };
-                                'dc:creator': ((val: string | undefined) => string | undefined) & {
-                                    config: {
-                                        sub: (val: string) => string;
-                                        fallback: (() => string) | undefined;
-                                    };
-                                    Value: ReturnType<Value>;
-                                };
-                                'dc:identifier': (val: string) => string;
-                                'dc:title': (val: string) => string;
-                                'prism:coverDate': ((this: any, input: string) => $mol_time_moment) & {
-                                    config: {
-                                        funcs: [(val: string) => string, typeof $mol_time_moment] & [(input: string) => $mol_time_moment_config | undefined, new (input: $mol_time_moment_config | undefined) => unknown];
-                                    };
-                                    Value: ReturnType<Value>;
-                                };
-                                'prism:publicationName': (val: string) => string;
-                                'prism:startingPage': typeof parseInt;
-                                'prism:url': (val: string) => string;
-                                'prism:volume': typeof parseInt;
-                                link: ((val: readonly {
+                        }>[]) & {
+                            config: ((val: {
+                                openaccess?: any;
+                                'dc:creator'?: string | undefined;
+                                link: readonly {
                                     '@ref': Link_type;
                                     '@href': string;
-                                }[]) => readonly Readonly<{
+                                }[];
+                                'dc:identifier': string;
+                                'dc:title': string;
+                                'prism:coverDate': string;
+                                'prism:publicationName': string;
+                                'prism:startingPage': string;
+                                'prism:url': string;
+                                'prism:volume': string;
+                            }) => Readonly<{
+                                'dc:creator'?: string | undefined;
+                                link: readonly Readonly<{
                                     '@ref': Link_type;
                                     '@href': string;
-                                }>[]) & {
-                                    config: ((val: {
-                                        '@ref': Link_type;
-                                        '@href': string;
-                                    }) => Readonly<{
-                                        '@ref': Link_type;
-                                        '@href': string;
-                                    }>) & {
+                                }>[];
+                                openaccess: boolean;
+                                'dc:identifier': string;
+                                'dc:title': string;
+                                'prism:coverDate': $mol_time_moment;
+                                'prism:publicationName': string;
+                                'prism:startingPage': number;
+                                'prism:url': string;
+                                'prism:volume': number;
+                            }>) & {
+                                config: {
+                                    openaccess: ((this: any, input: any) => boolean) & {
                                         config: {
-                                            '@ref': ((value: Link_type) => Link_type) & {
-                                                config: {
-                                                    name: string;
-                                                    dict: typeof Link_type;
-                                                };
-                                                Value: ReturnType<Value>;
-                                            };
-                                            '@href': (val: string) => string;
+                                            funcs: [(v: any) => number, (v: number) => boolean] & [(input: any) => number, (input: number) => unknown];
                                         };
                                         Value: ReturnType<Value>;
                                     };
-                                    Value: ReturnType<Value>;
+                                    'dc:creator': ((val: string | undefined) => string | undefined) & {
+                                        config: {
+                                            sub: (val: string) => string;
+                                            fallback: (() => string) | undefined;
+                                        };
+                                        Value: ReturnType<Value>;
+                                    };
+                                    'dc:identifier': (val: string) => string;
+                                    'dc:title': (val: string) => string;
+                                    'prism:coverDate': ((this: any, input: string) => $mol_time_moment) & {
+                                        config: {
+                                            funcs: [(val: string) => string, typeof $mol_time_moment] & [(input: string) => $mol_time_moment_config | undefined, new (input: $mol_time_moment_config | undefined) => unknown];
+                                        };
+                                        Value: ReturnType<Value>;
+                                    };
+                                    'prism:publicationName': (val: string) => string;
+                                    'prism:startingPage': typeof parseInt;
+                                    'prism:url': (val: string) => string;
+                                    'prism:volume': typeof parseInt;
+                                    link: ((val: readonly {
+                                        '@ref': Link_type;
+                                        '@href': string;
+                                    }[]) => readonly Readonly<{
+                                        '@ref': Link_type;
+                                        '@href': string;
+                                    }>[]) & {
+                                        config: ((val: {
+                                            '@ref': Link_type;
+                                            '@href': string;
+                                        }) => Readonly<{
+                                            '@ref': Link_type;
+                                            '@href': string;
+                                        }>) & {
+                                            config: {
+                                                '@ref': ((value: Link_type) => Link_type) & {
+                                                    config: {
+                                                        name: string;
+                                                        dict: typeof Link_type;
+                                                    };
+                                                    Value: ReturnType<Value>;
+                                                };
+                                                '@href': (val: string) => string;
+                                            };
+                                            Value: ReturnType<Value>;
+                                        };
+                                        Value: ReturnType<Value>;
+                                    };
                                 };
+                                Value: ReturnType<Value>;
                             };
                             Value: ReturnType<Value>;
-                        };
+                        }, ((val: readonly {
+                            error: string;
+                        }[]) => readonly Readonly<{
+                            error: string;
+                        }>[]) & {
+                            config: ((val: {
+                                error: string;
+                            }) => Readonly<{
+                                error: string;
+                            }>) & {
+                                config: {
+                                    error: (val: string) => string;
+                                };
+                                Value: ReturnType<Value>;
+                            };
+                            Value: ReturnType<Value>;
+                        }];
                         Value: ReturnType<Value>;
                     };
                 };
@@ -3552,12 +3640,22 @@ declare namespace $ {
 		,
 		ReturnType< $hyoo_science_article['journal_title'] >
 	>
-	type $mol_list__rows_hyoo_science_app_22 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_science_app_22 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_chip['title'] >
+	>
+	type $mol_list__rows_hyoo_science_app_23 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_view__sub_hyoo_science_app_23 = $mol_type_enforce<
+	type $mol_list__Empty_hyoo_science_app_24 = $mol_type_enforce<
+		ReturnType< $hyoo_science_app['Found_none'] >
+		,
+		ReturnType< $mol_list['Empty'] >
+	>
+	type $mol_view__sub_hyoo_science_app_25 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -3586,6 +3684,7 @@ declare namespace $ {
 		found_journal( id: any): string
 		Found_row( id: any): $hyoo_science_article
 		found_rows( ): readonly(any)[]
+		Found_none( ): $mol_chip
 		Found_rows( ): $mol_list
 		request( ): string
 		Request( ): $mol_view
