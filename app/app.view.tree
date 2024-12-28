@@ -68,6 +68,8 @@ $hyoo_science_app $mol_page
 					title <= found_title* \
 					uri <= found_link* \
 					journal_title <= found_journal* \
+			Empty <= Found_none $mol_chip
+				title \Not Found
 		<= Request $mol_view
 			sub / <= request \Request: {request}
 	plugins /

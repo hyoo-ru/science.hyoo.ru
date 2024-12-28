@@ -16,6 +16,10 @@ namespace $ {
 		'@href': $mol_data_string,
 	})
 
+	export let $hyoo_science_elsevier_error = $mol_data_record({
+		error: $mol_data_string,
+	})
+
 	export let $hyoo_science_elsevier_entry = $mol_data_record({
 		// 'pii': $mol_data_string,
 		// 'load-date': moment,
@@ -37,7 +41,10 @@ namespace $ {
 			'opensearch:totalResults': parseInt,
 			'opensearch:startIndex': parseInt,
 			'opensearch:itemsPerPage': parseInt,
-			'entry': $mol_data_array( $hyoo_science_elsevier_entry ),
+			'entry': $mol_data_variant(
+				$mol_data_array( $hyoo_science_elsevier_entry ),
+				$mol_data_array( $hyoo_science_elsevier_error ),
+			),
 		}),
 	})
 
@@ -60,7 +67,9 @@ namespace $ {
 
 		return {
 			total: resp["opensearch:totalResults"],
-			article: resp.entry.map( entry => ({
+			article: ( resp.entry as typeof $hyoo_science_elsevier_entry.Value[] )
+			.filter( entry => !( 'error' in entry ) )
+			.map( entry => ({
 				// pii: entry.pii,
 				link: entry.link.filter( l => [ 'scidir', 'scopus' ].includes( l["@ref"] ) )[0]["@href"],
 				// doi: entry["prism:doi"],
