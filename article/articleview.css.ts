@@ -21,9 +21,18 @@ namespace $.$$ {
 			},
 		},
 		
+		Title: {
+			flex: {
+				shrink: 1,
+			},
+		},
+		
 		Journal: {
 			color: $mol_theme.shade,
 			padding: $mol_gap.text,
+			flex: {
+				shrink: 1,
+			},
 		},
 		
 	} )

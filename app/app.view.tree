@@ -4,7 +4,58 @@ $hyoo_science_app $mol_page
 		hint \Science Publications Searcher
 		query? <=> query_changed? <= query \
 		submit? <=> search? null
+	head /
+		<= Zone $mol_view sub /
+			<= Service $mol_select
+				dictionary *
+					sciencedirect \Science Direct
+					scopus \Scopus
+				value? <=> service? \sciencedirect
+			<= Area $mol_select
+				hint \Science Area
+				dictionary *
+					\
+						\any area
+					AGRI \Agro & Biology
+					ARTS \Arts & Humanities
+					BIOC \Biochemistry & Genetics
+					BUSI \Business & Accounting
+					CENG \Chemical Engineering
+					CHEM \Chemistry
+					COMP \Computers
+					DECI \Decisions
+					DENT \Dentistry
+					EART \Earth and Planetary
+					ECON \Economics & Finance
+					ENER \Energy
+					ENGI \Engineering
+					ENVI \Environment
+					HEAL \Health
+					IMMU \Immunology & Microbio
+					MATE \Materials
+					MATH \Math
+					MEDI \Medicine
+					NEUR \Neuro
+					NURS \Nursing
+					PHAR \Pharma & Toxic
+					PHYS \Physics & Astronomy
+					PSYC \Psychology
+					SOCI \Social
+					VETE \Veterinary
+					MULT \Multi
+				value? <=> area? \
+		<= Title
+		<= Tools
 	tools /
+		<= Open $mol_check_icon
+			hint \Open Access
+			Icon <= Open_icon $mol_icon_lock_open_variant_outline
+			checked? <=> open? true
+		<= Help $mol_link
+			hint \Query Syntax
+			uri <= help \https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm
+			sub /
+				<= Help_icon $mol_icon_hint
 		<= Lights $mol_lights_toggle
 		<= Source $mol_link_source
 			uri \https://github.com/hyoo-ru/science.hyoo.ru
@@ -17,5 +68,7 @@ $hyoo_science_app $mol_page
 					title <= found_title* \
 					uri <= found_link* \
 					journal_title <= found_journal* \
+		<= Request $mol_view
+			sub / <= request \Request: {request}
 	plugins /
 		<= Theme $mol_theme_auto
