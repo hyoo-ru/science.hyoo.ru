@@ -7877,6 +7877,7 @@ var $;
 		}
 		Service(){
 			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ("Indexing Service");
 			(obj.dictionary) = () => ({"sciencedirect": "Science Direct", "scopus": "Scopus"});
 			(obj.value) = (next) => ((this.service(next)));
 			return obj;
@@ -7889,7 +7890,7 @@ var $;
 			const obj = new this.$.$mol_select();
 			(obj.hint) = () => ("Science Area");
 			(obj.dictionary) = () => ({
-				"": "any area", 
+				"": "Any Area", 
 				"AGRI": "Agro & Biology", 
 				"ARTS": "Arts & Humanities", 
 				"BIOC": "Biochemistry & Genetics", 
@@ -7916,7 +7917,7 @@ var $;
 				"PSYC": "Psychology", 
 				"SOCI": "Social", 
 				"VETE": "Veterinary", 
-				"MULT": "Multi"
+				"MULT": "Multidiscipline"
 			});
 			(obj.value) = (next) => ((this.area(next)));
 			return obj;

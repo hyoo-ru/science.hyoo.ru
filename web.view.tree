@@ -398,6 +398,7 @@ $hyoo_science_app $mol_page
 	head /
 		<= Zone $mol_view sub /
 			<= Service $mol_select
+				hint \Indexing Service
 				dictionary *
 					sciencedirect \Science Direct
 					scopus \Scopus
@@ -406,7 +407,7 @@ $hyoo_science_app $mol_page
 				hint \Science Area
 				dictionary *
 					\
-						\any area
+						\Any Area
 					AGRI \Agro & Biology
 					ARTS \Arts & Humanities
 					BIOC \Biochemistry & Genetics
@@ -433,7 +434,7 @@ $hyoo_science_app $mol_page
 					PSYC \Psychology
 					SOCI \Social
 					VETE \Veterinary
-					MULT \Multi
+					MULT \Multidiscipline
 				value? <=> area? \
 		<= Title
 		<= Tools

@@ -3376,7 +3376,12 @@ declare namespace $ {
 		,
 		ReturnType< $mol_search['submit'] >
 	>
-	type $mol_select__dictionary_hyoo_science_app_4 = $mol_type_enforce<
+	type $mol_select__hint_hyoo_science_app_4 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_select['hint'] >
+	>
+	type $mol_select__dictionary_hyoo_science_app_5 = $mol_type_enforce<
 		({ 
 			'sciencedirect': string,
 			'scopus': string,
@@ -3384,17 +3389,17 @@ declare namespace $ {
 		,
 		ReturnType< $mol_select['dictionary'] >
 	>
-	type $mol_select__value_hyoo_science_app_5 = $mol_type_enforce<
+	type $mol_select__value_hyoo_science_app_6 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['service'] >
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $mol_select__hint_hyoo_science_app_6 = $mol_type_enforce<
+	type $mol_select__hint_hyoo_science_app_7 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_select['hint'] >
 	>
-	type $mol_select__dictionary_hyoo_science_app_7 = $mol_type_enforce<
+	type $mol_select__dictionary_hyoo_science_app_8 = $mol_type_enforce<
 		({ 
 			'': string,
 			'AGRI': string,
@@ -3428,92 +3433,92 @@ declare namespace $ {
 		,
 		ReturnType< $mol_select['dictionary'] >
 	>
-	type $mol_select__value_hyoo_science_app_8 = $mol_type_enforce<
+	type $mol_select__value_hyoo_science_app_9 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['area'] >
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $mol_view__sub_hyoo_science_app_9 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_science_app_10 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_check_icon__hint_hyoo_science_app_10 = $mol_type_enforce<
+	type $mol_check_icon__hint_hyoo_science_app_11 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_check_icon['hint'] >
 	>
-	type $mol_check_icon__Icon_hyoo_science_app_11 = $mol_type_enforce<
+	type $mol_check_icon__Icon_hyoo_science_app_12 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['Open_icon'] >
 		,
 		ReturnType< $mol_check_icon['Icon'] >
 	>
-	type $mol_check_icon__checked_hyoo_science_app_12 = $mol_type_enforce<
+	type $mol_check_icon__checked_hyoo_science_app_13 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['open'] >
 		,
 		ReturnType< $mol_check_icon['checked'] >
 	>
-	type $mol_link__hint_hyoo_science_app_13 = $mol_type_enforce<
+	type $mol_link__hint_hyoo_science_app_14 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link['hint'] >
 	>
-	type $mol_link__uri_hyoo_science_app_14 = $mol_type_enforce<
+	type $mol_link__uri_hyoo_science_app_15 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['help'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_link__sub_hyoo_science_app_15 = $mol_type_enforce<
+	type $mol_link__sub_hyoo_science_app_16 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_link['sub'] >
 	>
-	type $mol_link_source__uri_hyoo_science_app_16 = $mol_type_enforce<
+	type $mol_link_source__uri_hyoo_science_app_17 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link_source['uri'] >
 	>
-	type $hyoo_science_article__open_hyoo_science_app_17 = $mol_type_enforce<
+	type $hyoo_science_article__open_hyoo_science_app_18 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_open'] >
 		,
 		ReturnType< $hyoo_science_article['open'] >
 	>
-	type $hyoo_science_article__highlight_hyoo_science_app_18 = $mol_type_enforce<
+	type $hyoo_science_article__highlight_hyoo_science_app_19 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['query'] >
 		,
 		ReturnType< $hyoo_science_article['highlight'] >
 	>
-	type $hyoo_science_article__title_hyoo_science_app_19 = $mol_type_enforce<
+	type $hyoo_science_article__title_hyoo_science_app_20 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_title'] >
 		,
 		ReturnType< $hyoo_science_article['title'] >
 	>
-	type $hyoo_science_article__uri_hyoo_science_app_20 = $mol_type_enforce<
+	type $hyoo_science_article__uri_hyoo_science_app_21 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_link'] >
 		,
 		ReturnType< $hyoo_science_article['uri'] >
 	>
-	type $hyoo_science_article__journal_title_hyoo_science_app_21 = $mol_type_enforce<
+	type $hyoo_science_article__journal_title_hyoo_science_app_22 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_journal'] >
 		,
 		ReturnType< $hyoo_science_article['journal_title'] >
 	>
-	type $mol_chip__title_hyoo_science_app_22 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_science_app_23 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_list__rows_hyoo_science_app_23 = $mol_type_enforce<
+	type $mol_list__rows_hyoo_science_app_24 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_list__Empty_hyoo_science_app_24 = $mol_type_enforce<
+	type $mol_list__Empty_hyoo_science_app_25 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['Found_none'] >
 		,
 		ReturnType< $mol_list['Empty'] >
 	>
-	type $mol_view__sub_hyoo_science_app_25 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_science_app_26 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
