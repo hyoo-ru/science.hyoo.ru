@@ -1,6 +1,6 @@
 $hyoo_science_app $mol_page
 	Title <= Query $mol_search
-		hint \Science Publications Searcher
+		hint <= title \Science Publications Searcher
 		query? <=> query_changed? <= query \
 		submit? <=> search? null
 	head /
@@ -16,33 +16,33 @@ $hyoo_science_app $mol_page
 				dictionary *
 					\
 						\Any Area
-					AGRI \Agro & Biology
-					ARTS \Arts & Humanities
-					BIOC \Biochemistry & Genetics
-					BUSI \Business & Accounting
-					CENG \Chemical Engineering
-					CHEM \Chemistry
-					COMP \Computers
-					DECI \Decisions
-					DENT \Dentistry
-					EART \Earth and Planetary
-					ECON \Economics & Finance
-					ENER \Energy
-					ENGI \Engineering
-					ENVI \Environment
-					HEAL \Health
-					IMMU \Immunology & Microbio
-					MATE \Materials
-					MATH \Math
-					MEDI \Medicine
-					NEUR \Neuro
-					NURS \Nursing
-					PHAR \Pharma & Toxic
-					PHYS \Physics & Astronomy
-					PSYC \Psychology
-					SOCI \Social
-					VETE \Veterinary
-					MULT \Multidiscipline
+					AGRI \🌽 Agri & Biology
+					ARTS \🖼️ Arts & Humanities
+					BIOC \🧬 Biochemistry & Genetics
+					BUSI \🧑‍💼 Business & Accounting
+					CENG \⚗️ Chemical Engineering
+					CHEM \🧪 Chemistry
+					COMP \🖥️ Computers
+					DECI \🔀 Decisions
+					DENT \🦷 Dentistry
+					EART \🌍 Earth and Planetary
+					ECON \🪙 Economics & Finance
+					ENER \⚡ Energy
+					ENGI \🏗️ Engineering
+					ENVI \🌌 Environment
+					HEAL \💓 Health
+					IMMU \☣️ Immunology & Microbio
+					MATE \🪙 Materials
+					MATH \➗ Math
+					MEDI \💊 Medicine
+					NEUR \🧠 Neuro
+					NURS \🧑‍⚕️ Nursing
+					PHAR \⚕️ Pharma & Toxic
+					PHYS \🚀 Physics & Astronomy
+					PSYC \🥴 Psychology
+					SOCI \💬 Social
+					VETE \🐈 Veterinary
+					MULT \🤹 Multidiscipline
 				value? <=> area? \
 		<= Title
 		<= Tools

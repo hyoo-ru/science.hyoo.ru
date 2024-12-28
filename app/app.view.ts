@@ -9,7 +9,12 @@ namespace $.$$ {
 		@ $mol_mem
 		query() {
 			return this.$.$mol_state_arg.value( 'query' ) ?? ''
-		}	
+		}
+
+		@ $mol_mem
+		title() {
+			return this.query().trim() || super.title()
+		}
 
 		@ $mol_mem
 		area( next?: string ) {
