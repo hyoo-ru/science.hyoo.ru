@@ -8003,9 +8003,6 @@ var $;
 			const obj = new this.$.$mol_theme_auto();
 			return obj;
 		}
-		key(){
-			return "7f59af901d2d86f78a1fd60c1bf9426a";
-		}
 		Title(){
 			return (this.Query());
 		}

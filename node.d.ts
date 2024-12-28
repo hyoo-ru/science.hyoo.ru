@@ -3694,7 +3694,6 @@ declare namespace $ {
 		request( ): string
 		Request( ): $mol_view
 		Theme( ): $mol_theme_auto
-		key( ): string
 		Title( ): ReturnType< $hyoo_science_app['Query'] >
 		head( ): readonly(any)[]
 		tools( ): readonly(any)[]
