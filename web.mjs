@@ -7357,7 +7357,7 @@ var $;
 		}
 		service(next){
 			if(next !== undefined) return next;
-			return "sciencedirect";
+			return "scopus";
 		}
 		Service(){
 			const obj = new this.$.$mol_select();
@@ -8428,6 +8428,7 @@ var $;
         'dc:identifier': $mol_data_string,
         'dc:title': $mol_data_string,
         'prism:coverDate': moment,
+        'prism:doi': $mol_data_optional($mol_data_string),
         'prism:publicationName': $mol_data_string,
         'prism:startingPage': parseInt,
         'prism:url': $mol_data_string,
@@ -8459,7 +8460,10 @@ var $;
             article: resp.entry
                 .filter(entry => !('error' in entry))
                 .map(entry => ({
-                link: entry.link.filter(l => ['scidir', 'scopus'].includes(l["@ref"]))[0]["@href"],
+                link: entry["prism:doi"]
+                    ? `https://doi.org/${entry["prism:doi"]}`
+                    : entry.link.filter(l => ['scidir', 'scopus'].includes(l["@ref"]))[0]["@href"],
+                doi: entry["prism:doi"] ?? null,
                 title: entry["dc:title"],
                 author: entry["dc:creator"] ?? '🥷',
                 journal: entry["prism:publicationName"],

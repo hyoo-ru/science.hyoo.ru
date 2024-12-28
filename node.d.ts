@@ -3135,6 +3135,7 @@ declare namespace $ {
     export let $hyoo_science_elsevier_entry: ((val: {
         openaccess?: any;
         'dc:creator'?: string | undefined;
+        'prism:doi'?: string | undefined;
         link: readonly {
             '@ref': Link_type;
             '@href': string;
@@ -3148,6 +3149,7 @@ declare namespace $ {
         'prism:volume': string;
     }) => Readonly<{
         'dc:creator'?: string | undefined;
+        'prism:doi'?: string | undefined;
         link: readonly Readonly<{
             '@ref': Link_type;
             '@href': string;
@@ -3180,6 +3182,13 @@ declare namespace $ {
             'prism:coverDate': ((this: any, input: string) => $mol_time_moment) & {
                 config: {
                     funcs: [(val: string) => string, typeof $mol_time_moment] & [(input: string) => $mol_time_moment_config | undefined, new (input: $mol_time_moment_config | undefined) => unknown];
+                };
+                Value: ReturnType<Value>;
+            };
+            'prism:doi': ((val: string | undefined) => string | undefined) & {
+                config: {
+                    sub: (val: string) => string;
+                    fallback: (() => string) | undefined;
                 };
                 Value: ReturnType<Value>;
             };
@@ -3226,6 +3235,7 @@ declare namespace $ {
             entry: readonly {
                 openaccess?: any;
                 'dc:creator'?: string | undefined;
+                'prism:doi'?: string | undefined;
                 link: readonly {
                     '@ref': Link_type;
                     '@href': string;
@@ -3248,6 +3258,7 @@ declare namespace $ {
             'opensearch:itemsPerPage': number;
             entry: readonly Readonly<{
                 'dc:creator'?: string | undefined;
+                'prism:doi'?: string | undefined;
                 link: readonly Readonly<{
                     '@ref': Link_type;
                     '@href': string;
@@ -3273,6 +3284,7 @@ declare namespace $ {
                 entry: readonly {
                     openaccess?: any;
                     'dc:creator'?: string | undefined;
+                    'prism:doi'?: string | undefined;
                     link: readonly {
                         '@ref': Link_type;
                         '@href': string;
@@ -3293,6 +3305,7 @@ declare namespace $ {
                 'opensearch:itemsPerPage': number;
                 entry: readonly Readonly<{
                     'dc:creator'?: string | undefined;
+                    'prism:doi'?: string | undefined;
                     link: readonly Readonly<{
                         '@ref': Link_type;
                         '@href': string;
@@ -3316,6 +3329,7 @@ declare namespace $ {
                     entry: ((val: readonly {
                         openaccess?: any;
                         'dc:creator'?: string | undefined;
+                        'prism:doi'?: string | undefined;
                         link: readonly {
                             '@ref': Link_type;
                             '@href': string;
@@ -3331,6 +3345,7 @@ declare namespace $ {
                         error: string;
                     }[]) => readonly Readonly<{
                         'dc:creator'?: string | undefined;
+                        'prism:doi'?: string | undefined;
                         link: readonly Readonly<{
                             '@ref': Link_type;
                             '@href': string;
@@ -3349,6 +3364,7 @@ declare namespace $ {
                         config: [((val: readonly {
                             openaccess?: any;
                             'dc:creator'?: string | undefined;
+                            'prism:doi'?: string | undefined;
                             link: readonly {
                                 '@ref': Link_type;
                                 '@href': string;
@@ -3362,6 +3378,7 @@ declare namespace $ {
                             'prism:volume': string;
                         }[]) => readonly Readonly<{
                             'dc:creator'?: string | undefined;
+                            'prism:doi'?: string | undefined;
                             link: readonly Readonly<{
                                 '@ref': Link_type;
                                 '@href': string;
@@ -3378,6 +3395,7 @@ declare namespace $ {
                             config: ((val: {
                                 openaccess?: any;
                                 'dc:creator'?: string | undefined;
+                                'prism:doi'?: string | undefined;
                                 link: readonly {
                                     '@ref': Link_type;
                                     '@href': string;
@@ -3391,6 +3409,7 @@ declare namespace $ {
                                 'prism:volume': string;
                             }) => Readonly<{
                                 'dc:creator'?: string | undefined;
+                                'prism:doi'?: string | undefined;
                                 link: readonly Readonly<{
                                     '@ref': Link_type;
                                     '@href': string;
@@ -3423,6 +3442,13 @@ declare namespace $ {
                                     'prism:coverDate': ((this: any, input: string) => $mol_time_moment) & {
                                         config: {
                                             funcs: [(val: string) => string, typeof $mol_time_moment] & [(input: string) => $mol_time_moment_config | undefined, new (input: $mol_time_moment_config | undefined) => unknown];
+                                        };
+                                        Value: ReturnType<Value>;
+                                    };
+                                    'prism:doi': ((val: string | undefined) => string | undefined) & {
+                                        config: {
+                                            sub: (val: string) => string;
+                                            fallback: (() => string) | undefined;
                                         };
                                         Value: ReturnType<Value>;
                                     };
@@ -3491,6 +3517,7 @@ declare namespace $ {
         total: number;
         article: {
             link: string;
+            doi: string | null;
             title: string;
             author: string;
             journal: string;
@@ -3717,6 +3744,7 @@ declare namespace $.$$ {
             total: number;
             article: {
                 link: string;
+                doi: string | null;
                 title: string;
                 author: string;
                 journal: string;
