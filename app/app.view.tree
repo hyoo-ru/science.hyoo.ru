@@ -1,0 +1,21 @@
+$hyoo_science_app $mol_page
+	key \7f59af901d2d86f78a1fd60c1bf9426a
+	Title <= Query $mol_search
+		hint \Science Publications Searcher
+		query? <=> query_changed? <= query \
+		submit? <=> search? null
+	tools /
+		<= Lights $mol_lights_toggle
+		<= Source $mol_link_source
+			uri \https://github.com/hyoo-ru/science.hyoo.ru
+	body /
+		<= Found_rows $mol_list
+			rows <= found_rows /
+				<= Found_row*0 $hyoo_science_article
+					open <= found_open* false
+					highlight <= query
+					title <= found_title* \
+					uri <= found_link* \
+					journal_title <= found_journal* \
+	plugins /
+		<= Theme $mol_theme_auto

@@ -1,0 +1,15 @@
+$hyoo_science_article $mol_view
+	open false
+	sub /
+		<= Link $mol_link
+			uri <= uri \
+			sub /
+				<= Open $mol_view
+					sub / <= open_icon \
+				<= Title $mol_dimmer
+					needle <= highlight \
+					haystack <= title \
+		<= Journal $mol_view
+			sub /
+				\📖 
+				<= journal_title \

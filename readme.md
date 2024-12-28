@@ -1,11 +1,4 @@
-# Template Repo
+# $hyoo_science
 
-Template repo to fast make new $hyoo apps.
+Science Publications Searcher
 
-## After Make
-
-- [ ] [Rename app then update index.html and CNAME](./app).
-- [ ] [Update GitHub Workflow](.github/workflows).
-- [ ] Update repo description and link to app at the GitHub.
-- [ ] [Add this repo to $hyoo namespace](https://github.com/hyoo-ru/mam_hyoo/blob/master/hyoo.meta.tree).
-- [ ] Rewrite this readme.
