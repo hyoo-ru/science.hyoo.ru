@@ -3389,7 +3389,7 @@ declare namespace $ {
 declare namespace $ {
 
 	type $mol_search__hint_hyoo_science_app_1 = $mol_type_enforce<
-		string
+		ReturnType< $hyoo_science_app['title'] >
 		,
 		ReturnType< $mol_search['hint'] >
 	>
@@ -3551,6 +3551,7 @@ declare namespace $ {
 		ReturnType< $mol_view['sub'] >
 	>
 	export class $hyoo_science_app extends $mol_page {
+		title( ): string
 		query( ): string
 		query_changed( next?: ReturnType< $hyoo_science_app['query'] > ): ReturnType< $hyoo_science_app['query'] >
 		search( next?: any ): any
@@ -3593,6 +3594,7 @@ declare namespace $.$$ {
     class $hyoo_science_app extends $.$hyoo_science_app {
         service(next?: string): string;
         query(): string;
+        title(): string;
         area(next?: string): string;
         open(next?: boolean): boolean;
         request(): string;

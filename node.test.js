@@ -7844,6 +7844,9 @@ var $;
 
 ;
 	($.$hyoo_science_app) = class $hyoo_science_app extends ($.$mol_page) {
+		title(){
+			return "Science Publications Searcher";
+		}
 		query(){
 			return "";
 		}
@@ -7857,7 +7860,7 @@ var $;
 		}
 		Query(){
 			const obj = new this.$.$mol_search();
-			(obj.hint) = () => ("Science Publications Searcher");
+			(obj.hint) = () => ((this.title()));
 			(obj.query) = (next) => ((this.query_changed(next)));
 			(obj.submit) = (next) => ((this.search(next)));
 			return obj;
@@ -7882,33 +7885,33 @@ var $;
 			(obj.hint) = () => ("Science Area");
 			(obj.dictionary) = () => ({
 				"": "Any Area", 
-				"AGRI": "Agro & Biology", 
-				"ARTS": "Arts & Humanities", 
-				"BIOC": "Biochemistry & Genetics", 
-				"BUSI": "Business & Accounting", 
-				"CENG": "Chemical Engineering", 
-				"CHEM": "Chemistry", 
-				"COMP": "Computers", 
-				"DECI": "Decisions", 
-				"DENT": "Dentistry", 
-				"EART": "Earth and Planetary", 
-				"ECON": "Economics & Finance", 
-				"ENER": "Energy", 
-				"ENGI": "Engineering", 
-				"ENVI": "Environment", 
-				"HEAL": "Health", 
-				"IMMU": "Immunology & Microbio", 
-				"MATE": "Materials", 
-				"MATH": "Math", 
-				"MEDI": "Medicine", 
-				"NEUR": "Neuro", 
-				"NURS": "Nursing", 
-				"PHAR": "Pharma & Toxic", 
-				"PHYS": "Physics & Astronomy", 
-				"PSYC": "Psychology", 
-				"SOCI": "Social", 
-				"VETE": "Veterinary", 
-				"MULT": "Multidiscipline"
+				"AGRI": "🌽 Agri & Biology", 
+				"ARTS": "🖼️ Arts & Humanities", 
+				"BIOC": "🧬 Biochemistry & Genetics", 
+				"BUSI": "🧑‍💼 Business & Accounting", 
+				"CENG": "⚗️ Chemical Engineering", 
+				"CHEM": "🧪 Chemistry", 
+				"COMP": "🖥️ Computers", 
+				"DECI": "🔀 Decisions", 
+				"DENT": "🦷 Dentistry", 
+				"EART": "🌍 Earth and Planetary", 
+				"ECON": "🪙 Economics & Finance", 
+				"ENER": "⚡ Energy", 
+				"ENGI": "🏗️ Engineering", 
+				"ENVI": "🌌 Environment", 
+				"HEAL": "💓 Health", 
+				"IMMU": "☣️ Immunology & Microbio", 
+				"MATE": "🪙 Materials", 
+				"MATH": "➗ Math", 
+				"MEDI": "💊 Medicine", 
+				"NEUR": "🧠 Neuro", 
+				"NURS": "🧑‍⚕️ Nursing", 
+				"PHAR": "⚕️ Pharma & Toxic", 
+				"PHYS": "🚀 Physics & Astronomy", 
+				"PSYC": "🥴 Psychology", 
+				"SOCI": "💬 Social", 
+				"VETE": "🐈 Veterinary", 
+				"MULT": "🤹 Multidiscipline"
 			});
 			(obj.value) = (next) => ((this.area(next)));
 			return obj;
@@ -9139,6 +9142,9 @@ var $;
             query() {
                 return this.$.$mol_state_arg.value('query') ?? '';
             }
+            title() {
+                return this.query().trim() || super.title();
+            }
             area(next) {
                 return this.$.$mol_state_arg.value('area', next) ?? super.area();
             }
@@ -9191,6 +9197,9 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_science_app.prototype, "query", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_science_app.prototype, "title", null);
         __decorate([
             $mol_mem
         ], $hyoo_science_app.prototype, "area", null);
