@@ -10,7 +10,7 @@ $hyoo_science_app $mol_page
 				dictionary *
 					sciencedirect \Science Direct
 					scopus \Scopus
-				value? <=> service? \sciencedirect
+				value? <=> service? \scopus
 			<= Area $mol_select
 				hint \Science Area
 				dictionary *
