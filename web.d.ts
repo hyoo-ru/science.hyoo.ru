@@ -2180,48 +2180,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_state_arg extends $mol_object {
-        prefix: string;
-        static href(next?: string): string;
-        static href_normal(): string;
-        static href_absolute(): string;
-        static dict(next?: {
-            [key: string]: string | null;
-        }): Readonly<{
-            [key: string]: string;
-        }>;
-        static dict_cut(except: string[]): {
-            [key: string]: string;
-        };
-        static value(key: string, next?: string | null): string | null;
-        static link(next: Record<string, string | null>): string;
-        static prolog: string;
-        static separator: string;
-        static make_link(next: {
-            [key: string]: string | null;
-        }): string;
-        static go(next: {
-            [key: string]: string | null;
-        }): void;
-        static encode(str: string): string;
-        constructor(prefix?: string);
-        value(key: string, next?: string): string | null;
-        sub(postfix: string): $mol_state_arg;
-        link(next: Record<string, string | null>): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_media extends $mol_object2 {
-        static match(query: string, next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-    function $mol_lights(this: $, next?: boolean): boolean;
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -2260,6 +2218,241 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+
+	type $mol_check__minimal_width_mol_pick_1 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_check['minimal_width'] >
+	>
+	type $mol_check__minimal_height_mol_pick_2 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_check['minimal_height'] >
+	>
+	type $mol_check__enabled_mol_pick_3 = $mol_type_enforce<
+		ReturnType< $mol_pick['trigger_enabled'] >
+		,
+		ReturnType< $mol_check['enabled'] >
+	>
+	type $mol_check__checked_mol_pick_4 = $mol_type_enforce<
+		ReturnType< $mol_pick['showed'] >
+		,
+		ReturnType< $mol_check['checked'] >
+	>
+	type $mol_check__clicks_mol_pick_5 = $mol_type_enforce<
+		ReturnType< $mol_pick['clicks'] >
+		,
+		ReturnType< $mol_check['clicks'] >
+	>
+	type $mol_check__sub_mol_pick_6 = $mol_type_enforce<
+		ReturnType< $mol_pick['trigger_content'] >
+		,
+		ReturnType< $mol_check['sub'] >
+	>
+	type $mol_check__hint_mol_pick_7 = $mol_type_enforce<
+		ReturnType< $mol_pick['hint'] >
+		,
+		ReturnType< $mol_check['hint'] >
+	>
+	export class $mol_pick extends $mol_pop {
+		keydown( next?: any ): any
+		trigger_enabled( ): boolean
+		clicks( next?: any ): any
+		trigger_content( ): readonly($mol_view_content)[]
+		hint( ): string
+		Trigger( ): $mol_check
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_pick['keydown'] > ): ReturnType< $mol_pick['keydown'] >,
+		})  & ReturnType< $mol_pop['event'] >
+		Anchor( ): ReturnType< $mol_pick['Trigger'] >
+	}
+	
+}
+
+//# sourceMappingURL=pick.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_pick extends $.$mol_pick {
+        keydown(event: KeyboardEvent): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_dots_vertical extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=vertical.view.tree.d.ts.map
+declare namespace $ {
+    function $mol_match_text<Variant>(query: string, values: (variant: Variant) => string[]): (variant: Variant) => boolean;
+}
+
+declare namespace $ {
+
+	type $mol_dimmer__haystack_mol_select_1 = $mol_type_enforce<
+		ReturnType< $mol_select['option_label'] >
+		,
+		ReturnType< $mol_dimmer['haystack'] >
+	>
+	type $mol_dimmer__needle_mol_select_2 = $mol_type_enforce<
+		ReturnType< $mol_select['filter_pattern'] >
+		,
+		ReturnType< $mol_dimmer['needle'] >
+	>
+	type $mol_nav__keys_y_mol_select_3 = $mol_type_enforce<
+		ReturnType< $mol_select['nav_components'] >
+		,
+		ReturnType< $mol_nav['keys_y'] >
+	>
+	type $mol_nav__current_y_mol_select_4 = $mol_type_enforce<
+		ReturnType< $mol_select['option_focused'] >
+		,
+		ReturnType< $mol_nav['current_y'] >
+	>
+	type $mol_nav__cycle_mol_select_5 = $mol_type_enforce<
+		ReturnType< $mol_select['nav_cycle'] >
+		,
+		ReturnType< $mol_nav['cycle'] >
+	>
+	type $mol_list__rows_mol_select_6 = $mol_type_enforce<
+		ReturnType< $mol_select['menu_content'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_scroll__sub_mol_select_7 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $mol_button_minor__event_click_mol_select_8 = $mol_type_enforce<
+		ReturnType< $mol_select['event_select'] >
+		,
+		ReturnType< $mol_button_minor['event_click'] >
+	>
+	type $mol_button_minor__sub_mol_select_9 = $mol_type_enforce<
+		ReturnType< $mol_select['option_content'] >
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_view__sub_mol_select_10 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_search__query_mol_select_11 = $mol_type_enforce<
+		ReturnType< $mol_select['filter_pattern'] >
+		,
+		ReturnType< $mol_search['query'] >
+	>
+	type $mol_search__hint_mol_select_12 = $mol_type_enforce<
+		ReturnType< $mol_select['filter_hint'] >
+		,
+		ReturnType< $mol_search['hint'] >
+	>
+	type $mol_search__submit_mol_select_13 = $mol_type_enforce<
+		ReturnType< $mol_select['submit'] >
+		,
+		ReturnType< $mol_search['submit'] >
+	>
+	type $mol_search__enabled_mol_select_14 = $mol_type_enforce<
+		ReturnType< $mol_select['enabled'] >
+		,
+		ReturnType< $mol_search['enabled'] >
+	>
+	export class $mol_select extends $mol_pick {
+		event_select( id: any, next?: any ): any
+		option_label( id: any): string
+		filter_pattern( next?: string ): string
+		Option_label( id: any): $mol_dimmer
+		option_content( id: any): readonly(any)[]
+		no_options_message( ): string
+		nav_components( ): readonly($mol_view)[]
+		option_focused( next?: any ): any
+		nav_cycle( next?: boolean ): boolean
+		Nav( ): $mol_nav
+		menu_content( ): readonly($mol_view)[]
+		Menu( ): $mol_list
+		Bubble_pane( ): $mol_scroll
+		filter_hint( ): string
+		submit( next?: any ): any
+		enabled( ): boolean
+		dictionary( next?: Record<string, any> ): Record<string, any>
+		options( ): readonly(string)[]
+		value( next?: string ): string
+		option_label_default( ): string
+		Option_row( id: any): $mol_button_minor
+		No_options( ): $mol_view
+		plugins( ): readonly(any)[]
+		hint( ): string
+		bubble_content( ): readonly(any)[]
+		Filter( ): $mol_search
+		Trigger_icon( ): $mol_icon_dots_vertical
+	}
+	
+}
+
+//# sourceMappingURL=select.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_select extends $.$mol_select {
+        filter_pattern(next?: string): string;
+        open(): void;
+        options(): readonly string[];
+        options_filtered(): readonly string[];
+        option_label(id: string): any;
+        option_rows(): $mol_button_minor[];
+        option_focused(component?: $mol_view): $mol_view | $.$mol_search | null;
+        event_select(id: string, event?: MouseEvent): void;
+        nav_components(): ($.$mol_search | $mol_button_minor)[];
+        trigger_content(): readonly $mol_view_content[];
+        menu_content(): $mol_view[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_lock extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=lock.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_lock_open extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=open.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_lock_open_variant extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=variant.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_lock_open_variant_outline extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=outline.view.tree.d.ts.map
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -2272,29 +2465,42 @@ declare namespace $ {
 //# sourceMappingURL=icon.view.tree.d.ts.map
 declare namespace $ {
 
-	export class $mol_icon_brightness_4 extends $mol_icon {
+	export class $mol_icon_hint extends $mol_icon {
 		path( ): string
 	}
 	
 }
 
-//# sourceMappingURL=4.view.tree.d.ts.map
+//# sourceMappingURL=hint.view.tree.d.ts.map
 declare namespace $ {
-
-	export class $mol_lights_toggle extends $mol_check_icon {
-		Lights_icon( ): $mol_icon_brightness_4
-		lights( next?: boolean ): boolean
-		Icon( ): ReturnType< $mol_lights_toggle['Lights_icon'] >
-		hint( ): string
-		checked( next?: ReturnType< $mol_lights_toggle['lights'] > ): ReturnType< $mol_lights_toggle['lights'] >
-	}
-	
-}
-
-//# sourceMappingURL=toggle.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_lights_toggle extends $.$mol_lights_toggle {
-        lights(next?: boolean): boolean;
+    class $mol_state_arg extends $mol_object {
+        prefix: string;
+        static href(next?: string): string;
+        static href_normal(): string;
+        static href_absolute(): string;
+        static dict(next?: {
+            [key: string]: string | null;
+        }): Readonly<{
+            [key: string]: string;
+        }>;
+        static dict_cut(except: string[]): {
+            [key: string]: string;
+        };
+        static value(key: string, next?: string | null): string | null;
+        static link(next: Record<string, string | null>): string;
+        static prolog: string;
+        static separator: string;
+        static make_link(next: {
+            [key: string]: string | null;
+        }): string;
+        static go(next: {
+            [key: string]: string | null;
+        }): void;
+        static encode(str: string): string;
+        constructor(prefix?: string);
+        value(key: string, next?: string): string | null;
+        sub(postfix: string): $mol_state_arg;
+        link(next: Record<string, string | null>): string;
     }
 }
 
@@ -2349,6 +2555,44 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_media extends $mol_object2 {
+        static match(query: string, next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+    function $mol_lights(this: $, next?: boolean): boolean;
+}
+
+declare namespace $ {
+
+	export class $mol_icon_brightness_4 extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=4.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_lights_toggle extends $mol_check_icon {
+		Lights_icon( ): $mol_icon_brightness_4
+		lights( next?: boolean ): boolean
+		Icon( ): ReturnType< $mol_lights_toggle['Lights_icon'] >
+		hint( ): string
+		checked( next?: ReturnType< $mol_lights_toggle['lights'] > ): ReturnType< $mol_lights_toggle['lights'] >
+	}
+	
+}
+
+//# sourceMappingURL=toggle.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_lights_toggle extends $.$mol_lights_toggle {
+        lights(next?: boolean): boolean;
+    }
 }
 
 declare namespace $ {
@@ -2431,7 +2675,7 @@ declare namespace $ {
 //# sourceMappingURL=article.view.tree.d.ts.map
 declare namespace $.$$ {
     class $hyoo_science_article extends $.$hyoo_science_article {
-        open_icon(): "👐 " | "🔒 ";
+        open_icon(): "📄 " | "🔒 ";
     }
 }
 
@@ -2673,7 +2917,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    let $mol_data_boolean: (val: boolean) => boolean;
+    function $mol_data_optional<Sub extends $mol_data_value, Fallback extends undefined | (() => ReturnType<Sub>)>(sub: Sub, fallback?: Fallback): ((val: Parameters<Sub>[0] | undefined) => ReturnType<Sub> | (Fallback extends undefined ? undefined : ReturnType<Extract<Fallback, () => any>>)) & {
+        config: {
+            sub: Sub;
+            fallback: Fallback | undefined;
+        };
+        Value: ReturnType<Value>;
+    };
 }
 
 declare namespace $ {
@@ -2685,8 +2935,12 @@ declare namespace $ {
 
 declare namespace $ {
     enum Link_type {
-        scidir = "scidir",
-        self = "self"
+        'scidir' = "scidir",
+        'self' = "self",
+        'scopus' = "scopus",
+        'scopus-citedby' = "scopus-citedby",
+        'full-text' = "full-text",
+        'author-affiliation' = "author-affiliation"
     }
     export let $hyoo_science_elsevier_link: ((val: {
         '@ref': Link_type;
@@ -2708,50 +2962,48 @@ declare namespace $ {
         Value: ReturnType<Value>;
     };
     export let $hyoo_science_elsevier_entry: ((val: {
+        openaccess?: any;
+        'dc:creator'?: string | undefined;
         link: readonly {
             '@ref': Link_type;
             '@href': string;
         }[];
-        pii: string;
-        'load-date': string;
-        openaccess: boolean;
-        'dc:creator': string;
         'dc:identifier': string;
         'dc:title': string;
         'prism:coverDate': string;
-        'prism:doi': string;
         'prism:publicationName': string;
         'prism:startingPage': string;
         'prism:url': string;
         'prism:volume': string;
     }) => Readonly<{
+        'dc:creator'?: string | undefined;
         link: readonly Readonly<{
             '@ref': Link_type;
             '@href': string;
         }>[];
-        pii: string;
-        'load-date': $mol_time_moment;
         openaccess: boolean;
-        'dc:creator': string;
         'dc:identifier': string;
         'dc:title': string;
         'prism:coverDate': $mol_time_moment;
-        'prism:doi': string;
         'prism:publicationName': string;
         'prism:startingPage': number;
         'prism:url': string;
         'prism:volume': number;
     }>) & {
         config: {
-            pii: (val: string) => string;
-            'load-date': ((this: any, input: string) => $mol_time_moment) & {
+            openaccess: ((this: any, input: any) => boolean) & {
                 config: {
-                    funcs: [(val: string) => string, typeof $mol_time_moment] & [(input: string) => $mol_time_moment_config | undefined, new (input: $mol_time_moment_config | undefined) => unknown];
+                    funcs: [(v: any) => number, (v: number) => boolean] & [(input: any) => number, (input: number) => unknown];
                 };
                 Value: ReturnType<Value>;
             };
-            openaccess: (val: boolean) => boolean;
-            'dc:creator': (val: string) => string;
+            'dc:creator': ((val: string | undefined) => string | undefined) & {
+                config: {
+                    sub: (val: string) => string;
+                    fallback: (() => string) | undefined;
+                };
+                Value: ReturnType<Value>;
+            };
             'dc:identifier': (val: string) => string;
             'dc:title': (val: string) => string;
             'prism:coverDate': ((this: any, input: string) => $mol_time_moment) & {
@@ -2760,7 +3012,6 @@ declare namespace $ {
                 };
                 Value: ReturnType<Value>;
             };
-            'prism:doi': (val: string) => string;
             'prism:publicationName': (val: string) => string;
             'prism:startingPage': typeof parseInt;
             'prism:url': (val: string) => string;
@@ -2802,18 +3053,15 @@ declare namespace $ {
             'opensearch:startIndex': string;
             'opensearch:itemsPerPage': string;
             entry: readonly {
+                openaccess?: any;
+                'dc:creator'?: string | undefined;
                 link: readonly {
                     '@ref': Link_type;
                     '@href': string;
                 }[];
-                pii: string;
-                'load-date': string;
-                openaccess: boolean;
-                'dc:creator': string;
                 'dc:identifier': string;
                 'dc:title': string;
                 'prism:coverDate': string;
-                'prism:doi': string;
                 'prism:publicationName': string;
                 'prism:startingPage': string;
                 'prism:url': string;
@@ -2826,18 +3074,15 @@ declare namespace $ {
             'opensearch:startIndex': number;
             'opensearch:itemsPerPage': number;
             entry: readonly Readonly<{
+                'dc:creator'?: string | undefined;
                 link: readonly Readonly<{
                     '@ref': Link_type;
                     '@href': string;
                 }>[];
-                pii: string;
-                'load-date': $mol_time_moment;
                 openaccess: boolean;
-                'dc:creator': string;
                 'dc:identifier': string;
                 'dc:title': string;
                 'prism:coverDate': $mol_time_moment;
-                'prism:doi': string;
                 'prism:publicationName': string;
                 'prism:startingPage': number;
                 'prism:url': string;
@@ -2851,18 +3096,15 @@ declare namespace $ {
                 'opensearch:startIndex': string;
                 'opensearch:itemsPerPage': string;
                 entry: readonly {
+                    openaccess?: any;
+                    'dc:creator'?: string | undefined;
                     link: readonly {
                         '@ref': Link_type;
                         '@href': string;
                     }[];
-                    pii: string;
-                    'load-date': string;
-                    openaccess: boolean;
-                    'dc:creator': string;
                     'dc:identifier': string;
                     'dc:title': string;
                     'prism:coverDate': string;
-                    'prism:doi': string;
                     'prism:publicationName': string;
                     'prism:startingPage': string;
                     'prism:url': string;
@@ -2873,18 +3115,15 @@ declare namespace $ {
                 'opensearch:startIndex': number;
                 'opensearch:itemsPerPage': number;
                 entry: readonly Readonly<{
+                    'dc:creator'?: string | undefined;
                     link: readonly Readonly<{
                         '@ref': Link_type;
                         '@href': string;
                     }>[];
-                    pii: string;
-                    'load-date': $mol_time_moment;
                     openaccess: boolean;
-                    'dc:creator': string;
                     'dc:identifier': string;
                     'dc:title': string;
                     'prism:coverDate': $mol_time_moment;
-                    'prism:doi': string;
                     'prism:publicationName': string;
                     'prism:startingPage': number;
                     'prism:url': string;
@@ -2896,85 +3135,77 @@ declare namespace $ {
                     'opensearch:startIndex': typeof parseInt;
                     'opensearch:itemsPerPage': typeof parseInt;
                     entry: ((val: readonly {
+                        openaccess?: any;
+                        'dc:creator'?: string | undefined;
                         link: readonly {
                             '@ref': Link_type;
                             '@href': string;
                         }[];
-                        pii: string;
-                        'load-date': string;
-                        openaccess: boolean;
-                        'dc:creator': string;
                         'dc:identifier': string;
                         'dc:title': string;
                         'prism:coverDate': string;
-                        'prism:doi': string;
                         'prism:publicationName': string;
                         'prism:startingPage': string;
                         'prism:url': string;
                         'prism:volume': string;
                     }[]) => readonly Readonly<{
+                        'dc:creator'?: string | undefined;
                         link: readonly Readonly<{
                             '@ref': Link_type;
                             '@href': string;
                         }>[];
-                        pii: string;
-                        'load-date': $mol_time_moment;
                         openaccess: boolean;
-                        'dc:creator': string;
                         'dc:identifier': string;
                         'dc:title': string;
                         'prism:coverDate': $mol_time_moment;
-                        'prism:doi': string;
                         'prism:publicationName': string;
                         'prism:startingPage': number;
                         'prism:url': string;
                         'prism:volume': number;
                     }>[]) & {
                         config: ((val: {
+                            openaccess?: any;
+                            'dc:creator'?: string | undefined;
                             link: readonly {
                                 '@ref': Link_type;
                                 '@href': string;
                             }[];
-                            pii: string;
-                            'load-date': string;
-                            openaccess: boolean;
-                            'dc:creator': string;
                             'dc:identifier': string;
                             'dc:title': string;
                             'prism:coverDate': string;
-                            'prism:doi': string;
                             'prism:publicationName': string;
                             'prism:startingPage': string;
                             'prism:url': string;
                             'prism:volume': string;
                         }) => Readonly<{
+                            'dc:creator'?: string | undefined;
                             link: readonly Readonly<{
                                 '@ref': Link_type;
                                 '@href': string;
                             }>[];
-                            pii: string;
-                            'load-date': $mol_time_moment;
                             openaccess: boolean;
-                            'dc:creator': string;
                             'dc:identifier': string;
                             'dc:title': string;
                             'prism:coverDate': $mol_time_moment;
-                            'prism:doi': string;
                             'prism:publicationName': string;
                             'prism:startingPage': number;
                             'prism:url': string;
                             'prism:volume': number;
                         }>) & {
                             config: {
-                                pii: (val: string) => string;
-                                'load-date': ((this: any, input: string) => $mol_time_moment) & {
+                                openaccess: ((this: any, input: any) => boolean) & {
                                     config: {
-                                        funcs: [(val: string) => string, typeof $mol_time_moment] & [(input: string) => $mol_time_moment_config | undefined, new (input: $mol_time_moment_config | undefined) => unknown];
+                                        funcs: [(v: any) => number, (v: number) => boolean] & [(input: any) => number, (input: number) => unknown];
                                     };
                                     Value: ReturnType<Value>;
                                 };
-                                openaccess: (val: boolean) => boolean;
-                                'dc:creator': (val: string) => string;
+                                'dc:creator': ((val: string | undefined) => string | undefined) & {
+                                    config: {
+                                        sub: (val: string) => string;
+                                        fallback: (() => string) | undefined;
+                                    };
+                                    Value: ReturnType<Value>;
+                                };
                                 'dc:identifier': (val: string) => string;
                                 'dc:title': (val: string) => string;
                                 'prism:coverDate': ((this: any, input: string) => $mol_time_moment) & {
@@ -2983,7 +3214,6 @@ declare namespace $ {
                                     };
                                     Value: ReturnType<Value>;
                                 };
-                                'prism:doi': (val: string) => string;
                                 'prism:publicationName': (val: string) => string;
                                 'prism:startingPage': typeof parseInt;
                                 'prism:url': (val: string) => string;
@@ -3027,12 +3257,12 @@ declare namespace $ {
         };
         Value: ReturnType<Value>;
     };
-    export function $hyoo_science_elsevier_search(this: $, query: string): {
+    export function $hyoo_science_elsevier_search(this: $, service: string, query: string): {
         total: number;
         article: {
-            pii: string;
+            link: string;
             title: string;
-            uri: string;
+            author: string;
             journal: string;
             date: $mol_time_moment;
             open: boolean;
@@ -3058,46 +3288,154 @@ declare namespace $ {
 		,
 		ReturnType< $mol_search['submit'] >
 	>
-	type $mol_link_source__uri_hyoo_science_app_4 = $mol_type_enforce<
+	type $mol_select__dictionary_hyoo_science_app_4 = $mol_type_enforce<
+		({ 
+			'sciencedirect': string,
+			'scopus': string,
+		}) 
+		,
+		ReturnType< $mol_select['dictionary'] >
+	>
+	type $mol_select__value_hyoo_science_app_5 = $mol_type_enforce<
+		ReturnType< $hyoo_science_app['service'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $mol_select__hint_hyoo_science_app_6 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_select['hint'] >
+	>
+	type $mol_select__dictionary_hyoo_science_app_7 = $mol_type_enforce<
+		({ 
+			'': string,
+			'AGRI': string,
+			'ARTS': string,
+			'BIOC': string,
+			'BUSI': string,
+			'CENG': string,
+			'CHEM': string,
+			'COMP': string,
+			'DECI': string,
+			'DENT': string,
+			'EART': string,
+			'ECON': string,
+			'ENER': string,
+			'ENGI': string,
+			'ENVI': string,
+			'HEAL': string,
+			'IMMU': string,
+			'MATE': string,
+			'MATH': string,
+			'MEDI': string,
+			'NEUR': string,
+			'NURS': string,
+			'PHAR': string,
+			'PHYS': string,
+			'PSYC': string,
+			'SOCI': string,
+			'VETE': string,
+			'MULT': string,
+		}) 
+		,
+		ReturnType< $mol_select['dictionary'] >
+	>
+	type $mol_select__value_hyoo_science_app_8 = $mol_type_enforce<
+		ReturnType< $hyoo_science_app['area'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $mol_view__sub_hyoo_science_app_9 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_check_icon__hint_hyoo_science_app_10 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_icon['hint'] >
+	>
+	type $mol_check_icon__Icon_hyoo_science_app_11 = $mol_type_enforce<
+		ReturnType< $hyoo_science_app['Open_icon'] >
+		,
+		ReturnType< $mol_check_icon['Icon'] >
+	>
+	type $mol_check_icon__checked_hyoo_science_app_12 = $mol_type_enforce<
+		ReturnType< $hyoo_science_app['open'] >
+		,
+		ReturnType< $mol_check_icon['checked'] >
+	>
+	type $mol_link__hint_hyoo_science_app_13 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link['hint'] >
+	>
+	type $mol_link__uri_hyoo_science_app_14 = $mol_type_enforce<
+		ReturnType< $hyoo_science_app['help'] >
+		,
+		ReturnType< $mol_link['uri'] >
+	>
+	type $mol_link__sub_hyoo_science_app_15 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	type $mol_link_source__uri_hyoo_science_app_16 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link_source['uri'] >
 	>
-	type $hyoo_science_article__open_hyoo_science_app_5 = $mol_type_enforce<
+	type $hyoo_science_article__open_hyoo_science_app_17 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_open'] >
 		,
 		ReturnType< $hyoo_science_article['open'] >
 	>
-	type $hyoo_science_article__highlight_hyoo_science_app_6 = $mol_type_enforce<
+	type $hyoo_science_article__highlight_hyoo_science_app_18 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['query'] >
 		,
 		ReturnType< $hyoo_science_article['highlight'] >
 	>
-	type $hyoo_science_article__title_hyoo_science_app_7 = $mol_type_enforce<
+	type $hyoo_science_article__title_hyoo_science_app_19 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_title'] >
 		,
 		ReturnType< $hyoo_science_article['title'] >
 	>
-	type $hyoo_science_article__uri_hyoo_science_app_8 = $mol_type_enforce<
+	type $hyoo_science_article__uri_hyoo_science_app_20 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_link'] >
 		,
 		ReturnType< $hyoo_science_article['uri'] >
 	>
-	type $hyoo_science_article__journal_title_hyoo_science_app_9 = $mol_type_enforce<
+	type $hyoo_science_article__journal_title_hyoo_science_app_21 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_journal'] >
 		,
 		ReturnType< $hyoo_science_article['journal_title'] >
 	>
-	type $mol_list__rows_hyoo_science_app_10 = $mol_type_enforce<
+	type $mol_list__rows_hyoo_science_app_22 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_view__sub_hyoo_science_app_23 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
 	>
 	export class $hyoo_science_app extends $mol_page {
 		query( ): string
 		query_changed( next?: ReturnType< $hyoo_science_app['query'] > ): ReturnType< $hyoo_science_app['query'] >
 		search( next?: any ): any
 		Query( ): $mol_search
+		service( next?: string ): string
+		Service( ): $mol_select
+		area( next?: string ): string
+		Area( ): $mol_select
+		Zone( ): $mol_view
+		Open_icon( ): $mol_icon_lock_open_variant_outline
+		open( next?: boolean ): boolean
+		Open( ): $mol_check_icon
+		help( ): string
+		Help_icon( ): $mol_icon_hint
+		Help( ): $mol_link
 		Lights( ): $mol_lights_toggle
 		Source( ): $mol_link_source
 		found_open( id: any): boolean
@@ -3107,9 +3445,12 @@ declare namespace $ {
 		Found_row( id: any): $hyoo_science_article
 		found_rows( ): readonly(any)[]
 		Found_rows( ): $mol_list
+		request( ): string
+		Request( ): $mol_view
 		Theme( ): $mol_theme_auto
 		key( ): string
 		Title( ): ReturnType< $hyoo_science_app['Query'] >
+		head( ): readonly(any)[]
 		tools( ): readonly(any)[]
 		body( ): readonly(any)[]
 		plugins( ): readonly(any)[]
@@ -3120,14 +3461,19 @@ declare namespace $ {
 //# sourceMappingURL=app.view.tree.d.ts.map
 declare namespace $.$$ {
     class $hyoo_science_app extends $.$hyoo_science_app {
+        service(next?: string): string;
         query(): string;
+        area(next?: string): string;
+        open(next?: boolean): boolean;
+        request(): string;
+        help(): string;
         search(): void;
         data(): {
             total: number;
             article: {
-                pii: string;
+                link: string;
                 title: string;
-                uri: string;
+                author: string;
                 journal: string;
                 date: $mol_time_moment;
                 open: boolean;

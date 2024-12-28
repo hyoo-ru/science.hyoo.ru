@@ -268,14 +268,67 @@ $mol_check $mol_button_minor
 				sub /
 					<= title \
 
+$mol_pick $mol_pop
+	event *
+		^
+		keydown?event <=> keydown?event null
+	Anchor <= Trigger $mol_check
+		minimal_width 40
+		minimal_height 40
+		enabled <= trigger_enabled true
+		checked? <=> showed?
+		clicks? <=> clicks? null
+		sub <= trigger_content /$mol_view_content
+			<= title
+		hint <= hint \
+
+$mol_icon_dots_vertical $mol_icon path \M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z
+
+$mol_select $mol_pick
+	dictionary? *
+	options /string
+	value? \
+	option_label_default \
+	Option_row* $mol_button_minor
+		event_click?event <=> event_select*?event null
+		sub <= option_content* /
+			<= Option_label* $mol_dimmer
+				haystack <= option_label* \
+				needle <= filter_pattern? \
+	No_options $mol_view
+		sub /
+			<= no_options_message @ \No options
+	plugins /
+		^
+		<= Nav $mol_nav
+			keys_y <= nav_components /$mol_view
+			current_y?component <=> option_focused?component null
+			cycle? <=> nav_cycle? true
+	hint @ \Pick..
+	bubble_content /
+		<= Filter
+		<= Bubble_pane $mol_scroll
+			sub /
+				<= Menu $mol_list
+					rows <= menu_content /$mol_view
+	Filter $mol_search
+		query? <=> filter_pattern? \
+		hint <= filter_hint @ \Filter..
+		submit?event <=> submit?event null
+		enabled <= enabled true
+	Trigger_icon $mol_icon_dots_vertical
+
+$mol_icon_lock $mol_icon path \M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z
+
+$mol_icon_lock_open $mol_icon path \M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10A2,2 0 0,1 6,8H15V6A3,3 0 0,0 12,3A3,3 0 0,0 9,6H7A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,17A2,2 0 0,0 14,15A2,2 0 0,0 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17Z
+
+$mol_icon_lock_open_variant $mol_icon path \M18 1C15.24 1 13 3.24 13 6V8H4C2.9 8 2 8.89 2 10V20C2 21.11 2.9 22 4 22H16C17.11 22 18 21.11 18 20V10C18 8.9 17.11 8 16 8H15V6C15 4.34 16.34 3 18 3C19.66 3 21 4.34 21 6V8H23V6C23 3.24 20.76 1 18 1M10 13C11.1 13 12 13.89 12 15C12 16.11 11.11 17 10 17C8.9 17 8 16.11 8 15C8 13.9 8.9 13 10 13Z
+
+$mol_icon_lock_open_variant_outline $mol_icon path \M10 13C11.1 13 12 13.89 12 15C12 16.11 11.11 17 10 17S8 16.11 8 15 8.9 13 10 13M18 1C15.24 1 13 3.24 13 6V8H4C2.9 8 2 8.9 2 10V20C2 21.1 2.9 22 4 22H16C17.1 22 18 21.1 18 20V10C18 8.9 17.1 8 16 8H15V6C15 4.34 16.34 3 18 3S21 4.34 21 6V8H23V6C23 3.24 20.76 1 18 1M16 10V20H4V10H16Z
+
 $mol_check_icon $mol_check
 
-$mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
-
-$mol_lights_toggle $mol_check_icon
-	Icon <= Lights_icon $mol_icon_brightness_4
-	hint @ \Toggle lights
-	checked? <=> lights? false
+$mol_icon_hint $mol_icon path \M10,19H13V22H10V19M12,2C17.35,2.22 19.68,7.62 16.5,11.67C15.67,12.67 14.33,13.33 13.67,14.17C13,15 13,16 13,17H10C10,15.33 10,13.92 10.67,12.92C11.33,11.92 12.67,11.33 13.5,10.67C15.92,8.43 15.32,5.26 12,5A3,3 0 0,0 9,8H6A6,6 0 0,1 12,2Z
 
 $mol_link $mol_view
 	uri \
@@ -297,6 +350,13 @@ $mol_link $mol_view
 	event *
 		^
 		click?event <=> click?event <=> event_click?event null
+
+$mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
+
+$mol_lights_toggle $mol_check_icon
+	Icon <= Lights_icon $mol_icon_brightness_4
+	hint @ \Toggle lights
+	checked? <=> lights? false
 
 $mol_icon_script $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2H8C6.3,2 5,3.3 5,5V16H16V17C16,17.6 16.4,18 17,18H18V5C18,4.4 18.4,4 19,4C19.6,4 20,4.4 20,5V6H22V5C22,3.3 20.7,2 19,2Z
 
@@ -332,7 +392,58 @@ $hyoo_science_app $mol_page
 		hint \Science Publications Searcher
 		query? <=> query_changed? <= query \
 		submit? <=> search? null
+	head /
+		<= Zone $mol_view sub /
+			<= Service $mol_select
+				dictionary *
+					sciencedirect \Science Direct
+					scopus \Scopus
+				value? <=> service? \sciencedirect
+			<= Area $mol_select
+				hint \Science Area
+				dictionary *
+					\
+						\any area
+					AGRI \Agro & Biology
+					ARTS \Arts & Humanities
+					BIOC \Biochemistry & Genetics
+					BUSI \Business & Accounting
+					CENG \Chemical Engineering
+					CHEM \Chemistry
+					COMP \Computers
+					DECI \Decisions
+					DENT \Dentistry
+					EART \Earth and Planetary
+					ECON \Economics & Finance
+					ENER \Energy
+					ENGI \Engineering
+					ENVI \Environment
+					HEAL \Health
+					IMMU \Immunology & Microbio
+					MATE \Materials
+					MATH \Math
+					MEDI \Medicine
+					NEUR \Neuro
+					NURS \Nursing
+					PHAR \Pharma & Toxic
+					PHYS \Physics & Astronomy
+					PSYC \Psychology
+					SOCI \Social
+					VETE \Veterinary
+					MULT \Multi
+				value? <=> area? \
+		<= Title
+		<= Tools
 	tools /
+		<= Open $mol_check_icon
+			hint \Open Access
+			Icon <= Open_icon $mol_icon_lock_open_variant_outline
+			checked? <=> open? true
+		<= Help $mol_link
+			hint \Query Syntax
+			uri <= help \https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm
+			sub /
+				<= Help_icon $mol_icon_hint
 		<= Lights $mol_lights_toggle
 		<= Source $mol_link_source
 			uri \https://github.com/hyoo-ru/science.hyoo.ru
@@ -345,5 +456,7 @@ $hyoo_science_app $mol_page
 					title <= found_title* \
 					uri <= found_link* \
 					journal_title <= found_journal* \
+		<= Request $mol_view
+			sub / <= request \Request: {request}
 	plugins /
 		<= Theme $mol_theme_auto

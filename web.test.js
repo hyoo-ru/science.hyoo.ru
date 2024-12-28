@@ -3615,22 +3615,20 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    const Age = $mol_data_optional($mol_data_number);
+    const Age_or_zero = $mol_data_optional($mol_data_number, () => 0);
     $mol_test({
-        'Is boolean - true'() {
-            $mol_data_boolean(true);
+        'Is not present'() {
+            $mol_assert_equal(Age(undefined), undefined);
         },
-        'Is boolean - false'() {
-            $mol_data_boolean(false);
+        'Is present'() {
+            $mol_assert_equal(Age(0), 0);
         },
-        'Is not boolean'() {
-            $mol_assert_fail(() => {
-                $mol_data_boolean('x');
-            }, 'x is not a boolean');
+        'Fallbacked'() {
+            $mol_assert_equal(Age_or_zero(undefined), 0);
         },
-        'Is object boolean'() {
-            $mol_assert_fail(() => {
-                $mol_data_boolean(new Boolean(''));
-            }, 'false is not a boolean');
+        'Is null'() {
+            $mol_assert_fail(() => Age(null), 'null is not a number');
         },
     });
 })($ || ($ = {}));
