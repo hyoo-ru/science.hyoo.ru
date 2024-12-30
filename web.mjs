@@ -1680,6 +1680,13 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    $.$mol_dom = $mol_dom_context;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     function $mol_dom_qname(name) {
         return name.replace(/\W/g, '').replace(/^(?=\d+)/, '_');
     }
@@ -7381,25 +7388,25 @@ var $;
 				"AGRI": "🌽 Agri & Biology", 
 				"ARTS": "🖼️ Arts & Humanities", 
 				"BIOC": "🧬 Biochemistry & Genetics", 
-				"BUSI": "🧑‍💼 Business & Accounting", 
+				"BUSI": "💼 Business & Accounting", 
 				"CENG": "⚗️ Chemical Engineering", 
 				"CHEM": "🧪 Chemistry", 
 				"COMP": "🖥️ Computers", 
 				"DECI": "🔀 Decisions", 
 				"DENT": "🦷 Dentistry", 
 				"EART": "🌍 Earth and Planetary", 
-				"ECON": "🪙 Economics & Finance", 
+				"ECON": "💰 Economics & Finance", 
 				"ENER": "⚡ Energy", 
 				"ENGI": "🏗️ Engineering", 
 				"ENVI": "🌌 Environment", 
 				"HEAL": "💓 Health", 
 				"IMMU": "☣️ Immunology & Microbio", 
-				"MATE": "🪙 Materials", 
+				"MATE": "💎 Materials", 
 				"MATH": "➗ Math", 
-				"MEDI": "💊 Medicine", 
-				"NEUR": "🧠 Neuro", 
-				"NURS": "🧑‍⚕️ Nursing", 
-				"PHAR": "⚕️ Pharma & Toxic", 
+				"MEDI": "💉 Medicine", 
+				"NEUR": "🧠 Neurology", 
+				"NURS": "⚕️ Nursing", 
+				"PHAR": "💊 Pharma & Toxic", 
 				"PHYS": "🚀 Physics & Astronomy", 
 				"PSYC": "🥴 Psychology", 
 				"SOCI": "💬 Social", 
