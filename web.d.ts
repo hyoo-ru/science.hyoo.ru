@@ -2795,6 +2795,11 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
+	type $mol_view__sub_hyoo_science_article_8 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
 	export class $hyoo_science_article extends $mol_view {
 		uri( ): string
 		open_icon( ): string
@@ -2806,8 +2811,9 @@ declare namespace $ {
 		Rank( ): $mol_view
 		Link( ): $mol_link
 		journal_title( ): string
-		date_view( ): string
 		Journal( ): $mol_view
+		date_view( ): string
+		Date( ): $mol_view
 		open( ): boolean
 		date( ): $mol_time_moment
 		rank( ): number

@@ -385,6 +385,8 @@ $hyoo_science_article $mol_view
 		<= Journal $mol_view
 			sub /
 				<= journal_title \
+		<= Date $mol_view
+			sub /
 				<= date_view \
 
 $mol_chip $mol_view

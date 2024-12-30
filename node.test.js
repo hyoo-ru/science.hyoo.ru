@@ -8367,12 +8367,17 @@ var $;
 		journal_title(){
 			return "";
 		}
+		Journal(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.journal_title())]);
+			return obj;
+		}
 		date_view(){
 			return "";
 		}
-		Journal(){
+		Date(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.journal_title()), (this.date_view())]);
+			(obj.sub) = () => ([(this.date_view())]);
 			return obj;
 		}
 		open(){
@@ -8386,7 +8391,11 @@ var $;
 			return 0;
 		}
 		sub(){
-			return [(this.Link()), (this.Journal())];
+			return [
+				(this.Link()), 
+				(this.Journal()), 
+				(this.Date())
+			];
 		}
 	};
 	($mol_mem(($.$hyoo_science_article.prototype), "Open"));
@@ -8394,6 +8403,7 @@ var $;
 	($mol_mem(($.$hyoo_science_article.prototype), "Rank"));
 	($mol_mem(($.$hyoo_science_article.prototype), "Link"));
 	($mol_mem(($.$hyoo_science_article.prototype), "Journal"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Date"));
 	($mol_mem(($.$hyoo_science_article.prototype), "date"));
 
 
@@ -8411,7 +8421,7 @@ var $;
                 return this.open() ? '📄 ' : '🔒 ';
             }
             rank_view() {
-                return this.rank() ? `🔊${this.rank()}` : '';
+                return this.rank() ? `「${this.rank()}」` : '';
             }
             date_view() {
                 return ` ${this.date()}`;
@@ -8451,12 +8461,19 @@ var $;
                     shrink: 1,
                 },
             },
+            Rank: {
+                color: $mol_theme.shade,
+            },
             Journal: {
                 color: $mol_theme.shade,
                 padding: $mol_gap.text,
                 flex: {
                     shrink: 1,
                 },
+            },
+            Date: {
+                padding: $mol_gap.text,
+                color: $mol_theme.special,
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
