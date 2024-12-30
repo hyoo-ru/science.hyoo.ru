@@ -7937,6 +7937,21 @@ var $;
 			(obj.sub) = () => ([(this.Service()), (this.Area())]);
 			return obj;
 		}
+		place(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Place(){
+			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ("Text Place");
+			(obj.dictionary) = () => ({
+				"": "Anywhere", 
+				"TITLE": "Title", 
+				"TITLE-ABS-KEY": "Abstract"
+			});
+			(obj.value) = (next) => ((this.place(next)));
+			return obj;
+		}
 		Open_icon(){
 			const obj = new this.$.$mol_icon_lock_open_variant_outline();
 			return obj;
@@ -8034,6 +8049,7 @@ var $;
 		}
 		tools(){
 			return [
+				(this.Place()), 
 				(this.Open()), 
 				(this.Help()), 
 				(this.Lights()), 
@@ -8055,6 +8071,8 @@ var $;
 	($mol_mem(($.$hyoo_science_app.prototype), "area"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Area"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Zone"));
+	($mol_mem(($.$hyoo_science_app.prototype), "place"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Place"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Open_icon"));
 	($mol_mem(($.$hyoo_science_app.prototype), "open"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Open"));
@@ -9164,11 +9182,16 @@ var $;
             area(next) {
                 return this.$.$mol_state_arg.value('area', next) ?? super.area();
             }
+            place(next) {
+                return this.$.$mol_state_arg.value('place', next) ?? super.place();
+            }
             open(next) {
                 return this.$.$mol_state_arg.value('open', next?.toString()) !== 'false';
             }
             request() {
                 let request = this.query();
+                if (request.trim() && this.place())
+                    request = `${this.place()}(${request})`;
                 if (this.open())
                     request += ` openaccess(1)`;
                 if (this.area())
@@ -9221,6 +9244,9 @@ var $;
         ], $hyoo_science_app.prototype, "area", null);
         __decorate([
             $mol_mem
+        ], $hyoo_science_app.prototype, "place", null);
+        __decorate([
+            $mol_mem
         ], $hyoo_science_app.prototype, "open", null);
         __decorate([
             $mol_mem
@@ -9251,6 +9277,8 @@ var $;
             Zone: {
                 flex: {
                     grow: 1,
+                    shrink: 1,
+                    wrap: 'wrap',
                 },
             },
             Query: {

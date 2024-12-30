@@ -438,6 +438,14 @@ $hyoo_science_app $mol_page
 		<= Title
 		<= Tools
 	tools /
+		<= Place $mol_select
+			hint \Text Place
+			dictionary *
+				\
+					\Anywhere
+				TITLE \Title
+				TITLE-ABS-KEY \Abstract
+			value? <=> place? \
 		<= Open $mol_check_icon
 			hint \Open Access
 			Icon <= Open_icon $mol_icon_lock_open_variant_outline
