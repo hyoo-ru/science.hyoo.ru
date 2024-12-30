@@ -81,7 +81,7 @@ namespace $ {
 				journal: entry["prism:publicationName"],
 				date: entry["prism:coverDate"],
 				open: entry.openaccess,
-				rank: entry["citedby-count"] ?? 0,
+				rank: Number( entry["citedby-count"] ),
 			}) ),
 		}
 
