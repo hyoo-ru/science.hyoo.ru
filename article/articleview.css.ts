@@ -31,12 +31,21 @@ namespace $.$$ {
 			},
 		},
 		
+		Rank: {
+			color: $mol_theme.shade,
+		},
+		
 		Journal: {
 			color: $mol_theme.shade,
 			padding: $mol_gap.text,
 			flex: {
 				shrink: 1,
 			},
+		},
+		
+		Date: {
+			padding: $mol_gap.text,
+			color: $mol_theme.special,
 		},
 		
 	} )

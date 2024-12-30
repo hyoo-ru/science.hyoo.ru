@@ -6,7 +6,7 @@ namespace $.$$ {
 		}
 		
 		rank_view() {
-			return this.rank() ? `🔊${ this.rank() }` : ''
+			return this.rank() ? `「${ this.rank() }」` : ''
 		}
 		
 		date_view() {
