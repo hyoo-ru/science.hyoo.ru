@@ -79,6 +79,10 @@ namespace $.$$ {
 			return this.data().article[ index ].link
 		}
 		
+		found_rank( index: number ) {
+			return this.data().article[ index ].rank
+		}
+		
 		found_date( index: number ) {
 			return this.data().article[ index ].date
 		}

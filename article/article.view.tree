@@ -1,5 +1,7 @@
 $hyoo_science_article $mol_view
 	open false
+	date $mol_time_moment
+	rank 0
 	sub /
 		<= Link $mol_link
 			uri <= uri \
@@ -9,6 +11,8 @@ $hyoo_science_article $mol_view
 				<= Title $mol_dimmer
 					needle <= highlight \
 					haystack <= title \
+				<= Rank $mol_view
+					sub / <= rank_view \
 		<= Journal $mol_view
 			sub /
 				<= journal_title \

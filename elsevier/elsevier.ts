@@ -24,6 +24,7 @@ namespace $ {
 		// 'pii': $mol_data_string,
 		// 'load-date': moment,
 		'openaccess': $mol_data_pipe( ( v: any )=> Number( v ), ( v: number )=> Boolean( v ) ),
+		'citedby-count': $mol_data_optional( $mol_data_string ),
 		'dc:creator': $mol_data_optional( $mol_data_string ),
 		'dc:identifier': $mol_data_string,
 		'dc:title': $mol_data_string,
@@ -80,6 +81,7 @@ namespace $ {
 				journal: entry["prism:publicationName"],
 				date: entry["prism:coverDate"],
 				open: entry.openaccess,
+				rank: entry["citedby-count"] ?? 0,
 			}) ),
 		}
 

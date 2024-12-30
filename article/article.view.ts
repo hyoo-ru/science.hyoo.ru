@@ -5,6 +5,10 @@ namespace $.$$ {
 			return this.open() ? '📄 ' : '🔒 '
 		}
 		
+		rank_view() {
+			return this.rank() ? `🔊${ this.rank() }` : ''
+		}
+		
 		date_view() {
 			return this.date().toString()
 		}
