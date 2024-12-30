@@ -79,6 +79,10 @@ namespace $.$$ {
 			return this.data().article[ index ].link
 		}
 		
+		found_date( index: number ) {
+			return this.data().article[ index ].date
+		}
+		
 		found_journal( index: number ) {
 			return this.data().article[ index ].journal
 		}

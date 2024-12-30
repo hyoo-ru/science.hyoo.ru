@@ -5,5 +5,9 @@ namespace $.$$ {
 			return this.open() ? '📄 ' : '🔒 '
 		}
 		
+		date_view() {
+			return this.date().toString()
+		}
+		
 	}
 }

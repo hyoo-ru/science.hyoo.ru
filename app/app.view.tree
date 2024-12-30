@@ -75,6 +75,7 @@ $hyoo_science_app $mol_page
 					highlight <= query
 					title <= found_title* \
 					uri <= found_link* \
+					date <= found_date* $mol_time_moment
 					journal_title <= found_journal* \
 			Empty <= Found_none $mol_chip
 				title \Not Found
