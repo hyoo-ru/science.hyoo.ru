@@ -22,6 +22,11 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
+		place( next?: string ) {
+			return this.$.$mol_state_arg.value( 'place', next ) ?? super.place()
+		}
+
+		@ $mol_mem
 		open( next?: boolean ) {
 			return this.$.$mol_state_arg.value( 'open', next?.toString() ) !== 'false'
 		}
@@ -29,6 +34,7 @@ namespace $.$$ {
 		@ $mol_mem
 		request() {
 			let request = this.query()
+			if( request.trim() && this.place() ) request = `${ this.place() }(${ request })`
 			if( this.open() ) request += ` openaccess(1)` 
 			if( this.area() ) request += ` SUBJAREA(${ this.area() })` 
 			return super.request().replace( '{request}', request )
