@@ -369,6 +369,8 @@ $mol_link_source $mol_link
 
 $hyoo_science_article $mol_view
 	open false
+	date $mol_time_moment
+	rank 0
 	sub /
 		<= Link $mol_link
 			uri <= uri \
@@ -378,9 +380,12 @@ $hyoo_science_article $mol_view
 				<= Title $mol_dimmer
 					needle <= highlight \
 					haystack <= title \
+				<= Rank $mol_view
+					sub / <= rank_view \
 		<= Journal $mol_view
 			sub /
 				<= journal_title \
+				<= date_view \
 
 $mol_chip $mol_view
 	sub /
@@ -466,6 +471,8 @@ $hyoo_science_app $mol_page
 					highlight <= query
 					title <= found_title* \
 					uri <= found_link* \
+					rank <= found_rank* 0
+					date <= found_date* $mol_time_moment
 					journal_title <= found_journal* \
 			Empty <= Found_none $mol_chip
 				title \Not Found

@@ -2629,157 +2629,6 @@ declare namespace $ {
 
 //# sourceMappingURL=source.view.tree.d.ts.map
 declare namespace $ {
-
-	type $mol_view__sub_hyoo_science_article_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_dimmer__needle_hyoo_science_article_2 = $mol_type_enforce<
-		ReturnType< $hyoo_science_article['highlight'] >
-		,
-		ReturnType< $mol_dimmer['needle'] >
-	>
-	type $mol_dimmer__haystack_hyoo_science_article_3 = $mol_type_enforce<
-		ReturnType< $hyoo_science_article['title'] >
-		,
-		ReturnType< $mol_dimmer['haystack'] >
-	>
-	type $mol_link__uri_hyoo_science_article_4 = $mol_type_enforce<
-		ReturnType< $hyoo_science_article['uri'] >
-		,
-		ReturnType< $mol_link['uri'] >
-	>
-	type $mol_link__sub_hyoo_science_article_5 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	type $mol_view__sub_hyoo_science_article_6 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $hyoo_science_article extends $mol_view {
-		uri( ): string
-		open_icon( ): string
-		Open( ): $mol_view
-		highlight( ): string
-		title( ): string
-		Title( ): $mol_dimmer
-		Link( ): $mol_link
-		journal_title( ): string
-		Journal( ): $mol_view
-		open( ): boolean
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=article.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $hyoo_science_article extends $.$hyoo_science_article {
-        open_icon(): "📄 " | "🔒 ";
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	export class $mol_chip extends $mol_view {
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=chip.view.tree.d.ts.map
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	export class $mol_theme_auto extends $mol_plugin {
-		theme( ): string
-		attr( ): ({ 
-			'mol_theme': ReturnType< $mol_theme_auto['theme'] >,
-		}) 
-	}
-	
-}
-
-//# sourceMappingURL=auto.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_theme_auto extends $.$mol_theme_auto {
-        theme(): "$mol_theme_light" | "$mol_theme_dark";
-    }
-}
-
-declare namespace $ {
-    type $mol_type_unary_func = ((param: any) => any);
-    type $mol_type_unary_class = new (param: any) => any;
-    type $mol_type_unary = $mol_type_unary_func | $mol_type_unary_class;
-}
-
-declare namespace $ {
-    type $mol_type_param<Func, Index extends number> = Func extends (...params: infer Params) => any ? Params[Index] : Func extends new (...params: infer Params2) => any ? Params2[Index] : never;
-}
-
-declare namespace $ {
-    type $mol_data_value<Input = any, Output = any> = (val: Input) => Output;
-}
-
-declare namespace $ {
-    function $mol_data_setup<Value extends $mol_data_value, Config = never>(value: Value, config: Config): Value & {
-        config: Config;
-        Value: ReturnType<Value>;
-    };
-}
-
-declare namespace $ {
-    function $mol_func_is_class<Func extends Function>(func: Func): func is Func & (new (...args: any[]) => any);
-}
-
-declare namespace $ {
-    type $mol_type_result<Func> = Func extends (...params: any) => infer Result ? Result : Func extends new (...params: any) => infer Result ? Result : never;
-}
-
-declare namespace $ {
-    type Guard_value<Funcs extends $mol_type_unary[], Index extends keyof Funcs> = $mol_type_param<Index extends keyof $mol_type_tail<Funcs> ? $mol_type_tail<Funcs>[Index] : any, 0>;
-    type Guard<Funcs extends $mol_type_unary[]> = {
-        [Index in keyof Funcs]: (Funcs[Index] extends $mol_type_unary_func ? (input: $mol_type_param<Funcs[Index], 0>) => Guard_value<Funcs, Index> : new (input: $mol_type_param<Funcs[Index], 0>) => Guard_value<Funcs, Index>);
-    };
-    export function $mol_data_pipe<Funcs extends $mol_type_unary[]>(...funcs: Funcs & Guard<Funcs>): ((this: any, input: $mol_type_param<Funcs[0], 0>) => $mol_type_result<$mol_type_foot<Funcs>>) & {
-        config: {
-            funcs: Funcs & Guard<Funcs>;
-        };
-        Value: ReturnType<Value>;
-    };
-    export {};
-}
-
-declare namespace $ {
-    class $mol_error_mix<Cause extends {} = {}> extends AggregateError {
-        readonly cause: Cause;
-        name: string;
-        constructor(message: string, cause?: Cause, ...errors: Error[]);
-        static [Symbol.toPrimitive](): string;
-        static toString(): string;
-        static make(...params: ConstructorParameters<typeof $mol_error_mix>): $mol_error_mix<{}>;
-    }
-}
-
-declare namespace $ {
-    class $mol_data_error extends $mol_error_mix {
-    }
-}
-
-declare namespace $ {
-    let $mol_data_string: (val: string) => string;
-}
-
-declare namespace $ {
     class $mol_time_base {
         static patterns: Record<string, (arg: any) => string>;
         static formatter(pattern: string): (arg: any) => string;
@@ -2910,6 +2759,169 @@ declare namespace $ {
 }
 
 declare namespace $ {
+
+	type $mol_view__sub_hyoo_science_article_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_dimmer__needle_hyoo_science_article_2 = $mol_type_enforce<
+		ReturnType< $hyoo_science_article['highlight'] >
+		,
+		ReturnType< $mol_dimmer['needle'] >
+	>
+	type $mol_dimmer__haystack_hyoo_science_article_3 = $mol_type_enforce<
+		ReturnType< $hyoo_science_article['title'] >
+		,
+		ReturnType< $mol_dimmer['haystack'] >
+	>
+	type $mol_view__sub_hyoo_science_article_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_link__uri_hyoo_science_article_5 = $mol_type_enforce<
+		ReturnType< $hyoo_science_article['uri'] >
+		,
+		ReturnType< $mol_link['uri'] >
+	>
+	type $mol_link__sub_hyoo_science_article_6 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	type $mol_view__sub_hyoo_science_article_7 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $hyoo_science_article extends $mol_view {
+		uri( ): string
+		open_icon( ): string
+		Open( ): $mol_view
+		highlight( ): string
+		title( ): string
+		Title( ): $mol_dimmer
+		rank_view( ): string
+		Rank( ): $mol_view
+		Link( ): $mol_link
+		journal_title( ): string
+		date_view( ): string
+		Journal( ): $mol_view
+		open( ): boolean
+		date( ): $mol_time_moment
+		rank( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=article.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $hyoo_science_article extends $.$hyoo_science_article {
+        open_icon(): "📄 " | "🔒 ";
+        rank_view(): string;
+        date_view(): string;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	export class $mol_chip extends $mol_view {
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=chip.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	export class $mol_theme_auto extends $mol_plugin {
+		theme( ): string
+		attr( ): ({ 
+			'mol_theme': ReturnType< $mol_theme_auto['theme'] >,
+		}) 
+	}
+	
+}
+
+//# sourceMappingURL=auto.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_theme_auto extends $.$mol_theme_auto {
+        theme(): "$mol_theme_light" | "$mol_theme_dark";
+    }
+}
+
+declare namespace $ {
+    type $mol_type_unary_func = ((param: any) => any);
+    type $mol_type_unary_class = new (param: any) => any;
+    type $mol_type_unary = $mol_type_unary_func | $mol_type_unary_class;
+}
+
+declare namespace $ {
+    type $mol_type_param<Func, Index extends number> = Func extends (...params: infer Params) => any ? Params[Index] : Func extends new (...params: infer Params2) => any ? Params2[Index] : never;
+}
+
+declare namespace $ {
+    type $mol_data_value<Input = any, Output = any> = (val: Input) => Output;
+}
+
+declare namespace $ {
+    function $mol_data_setup<Value extends $mol_data_value, Config = never>(value: Value, config: Config): Value & {
+        config: Config;
+        Value: ReturnType<Value>;
+    };
+}
+
+declare namespace $ {
+    function $mol_func_is_class<Func extends Function>(func: Func): func is Func & (new (...args: any[]) => any);
+}
+
+declare namespace $ {
+    type $mol_type_result<Func> = Func extends (...params: any) => infer Result ? Result : Func extends new (...params: any) => infer Result ? Result : never;
+}
+
+declare namespace $ {
+    type Guard_value<Funcs extends $mol_type_unary[], Index extends keyof Funcs> = $mol_type_param<Index extends keyof $mol_type_tail<Funcs> ? $mol_type_tail<Funcs>[Index] : any, 0>;
+    type Guard<Funcs extends $mol_type_unary[]> = {
+        [Index in keyof Funcs]: (Funcs[Index] extends $mol_type_unary_func ? (input: $mol_type_param<Funcs[Index], 0>) => Guard_value<Funcs, Index> : new (input: $mol_type_param<Funcs[Index], 0>) => Guard_value<Funcs, Index>);
+    };
+    export function $mol_data_pipe<Funcs extends $mol_type_unary[]>(...funcs: Funcs & Guard<Funcs>): ((this: any, input: $mol_type_param<Funcs[0], 0>) => $mol_type_result<$mol_type_foot<Funcs>>) & {
+        config: {
+            funcs: Funcs & Guard<Funcs>;
+        };
+        Value: ReturnType<Value>;
+    };
+    export {};
+}
+
+declare namespace $ {
+    class $mol_error_mix<Cause extends {} = {}> extends AggregateError {
+        readonly cause: Cause;
+        name: string;
+        constructor(message: string, cause?: Cause, ...errors: Error[]);
+        static [Symbol.toPrimitive](): string;
+        static toString(): string;
+        static make(...params: ConstructorParameters<typeof $mol_error_mix>): $mol_error_mix<{}>;
+    }
+}
+
+declare namespace $ {
+    class $mol_data_error extends $mol_error_mix {
+    }
+}
+
+declare namespace $ {
+    let $mol_data_string: (val: string) => string;
+}
+
+declare namespace $ {
     type $mol_type_partial_undefined<Val> = $mol_type_merge<$mol_type_override<Partial<Val>, Pick<Val, {
         [Field in keyof Val]: undefined extends Val[Field] ? never : Field;
     }[keyof Val]>>>;
@@ -2996,6 +3008,7 @@ declare namespace $ {
     };
     export let $hyoo_science_elsevier_entry: ((val: {
         openaccess?: any;
+        'citedby-count'?: string | undefined;
         'dc:creator'?: string | undefined;
         'prism:doi'?: string | undefined;
         link: readonly {
@@ -3010,6 +3023,7 @@ declare namespace $ {
         'prism:url': string;
         'prism:volume': string;
     }) => Readonly<{
+        'citedby-count'?: string | undefined;
         'dc:creator'?: string | undefined;
         'prism:doi'?: string | undefined;
         link: readonly Readonly<{
@@ -3029,6 +3043,13 @@ declare namespace $ {
             openaccess: ((this: any, input: any) => boolean) & {
                 config: {
                     funcs: [(v: any) => number, (v: number) => boolean] & [(input: any) => number, (input: number) => unknown];
+                };
+                Value: ReturnType<Value>;
+            };
+            'citedby-count': ((val: string | undefined) => string | undefined) & {
+                config: {
+                    sub: (val: string) => string;
+                    fallback: (() => string) | undefined;
                 };
                 Value: ReturnType<Value>;
             };
@@ -3096,6 +3117,7 @@ declare namespace $ {
             'opensearch:itemsPerPage': string;
             entry: readonly {
                 openaccess?: any;
+                'citedby-count'?: string | undefined;
                 'dc:creator'?: string | undefined;
                 'prism:doi'?: string | undefined;
                 link: readonly {
@@ -3119,6 +3141,7 @@ declare namespace $ {
             'opensearch:startIndex': number;
             'opensearch:itemsPerPage': number;
             entry: readonly Readonly<{
+                'citedby-count'?: string | undefined;
                 'dc:creator'?: string | undefined;
                 'prism:doi'?: string | undefined;
                 link: readonly Readonly<{
@@ -3145,6 +3168,7 @@ declare namespace $ {
                 'opensearch:itemsPerPage': string;
                 entry: readonly {
                     openaccess?: any;
+                    'citedby-count'?: string | undefined;
                     'dc:creator'?: string | undefined;
                     'prism:doi'?: string | undefined;
                     link: readonly {
@@ -3166,6 +3190,7 @@ declare namespace $ {
                 'opensearch:startIndex': number;
                 'opensearch:itemsPerPage': number;
                 entry: readonly Readonly<{
+                    'citedby-count'?: string | undefined;
                     'dc:creator'?: string | undefined;
                     'prism:doi'?: string | undefined;
                     link: readonly Readonly<{
@@ -3190,6 +3215,7 @@ declare namespace $ {
                     'opensearch:itemsPerPage': typeof parseInt;
                     entry: ((val: readonly {
                         openaccess?: any;
+                        'citedby-count'?: string | undefined;
                         'dc:creator'?: string | undefined;
                         'prism:doi'?: string | undefined;
                         link: readonly {
@@ -3206,6 +3232,7 @@ declare namespace $ {
                     }[] | readonly {
                         error: string;
                     }[]) => readonly Readonly<{
+                        'citedby-count'?: string | undefined;
                         'dc:creator'?: string | undefined;
                         'prism:doi'?: string | undefined;
                         link: readonly Readonly<{
@@ -3225,6 +3252,7 @@ declare namespace $ {
                     }>[]) & {
                         config: [((val: readonly {
                             openaccess?: any;
+                            'citedby-count'?: string | undefined;
                             'dc:creator'?: string | undefined;
                             'prism:doi'?: string | undefined;
                             link: readonly {
@@ -3239,6 +3267,7 @@ declare namespace $ {
                             'prism:url': string;
                             'prism:volume': string;
                         }[]) => readonly Readonly<{
+                            'citedby-count'?: string | undefined;
                             'dc:creator'?: string | undefined;
                             'prism:doi'?: string | undefined;
                             link: readonly Readonly<{
@@ -3256,6 +3285,7 @@ declare namespace $ {
                         }>[]) & {
                             config: ((val: {
                                 openaccess?: any;
+                                'citedby-count'?: string | undefined;
                                 'dc:creator'?: string | undefined;
                                 'prism:doi'?: string | undefined;
                                 link: readonly {
@@ -3270,6 +3300,7 @@ declare namespace $ {
                                 'prism:url': string;
                                 'prism:volume': string;
                             }) => Readonly<{
+                                'citedby-count'?: string | undefined;
                                 'dc:creator'?: string | undefined;
                                 'prism:doi'?: string | undefined;
                                 link: readonly Readonly<{
@@ -3289,6 +3320,13 @@ declare namespace $ {
                                     openaccess: ((this: any, input: any) => boolean) & {
                                         config: {
                                             funcs: [(v: any) => number, (v: number) => boolean] & [(input: any) => number, (input: number) => unknown];
+                                        };
+                                        Value: ReturnType<Value>;
+                                    };
+                                    'citedby-count': ((val: string | undefined) => string | undefined) & {
+                                        config: {
+                                            sub: (val: string) => string;
+                                            fallback: (() => string) | undefined;
                                         };
                                         Value: ReturnType<Value>;
                                     };
@@ -3385,6 +3423,7 @@ declare namespace $ {
             journal: string;
             date: $mol_time_moment;
             open: boolean;
+            rank: number;
         }[];
     };
     export {};
@@ -3548,27 +3587,37 @@ declare namespace $ {
 		,
 		ReturnType< $hyoo_science_article['uri'] >
 	>
-	type $hyoo_science_article__journal_title_hyoo_science_app_25 = $mol_type_enforce<
+	type $hyoo_science_article__rank_hyoo_science_app_25 = $mol_type_enforce<
+		ReturnType< $hyoo_science_app['found_rank'] >
+		,
+		ReturnType< $hyoo_science_article['rank'] >
+	>
+	type $hyoo_science_article__date_hyoo_science_app_26 = $mol_type_enforce<
+		ReturnType< $hyoo_science_app['found_date'] >
+		,
+		ReturnType< $hyoo_science_article['date'] >
+	>
+	type $hyoo_science_article__journal_title_hyoo_science_app_27 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_journal'] >
 		,
 		ReturnType< $hyoo_science_article['journal_title'] >
 	>
-	type $mol_chip__title_hyoo_science_app_26 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_science_app_28 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_list__rows_hyoo_science_app_27 = $mol_type_enforce<
+	type $mol_list__rows_hyoo_science_app_29 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_list__Empty_hyoo_science_app_28 = $mol_type_enforce<
+	type $mol_list__Empty_hyoo_science_app_30 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['Found_none'] >
 		,
 		ReturnType< $mol_list['Empty'] >
 	>
-	type $mol_view__sub_hyoo_science_app_29 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_science_app_31 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -3597,6 +3646,8 @@ declare namespace $ {
 		found_open( id: any): boolean
 		found_title( id: any): string
 		found_link( id: any): string
+		found_rank( id: any): number
+		found_date( id: any): $mol_time_moment
 		found_journal( id: any): string
 		Found_row( id: any): $hyoo_science_article
 		found_rows( ): readonly(any)[]
@@ -3636,12 +3687,15 @@ declare namespace $.$$ {
                 journal: string;
                 date: $mol_time_moment;
                 open: boolean;
+                rank: number;
             }[];
         };
         found_rows(): $.$hyoo_science_article[];
         found_open(index: number): boolean;
         found_title(index: number): string;
         found_link(index: number): string;
+        found_rank(index: number): number;
+        found_date(index: number): $mol_time_moment;
         found_journal(index: number): string;
     }
 }

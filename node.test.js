@@ -7681,474 +7681,6 @@ var $;
 "use strict";
 
 ;
-	($.$hyoo_science_article) = class $hyoo_science_article extends ($.$mol_view) {
-		uri(){
-			return "";
-		}
-		open_icon(){
-			return "";
-		}
-		Open(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.open_icon())]);
-			return obj;
-		}
-		highlight(){
-			return "";
-		}
-		title(){
-			return "";
-		}
-		Title(){
-			const obj = new this.$.$mol_dimmer();
-			(obj.needle) = () => ((this.highlight()));
-			(obj.haystack) = () => ((this.title()));
-			return obj;
-		}
-		Link(){
-			const obj = new this.$.$mol_link();
-			(obj.uri) = () => ((this.uri()));
-			(obj.sub) = () => ([(this.Open()), (this.Title())]);
-			return obj;
-		}
-		journal_title(){
-			return "";
-		}
-		Journal(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.journal_title())]);
-			return obj;
-		}
-		open(){
-			return false;
-		}
-		sub(){
-			return [(this.Link()), (this.Journal())];
-		}
-	};
-	($mol_mem(($.$hyoo_science_article.prototype), "Open"));
-	($mol_mem(($.$hyoo_science_article.prototype), "Title"));
-	($mol_mem(($.$hyoo_science_article.prototype), "Link"));
-	($mol_mem(($.$hyoo_science_article.prototype), "Journal"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $hyoo_science_article extends $.$hyoo_science_article {
-            open_icon() {
-                return this.open() ? '📄 ' : '🔒 ';
-            }
-        }
-        $$.$hyoo_science_article = $hyoo_science_article;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($hyoo_science_article, {
-            background: {
-                color: $mol_theme.card,
-            },
-            border: {
-                radius: $mol_gap.round,
-            },
-            flex: {
-                wrap: 'wrap',
-            },
-            justify: {
-                content: 'flex-end',
-            },
-            Link: {
-                flex: {
-                    grow: 1,
-                    shrink: 1,
-                },
-            },
-            Title: {
-                flex: {
-                    shrink: 1,
-                },
-            },
-            Journal: {
-                color: $mol_theme.shade,
-                padding: $mol_gap.text,
-                flex: {
-                    shrink: 1,
-                },
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_chip) = class $mol_chip extends ($.$mol_view) {
-		sub(){
-			return [(this.title())];
-		}
-	};
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($mol_chip, {
-            padding: $mol_gap.text,
-            border: {
-                radius: $mol_gap.round,
-            },
-            background: {
-                color: $mol_theme.card,
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_theme_auto) = class $mol_theme_auto extends ($.$mol_plugin) {
-		theme(){
-			return "";
-		}
-		attr(){
-			return {"mol_theme": (this.theme())};
-		}
-	};
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_theme_auto extends $.$mol_theme_auto {
-            theme() {
-                return this.$.$mol_lights() ? '$mol_theme_light' : '$mol_theme_dark';
-            }
-        }
-        $$.$mol_theme_auto = $mol_theme_auto;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$hyoo_science_app) = class $hyoo_science_app extends ($.$mol_page) {
-		title(){
-			return "Science Publications Searcher";
-		}
-		query(){
-			return "";
-		}
-		query_changed(next){
-			if(next !== undefined) return next;
-			return (this.query());
-		}
-		search(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Query(){
-			const obj = new this.$.$mol_search();
-			(obj.hint) = () => ((this.title()));
-			(obj.query) = (next) => ((this.query_changed(next)));
-			(obj.submit) = (next) => ((this.search(next)));
-			return obj;
-		}
-		service(next){
-			if(next !== undefined) return next;
-			return "scopus";
-		}
-		Service(){
-			const obj = new this.$.$mol_select();
-			(obj.hint) = () => ("Indexing Service");
-			(obj.dictionary) = () => ({"sciencedirect": "Science Direct", "scopus": "Scopus"});
-			(obj.value) = (next) => ((this.service(next)));
-			return obj;
-		}
-		area(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		Area(){
-			const obj = new this.$.$mol_select();
-			(obj.hint) = () => ("Science Area");
-			(obj.dictionary) = () => ({
-				"": "Any Area", 
-				"AGRI": "🌽 Agri & Biology", 
-				"ARTS": "🖼️ Arts & Humanities", 
-				"BIOC": "🧬 Biochemistry & Genetics", 
-				"BUSI": "💼 Business & Accounting", 
-				"CENG": "⚗️ Chemical Engineering", 
-				"CHEM": "🧪 Chemistry", 
-				"COMP": "🖥️ Computers", 
-				"DECI": "🔀 Decisions", 
-				"DENT": "🦷 Dentistry", 
-				"EART": "🌍 Earth and Planetary", 
-				"ECON": "💰 Economics & Finance", 
-				"ENER": "⚡ Energy", 
-				"ENGI": "🏗️ Engineering", 
-				"ENVI": "🌌 Environment", 
-				"HEAL": "💓 Health", 
-				"IMMU": "☣️ Immunology & Microbio", 
-				"MATE": "💎 Materials", 
-				"MATH": "➗ Math", 
-				"MEDI": "💉 Medicine", 
-				"NEUR": "🧠 Neurology", 
-				"NURS": "⚕️ Nursing", 
-				"PHAR": "💊 Pharma & Toxic", 
-				"PHYS": "🚀 Physics & Astronomy", 
-				"PSYC": "🥴 Psychology", 
-				"SOCI": "💬 Social", 
-				"VETE": "🐈 Veterinary", 
-				"MULT": "🤹 Multidiscipline"
-			});
-			(obj.value) = (next) => ((this.area(next)));
-			return obj;
-		}
-		Zone(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Service()), (this.Area())]);
-			return obj;
-		}
-		place(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		Place(){
-			const obj = new this.$.$mol_select();
-			(obj.hint) = () => ("Text Place");
-			(obj.dictionary) = () => ({
-				"": "Anywhere", 
-				"TITLE": "Title", 
-				"TITLE-ABS-KEY": "Abstract"
-			});
-			(obj.value) = (next) => ((this.place(next)));
-			return obj;
-		}
-		Open_icon(){
-			const obj = new this.$.$mol_icon_lock_open_variant_outline();
-			return obj;
-		}
-		open(next){
-			if(next !== undefined) return next;
-			return true;
-		}
-		Open(){
-			const obj = new this.$.$mol_check_icon();
-			(obj.hint) = () => ("Open Access");
-			(obj.Icon) = () => ((this.Open_icon()));
-			(obj.checked) = (next) => ((this.open(next)));
-			return obj;
-		}
-		help(){
-			return "https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm";
-		}
-		Help_icon(){
-			const obj = new this.$.$mol_icon_hint();
-			return obj;
-		}
-		Help(){
-			const obj = new this.$.$mol_link();
-			(obj.hint) = () => ("Query Syntax");
-			(obj.uri) = () => ((this.help()));
-			(obj.sub) = () => ([(this.Help_icon())]);
-			return obj;
-		}
-		Lights(){
-			const obj = new this.$.$mol_lights_toggle();
-			return obj;
-		}
-		Source(){
-			const obj = new this.$.$mol_link_source();
-			(obj.uri) = () => ("https://github.com/hyoo-ru/science.hyoo.ru");
-			return obj;
-		}
-		found_open(id){
-			return false;
-		}
-		found_title(id){
-			return "";
-		}
-		found_link(id){
-			return "";
-		}
-		found_journal(id){
-			return "";
-		}
-		Found_row(id){
-			const obj = new this.$.$hyoo_science_article();
-			(obj.open) = () => ((this.found_open(id)));
-			(obj.highlight) = () => ((this.query()));
-			(obj.title) = () => ((this.found_title(id)));
-			(obj.uri) = () => ((this.found_link(id)));
-			(obj.journal_title) = () => ((this.found_journal(id)));
-			return obj;
-		}
-		found_rows(){
-			return [(this.Found_row("0"))];
-		}
-		Found_none(){
-			const obj = new this.$.$mol_chip();
-			(obj.title) = () => ("Not Found");
-			return obj;
-		}
-		Found_rows(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.found_rows()));
-			(obj.Empty) = () => ((this.Found_none()));
-			return obj;
-		}
-		request(){
-			return "Request: {request}";
-		}
-		Request(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.request())]);
-			return obj;
-		}
-		Theme(){
-			const obj = new this.$.$mol_theme_auto();
-			return obj;
-		}
-		Title(){
-			return (this.Query());
-		}
-		head(){
-			return [
-				(this.Zone()), 
-				(this.Title()), 
-				(this.Tools())
-			];
-		}
-		tools(){
-			return [
-				(this.Place()), 
-				(this.Open()), 
-				(this.Help()), 
-				(this.Lights()), 
-				(this.Source())
-			];
-		}
-		body(){
-			return [(this.Found_rows()), (this.Request())];
-		}
-		plugins(){
-			return [(this.Theme())];
-		}
-	};
-	($mol_mem(($.$hyoo_science_app.prototype), "query_changed"));
-	($mol_mem(($.$hyoo_science_app.prototype), "search"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Query"));
-	($mol_mem(($.$hyoo_science_app.prototype), "service"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Service"));
-	($mol_mem(($.$hyoo_science_app.prototype), "area"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Area"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Zone"));
-	($mol_mem(($.$hyoo_science_app.prototype), "place"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Place"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Open_icon"));
-	($mol_mem(($.$hyoo_science_app.prototype), "open"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Open"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Help_icon"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Help"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Lights"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Source"));
-	($mol_mem_key(($.$hyoo_science_app.prototype), "Found_row"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Found_none"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Found_rows"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Request"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Theme"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_data_setup(value, config) {
-        return Object.assign(value, {
-            config,
-            Value: null
-        });
-    }
-    $.$mol_data_setup = $mol_data_setup;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_func_is_class(func) {
-        return Object.getOwnPropertyDescriptor(func, 'prototype')?.writable === false;
-    }
-    $.$mol_func_is_class = $mol_func_is_class;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_data_pipe(...funcs) {
-        return $mol_data_setup(function (input) {
-            let value = input;
-            for (const func of funcs)
-                value = $mol_func_is_class(func) ? new func(value) : func.call(this, value);
-            return value;
-        }, { funcs });
-    }
-    $.$mol_data_pipe = $mol_data_pipe;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_data_error extends $mol_error_mix {
-    }
-    $.$mol_data_error = $mol_data_error;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_data_string = (val) => {
-        if (typeof val === 'string')
-            return val;
-        return $mol_fail(new $mol_data_error(`${val} is not a string`));
-    };
-})($ || ($ = {}));
-
-;
 "use strict";
 var $;
 (function ($) {
@@ -8790,6 +8322,514 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$hyoo_science_article) = class $hyoo_science_article extends ($.$mol_view) {
+		uri(){
+			return "";
+		}
+		open_icon(){
+			return "";
+		}
+		Open(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.open_icon())]);
+			return obj;
+		}
+		highlight(){
+			return "";
+		}
+		title(){
+			return "";
+		}
+		Title(){
+			const obj = new this.$.$mol_dimmer();
+			(obj.needle) = () => ((this.highlight()));
+			(obj.haystack) = () => ((this.title()));
+			return obj;
+		}
+		rank_view(){
+			return "";
+		}
+		Rank(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.rank_view())]);
+			return obj;
+		}
+		Link(){
+			const obj = new this.$.$mol_link();
+			(obj.uri) = () => ((this.uri()));
+			(obj.sub) = () => ([
+				(this.Open()), 
+				(this.Title()), 
+				(this.Rank())
+			]);
+			return obj;
+		}
+		journal_title(){
+			return "";
+		}
+		date_view(){
+			return "";
+		}
+		Journal(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.journal_title()), (this.date_view())]);
+			return obj;
+		}
+		open(){
+			return false;
+		}
+		date(){
+			const obj = new this.$.$mol_time_moment();
+			return obj;
+		}
+		rank(){
+			return 0;
+		}
+		sub(){
+			return [(this.Link()), (this.Journal())];
+		}
+	};
+	($mol_mem(($.$hyoo_science_article.prototype), "Open"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Title"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Rank"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Link"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Journal"));
+	($mol_mem(($.$hyoo_science_article.prototype), "date"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_science_article extends $.$hyoo_science_article {
+            open_icon() {
+                return this.open() ? '📄 ' : '🔒 ';
+            }
+            rank_view() {
+                return this.rank() ? `🔊${this.rank()}` : '';
+            }
+            date_view() {
+                return ` ${this.date()}`;
+            }
+        }
+        $$.$hyoo_science_article = $hyoo_science_article;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_science_article, {
+            background: {
+                color: $mol_theme.card,
+            },
+            border: {
+                radius: $mol_gap.round,
+            },
+            flex: {
+                wrap: 'wrap',
+            },
+            justify: {
+                content: 'flex-end',
+            },
+            Link: {
+                flex: {
+                    grow: 1,
+                    shrink: 1,
+                },
+            },
+            Title: {
+                flex: {
+                    shrink: 1,
+                },
+            },
+            Journal: {
+                color: $mol_theme.shade,
+                padding: $mol_gap.text,
+                flex: {
+                    shrink: 1,
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_chip) = class $mol_chip extends ($.$mol_view) {
+		sub(){
+			return [(this.title())];
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($mol_chip, {
+            padding: $mol_gap.text,
+            border: {
+                radius: $mol_gap.round,
+            },
+            background: {
+                color: $mol_theme.card,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_theme_auto) = class $mol_theme_auto extends ($.$mol_plugin) {
+		theme(){
+			return "";
+		}
+		attr(){
+			return {"mol_theme": (this.theme())};
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_theme_auto extends $.$mol_theme_auto {
+            theme() {
+                return this.$.$mol_lights() ? '$mol_theme_light' : '$mol_theme_dark';
+            }
+        }
+        $$.$mol_theme_auto = $mol_theme_auto;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$hyoo_science_app) = class $hyoo_science_app extends ($.$mol_page) {
+		title(){
+			return "Science Publications Searcher";
+		}
+		query(){
+			return "";
+		}
+		query_changed(next){
+			if(next !== undefined) return next;
+			return (this.query());
+		}
+		search(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Query(){
+			const obj = new this.$.$mol_search();
+			(obj.hint) = () => ((this.title()));
+			(obj.query) = (next) => ((this.query_changed(next)));
+			(obj.submit) = (next) => ((this.search(next)));
+			return obj;
+		}
+		service(next){
+			if(next !== undefined) return next;
+			return "scopus";
+		}
+		Service(){
+			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ("Indexing Service");
+			(obj.dictionary) = () => ({"sciencedirect": "Science Direct", "scopus": "Scopus"});
+			(obj.value) = (next) => ((this.service(next)));
+			return obj;
+		}
+		area(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Area(){
+			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ("Science Area");
+			(obj.dictionary) = () => ({
+				"": "Any Area", 
+				"AGRI": "🌽 Agri & Biology", 
+				"ARTS": "🖼️ Arts & Humanities", 
+				"BIOC": "🧬 Biochemistry & Genetics", 
+				"BUSI": "💼 Business & Accounting", 
+				"CENG": "⚗️ Chemical Engineering", 
+				"CHEM": "🧪 Chemistry", 
+				"COMP": "🖥️ Computers", 
+				"DECI": "🔀 Decisions", 
+				"DENT": "🦷 Dentistry", 
+				"EART": "🌍 Earth and Planetary", 
+				"ECON": "💰 Economics & Finance", 
+				"ENER": "⚡ Energy", 
+				"ENGI": "🏗️ Engineering", 
+				"ENVI": "🌌 Environment", 
+				"HEAL": "💓 Health", 
+				"IMMU": "☣️ Immunology & Microbio", 
+				"MATE": "💎 Materials", 
+				"MATH": "➗ Math", 
+				"MEDI": "💉 Medicine", 
+				"NEUR": "🧠 Neurology", 
+				"NURS": "⚕️ Nursing", 
+				"PHAR": "💊 Pharma & Toxic", 
+				"PHYS": "🚀 Physics & Astronomy", 
+				"PSYC": "🥴 Psychology", 
+				"SOCI": "💬 Social", 
+				"VETE": "🐈 Veterinary", 
+				"MULT": "🤹 Multidiscipline"
+			});
+			(obj.value) = (next) => ((this.area(next)));
+			return obj;
+		}
+		Zone(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Service()), (this.Area())]);
+			return obj;
+		}
+		place(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Place(){
+			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ("Text Place");
+			(obj.dictionary) = () => ({
+				"": "Anywhere", 
+				"TITLE": "Title", 
+				"TITLE-ABS-KEY": "Abstract"
+			});
+			(obj.value) = (next) => ((this.place(next)));
+			return obj;
+		}
+		Open_icon(){
+			const obj = new this.$.$mol_icon_lock_open_variant_outline();
+			return obj;
+		}
+		open(next){
+			if(next !== undefined) return next;
+			return true;
+		}
+		Open(){
+			const obj = new this.$.$mol_check_icon();
+			(obj.hint) = () => ("Open Access");
+			(obj.Icon) = () => ((this.Open_icon()));
+			(obj.checked) = (next) => ((this.open(next)));
+			return obj;
+		}
+		help(){
+			return "https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm";
+		}
+		Help_icon(){
+			const obj = new this.$.$mol_icon_hint();
+			return obj;
+		}
+		Help(){
+			const obj = new this.$.$mol_link();
+			(obj.hint) = () => ("Query Syntax");
+			(obj.uri) = () => ((this.help()));
+			(obj.sub) = () => ([(this.Help_icon())]);
+			return obj;
+		}
+		Lights(){
+			const obj = new this.$.$mol_lights_toggle();
+			return obj;
+		}
+		Source(){
+			const obj = new this.$.$mol_link_source();
+			(obj.uri) = () => ("https://github.com/hyoo-ru/science.hyoo.ru");
+			return obj;
+		}
+		found_open(id){
+			return false;
+		}
+		found_title(id){
+			return "";
+		}
+		found_link(id){
+			return "";
+		}
+		found_rank(id){
+			return 0;
+		}
+		found_date(id){
+			const obj = new this.$.$mol_time_moment();
+			return obj;
+		}
+		found_journal(id){
+			return "";
+		}
+		Found_row(id){
+			const obj = new this.$.$hyoo_science_article();
+			(obj.open) = () => ((this.found_open(id)));
+			(obj.highlight) = () => ((this.query()));
+			(obj.title) = () => ((this.found_title(id)));
+			(obj.uri) = () => ((this.found_link(id)));
+			(obj.rank) = () => ((this.found_rank(id)));
+			(obj.date) = () => ((this.found_date(id)));
+			(obj.journal_title) = () => ((this.found_journal(id)));
+			return obj;
+		}
+		found_rows(){
+			return [(this.Found_row("0"))];
+		}
+		Found_none(){
+			const obj = new this.$.$mol_chip();
+			(obj.title) = () => ("Not Found");
+			return obj;
+		}
+		Found_rows(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.found_rows()));
+			(obj.Empty) = () => ((this.Found_none()));
+			return obj;
+		}
+		request(){
+			return "Request: {request}";
+		}
+		Request(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.request())]);
+			return obj;
+		}
+		Theme(){
+			const obj = new this.$.$mol_theme_auto();
+			return obj;
+		}
+		Title(){
+			return (this.Query());
+		}
+		head(){
+			return [
+				(this.Zone()), 
+				(this.Title()), 
+				(this.Tools())
+			];
+		}
+		tools(){
+			return [
+				(this.Place()), 
+				(this.Open()), 
+				(this.Help()), 
+				(this.Lights()), 
+				(this.Source())
+			];
+		}
+		body(){
+			return [(this.Found_rows()), (this.Request())];
+		}
+		plugins(){
+			return [(this.Theme())];
+		}
+	};
+	($mol_mem(($.$hyoo_science_app.prototype), "query_changed"));
+	($mol_mem(($.$hyoo_science_app.prototype), "search"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Query"));
+	($mol_mem(($.$hyoo_science_app.prototype), "service"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Service"));
+	($mol_mem(($.$hyoo_science_app.prototype), "area"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Area"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Zone"));
+	($mol_mem(($.$hyoo_science_app.prototype), "place"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Place"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Open_icon"));
+	($mol_mem(($.$hyoo_science_app.prototype), "open"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Open"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Help_icon"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Help"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Lights"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Source"));
+	($mol_mem_key(($.$hyoo_science_app.prototype), "found_date"));
+	($mol_mem_key(($.$hyoo_science_app.prototype), "Found_row"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Found_none"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Found_rows"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Request"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Theme"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_setup(value, config) {
+        return Object.assign(value, {
+            config,
+            Value: null
+        });
+    }
+    $.$mol_data_setup = $mol_data_setup;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_func_is_class(func) {
+        return Object.getOwnPropertyDescriptor(func, 'prototype')?.writable === false;
+    }
+    $.$mol_func_is_class = $mol_func_is_class;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_pipe(...funcs) {
+        return $mol_data_setup(function (input) {
+            let value = input;
+            for (const func of funcs)
+                value = $mol_func_is_class(func) ? new func(value) : func.call(this, value);
+            return value;
+        }, { funcs });
+    }
+    $.$mol_data_pipe = $mol_data_pipe;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_data_error extends $mol_error_mix {
+    }
+    $.$mol_data_error = $mol_data_error;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_data_string = (val) => {
+        if (typeof val === 'string')
+            return val;
+        return $mol_fail(new $mol_data_error(`${val} is not a string`));
+    };
+})($ || ($ = {}));
+
+;
 "use strict";
 
 ;
@@ -9100,6 +9140,7 @@ var $;
     });
     $.$hyoo_science_elsevier_entry = $mol_data_record({
         'openaccess': $mol_data_pipe((v) => Number(v), (v) => Boolean(v)),
+        'citedby-count': $mol_data_optional($mol_data_string),
         'dc:creator': $mol_data_optional($mol_data_string),
         'dc:identifier': $mol_data_string,
         'dc:title': $mol_data_string,
@@ -9145,6 +9186,7 @@ var $;
                 journal: entry["prism:publicationName"],
                 date: entry["prism:coverDate"],
                 open: entry.openaccess,
+                rank: Number(entry["citedby-count"]),
             })),
         };
     }
@@ -9216,6 +9258,12 @@ var $;
             }
             found_link(index) {
                 return this.data().article[index].link;
+            }
+            found_rank(index) {
+                return this.data().article[index].rank;
+            }
+            found_date(index) {
+                return this.data().article[index].date;
             }
             found_journal(index) {
                 return this.data().article[index].journal;
@@ -12778,6 +12826,101 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'parse and serial'() {
+            $mol_assert_equal(new $mol_time_duration('P42.1Y').toString(), 'P42.1YT');
+            $mol_assert_equal(new $mol_time_duration('P42.1M').toString(), 'P42.1MT');
+            $mol_assert_equal(new $mol_time_duration('P42.1D').toString(), 'P42.1DT');
+            $mol_assert_equal(new $mol_time_duration('PT42.1h').toString(), 'PT42.1H');
+            $mol_assert_equal(new $mol_time_duration('PT42.1m').toString(), 'PT42.1M');
+            $mol_assert_equal(new $mol_time_duration('PT42.1s').toString(), 'PT42.1S');
+            $mol_assert_equal(new $mol_time_duration('P1Y2M3DT4h5m6.7s').toString(), 'P1Y2M3DT4H5M6.7S');
+        },
+        'format typed'() {
+            $mol_assert_equal(new $mol_time_duration('P1Y2M3DT4h5m6s').toString('P#Y#M#DT#h#m#s'), 'P1Y2M3DT4H5M6S');
+        },
+        'format readable'() {
+            $mol_assert_equal(new $mol_time_duration('P1Y2M3DT4h5m6s').toString('hh:mm:ss.sss'), '04:05:06.000');
+        },
+        'normalization'() {
+            $mol_assert_equal(new $mol_time_duration('P1Y2M3DT44h55m66s').normal.toString(), 'P1Y2M4DT20H56M6S');
+        },
+        'comparison'() {
+            const iso = 'P1Y1M1DT1h1m1s';
+            $mol_assert_equal(new $mol_time_duration(iso), new $mol_time_duration(iso));
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'parse and serial'() {
+            $mol_assert_equal(new $mol_time_moment('2014').toString(), '2014');
+            $mol_assert_equal(new $mol_time_moment('2014-01').toString(), '2014-01');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02').toString(), '2014-01-02');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02T03').toString(), '2014-01-02T03');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04').toString(), '2014-01-02T03:04');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04:05').toString(), '2014-01-02T03:04:05');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04:05.006').toString(), '2014-01-02T03:04:05.006');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04:05.006Z').toString(), '2014-01-02T03:04:05.006+00:00');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04:05.006+07:00').toString(), '2014-01-02T03:04:05.006+07:00');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04:05+07:08').toString(), '2014-01-02T03:04:05+07:08');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04+07:08').toString(), '2014-01-02T03:04+07:08');
+            $mol_assert_equal(new $mol_time_moment('T03:04+07:08').toString(), 'T03:04+07:08');
+            $mol_assert_equal(new $mol_time_moment('T03:04:05').toString(), 'T03:04:05');
+            $mol_assert_equal(new $mol_time_moment('T03:04').toString(), 'T03:04');
+            $mol_assert_equal(new $mol_time_moment('T03').toString(), 'T03');
+        },
+        'format simple'() {
+            $mol_assert_equal(new $mol_time_moment('2014-01-02T01:02:03.000000').toString('AD YY-M-D h:m:s'), '21 14-1-2 1:2:3');
+        },
+        'format padded'() {
+            $mol_assert_equal(new $mol_time_moment('2014-01-02T01:02:03.000').toString('YYYY-MM-DD hh:mm:ss'), '2014-01-02 01:02:03');
+        },
+        'format time zone'() {
+            $mol_assert_equal(new $mol_time_moment('2014-01-02T01:02:03+05:00').toString('Z'), '+05:00');
+        },
+        'format names'() {
+            $mol_assert_ok(new $mol_time_moment('2014-01-02T01:02:03.000').toString('Month Mon | WeekDay WD'));
+        },
+        'shifting'() {
+            $mol_assert_equal(new $mol_time_moment('T15:54:58.243+03:00').shift({}).toString(), 'T15:54:58.243+03:00');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02').shift('P1Y').toString(), '2015-01-02');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02').shift('P12M').toString(), '2015-01-02');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02').shift('P365D').toString(), '2015-01-02');
+            $mol_assert_equal(new $mol_time_moment('2014-01-02').shift('PT8760h').toString(), '2015-01-02');
+            $mol_assert_equal(new $mol_time_moment('2014-01').shift('PT8760h').toString(), '2015-01');
+            $mol_assert_equal(new $mol_time_moment('2014-01').shift('PT-8760h').toString(), '2013-01');
+        },
+        'normalization'() {
+            $mol_assert_equal(new $mol_time_moment({ year: 2015, month: 6, day: 34 }).normal.toString(), '2015-08-04');
+            $mol_assert_equal(new $mol_time_moment('2024-09-30 19:00+03:00').normal.month, 8);
+        },
+        'renormalization'() {
+            $mol_assert_equal(new $mol_time_moment('2024-08').normal.toString(), '2024-08');
+            $mol_assert_equal(new $mol_time_moment('2024-11').normal.toString(), '2024-11');
+        },
+        'iso week day'() {
+            $mol_assert_equal(new $mol_time_moment('2017-09-17').weekday, $mol_time_moment_weekdays.sunday);
+            $mol_assert_equal(new $mol_time_moment('2017-09-18').weekday, $mol_time_moment_weekdays.monday);
+        },
+        'change offset'() {
+            $mol_assert_equal(new $mol_time_moment('2021-04-10 +03:00').toOffset('Z').toString(), '2021-04-09T21:00:00+00:00');
+        },
+        'comparison'() {
+            const iso = '2021-01-02T03:04:05.678+09:10';
+            $mol_assert_like(new $mol_time_moment(iso), new $mol_time_moment(iso));
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
 
 ;
 "use strict";
@@ -12871,101 +13014,6 @@ var $;
             $mol_assert_fail(() => {
                 $mol_data_string(new String('x'));
             }, 'x is not a string');
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_test({
-        'parse and serial'() {
-            $mol_assert_equal(new $mol_time_duration('P42.1Y').toString(), 'P42.1YT');
-            $mol_assert_equal(new $mol_time_duration('P42.1M').toString(), 'P42.1MT');
-            $mol_assert_equal(new $mol_time_duration('P42.1D').toString(), 'P42.1DT');
-            $mol_assert_equal(new $mol_time_duration('PT42.1h').toString(), 'PT42.1H');
-            $mol_assert_equal(new $mol_time_duration('PT42.1m').toString(), 'PT42.1M');
-            $mol_assert_equal(new $mol_time_duration('PT42.1s').toString(), 'PT42.1S');
-            $mol_assert_equal(new $mol_time_duration('P1Y2M3DT4h5m6.7s').toString(), 'P1Y2M3DT4H5M6.7S');
-        },
-        'format typed'() {
-            $mol_assert_equal(new $mol_time_duration('P1Y2M3DT4h5m6s').toString('P#Y#M#DT#h#m#s'), 'P1Y2M3DT4H5M6S');
-        },
-        'format readable'() {
-            $mol_assert_equal(new $mol_time_duration('P1Y2M3DT4h5m6s').toString('hh:mm:ss.sss'), '04:05:06.000');
-        },
-        'normalization'() {
-            $mol_assert_equal(new $mol_time_duration('P1Y2M3DT44h55m66s').normal.toString(), 'P1Y2M4DT20H56M6S');
-        },
-        'comparison'() {
-            const iso = 'P1Y1M1DT1h1m1s';
-            $mol_assert_equal(new $mol_time_duration(iso), new $mol_time_duration(iso));
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_test({
-        'parse and serial'() {
-            $mol_assert_equal(new $mol_time_moment('2014').toString(), '2014');
-            $mol_assert_equal(new $mol_time_moment('2014-01').toString(), '2014-01');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02').toString(), '2014-01-02');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02T03').toString(), '2014-01-02T03');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04').toString(), '2014-01-02T03:04');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04:05').toString(), '2014-01-02T03:04:05');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04:05.006').toString(), '2014-01-02T03:04:05.006');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04:05.006Z').toString(), '2014-01-02T03:04:05.006+00:00');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04:05.006+07:00').toString(), '2014-01-02T03:04:05.006+07:00');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04:05+07:08').toString(), '2014-01-02T03:04:05+07:08');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02T03:04+07:08').toString(), '2014-01-02T03:04+07:08');
-            $mol_assert_equal(new $mol_time_moment('T03:04+07:08').toString(), 'T03:04+07:08');
-            $mol_assert_equal(new $mol_time_moment('T03:04:05').toString(), 'T03:04:05');
-            $mol_assert_equal(new $mol_time_moment('T03:04').toString(), 'T03:04');
-            $mol_assert_equal(new $mol_time_moment('T03').toString(), 'T03');
-        },
-        'format simple'() {
-            $mol_assert_equal(new $mol_time_moment('2014-01-02T01:02:03.000000').toString('AD YY-M-D h:m:s'), '21 14-1-2 1:2:3');
-        },
-        'format padded'() {
-            $mol_assert_equal(new $mol_time_moment('2014-01-02T01:02:03.000').toString('YYYY-MM-DD hh:mm:ss'), '2014-01-02 01:02:03');
-        },
-        'format time zone'() {
-            $mol_assert_equal(new $mol_time_moment('2014-01-02T01:02:03+05:00').toString('Z'), '+05:00');
-        },
-        'format names'() {
-            $mol_assert_ok(new $mol_time_moment('2014-01-02T01:02:03.000').toString('Month Mon | WeekDay WD'));
-        },
-        'shifting'() {
-            $mol_assert_equal(new $mol_time_moment('T15:54:58.243+03:00').shift({}).toString(), 'T15:54:58.243+03:00');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02').shift('P1Y').toString(), '2015-01-02');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02').shift('P12M').toString(), '2015-01-02');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02').shift('P365D').toString(), '2015-01-02');
-            $mol_assert_equal(new $mol_time_moment('2014-01-02').shift('PT8760h').toString(), '2015-01-02');
-            $mol_assert_equal(new $mol_time_moment('2014-01').shift('PT8760h').toString(), '2015-01');
-            $mol_assert_equal(new $mol_time_moment('2014-01').shift('PT-8760h').toString(), '2013-01');
-        },
-        'normalization'() {
-            $mol_assert_equal(new $mol_time_moment({ year: 2015, month: 6, day: 34 }).normal.toString(), '2015-08-04');
-            $mol_assert_equal(new $mol_time_moment('2024-09-30 19:00+03:00').normal.month, 8);
-        },
-        'renormalization'() {
-            $mol_assert_equal(new $mol_time_moment('2024-08').normal.toString(), '2024-08');
-            $mol_assert_equal(new $mol_time_moment('2024-11').normal.toString(), '2024-11');
-        },
-        'iso week day'() {
-            $mol_assert_equal(new $mol_time_moment('2017-09-17').weekday, $mol_time_moment_weekdays.sunday);
-            $mol_assert_equal(new $mol_time_moment('2017-09-18').weekday, $mol_time_moment_weekdays.monday);
-        },
-        'change offset'() {
-            $mol_assert_equal(new $mol_time_moment('2021-04-10 +03:00').toOffset('Z').toString(), '2021-04-09T21:00:00+00:00');
-        },
-        'comparison'() {
-            const iso = '2021-01-02T03:04:05.678+09:10';
-            $mol_assert_like(new $mol_time_moment(iso), new $mol_time_moment(iso));
         },
     });
 })($ || ($ = {}));
