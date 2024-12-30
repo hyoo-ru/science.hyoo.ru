@@ -10,7 +10,7 @@ namespace $.$$ {
 		}
 		
 		date_view() {
-			return this.date().toString()
+			return ` ${ this.date() }`
 		}
 		
 	}
