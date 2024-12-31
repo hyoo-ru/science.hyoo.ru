@@ -3033,7 +3033,6 @@ var $;
             maxHeight: per(100),
             boxSizing: 'border-box',
             color: $mol_theme.text,
-            backdropFilter: blur(`3px`),
             ':focus': {
                 outline: 'none',
             },
@@ -8079,7 +8078,7 @@ var $;
 				"BUSI": "💼 Business & Accounting", 
 				"CENG": "⚗️ Chemical Engineering", 
 				"CHEM": "🧪 Chemistry", 
-				"COMP": "🖥️ Computers", 
+				"COMP": "🖥️ Computing", 
 				"DECI": "🔀 Decisions", 
 				"DENT": "🦷 Dentistry", 
 				"EART": "🌍 Earth and Planetary", 
