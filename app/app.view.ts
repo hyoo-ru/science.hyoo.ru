@@ -18,31 +18,60 @@ namespace $.$$ {
 
 		@ $mol_mem
 		area( next?: string ) {
+			if( !this.area_supported() ) return ''
 			return this.$.$mol_state_arg.value( 'area', next ) ?? super.area()
+		}
+		
+		area_supported() {
+			return [ 'scopus' ].includes( this.service() )
 		}
 
 		@ $mol_mem
 		place( next?: string ) {
+			if( !this.place_supported() ) return ''
 			return this.$.$mol_state_arg.value( 'place', next ) ?? super.place()
+		}
+
+		place_supported() {
+			return [ 'scopus', 'sciencedirect' ].includes( this.service() )
 		}
 
 		@ $mol_mem
 		open( next?: boolean ) {
+			if( !this.open_supported() ) return false
 			return this.$.$mol_state_arg.value( 'open', next?.toString() ) !== 'false'
+		}
+
+		open_supported() {
+			return [ 'scopus', 'sciencedirect' ].includes( this.service() )
 		}
 
 		@ $mol_mem
 		request() {
 			let request = this.query()
-			if( request.trim() && this.place() ) request = `${ this.place() }(${ request })`
-			if( this.open() ) request += ` openaccess(1)` 
-			if( this.area() ) request += ` SUBJAREA(${ this.area() })` 
-			return super.request().replace( '{request}', request )
+			switch( this.service() ) {
+				
+				case 'scopus': {
+					if( request.trim() && this.place() ) request = `${ this.place() }(${ request })`
+					if( this.open() ) request += ` openaccess(1)` 
+					if( this.area() ) request += ` SUBJAREA(${ this.area() })` 
+					break
+				}
+				
+				case 'sciencedirect': {
+					if( request.trim() && this.place() ) request = `${ this.place() }(${ request })`
+					if( this.open() ) request += ` openaccess(1)` 
+					break
+				}
+				
+			}
+			return request
 		}
 
 		@ $mol_mem
 		help() {
 			return {
+				crossref: 'https://github.com/CrossRef/rest-api-doc',
 				sciencedirect: 'https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm',
 				scopus: 'https://schema.elsevier.com/dtds/document/bkapi/search/SCOPUSSearchTips.htm',
 			}[ this.service() ] ?? ''
@@ -59,7 +88,18 @@ namespace $.$$ {
 
 		@ $mol_mem
 		data() {
-			return this.$.$hyoo_science_elsevier_search( this.service(), this.request() )
+			const self = this
+			return {
+				get crossref() {
+					return self.$.$hyoo_science_crossref_search( self.request() )
+				},
+				get sciencedirect() {
+					return self.$.$hyoo_science_elsevier_search( self.service(), self.request() )
+				},
+				get scopus() {
+					return self.$.$hyoo_science_elsevier_search( self.service(), self.request() )
+				},
+			}[ this.service() ]!
 		}
 
 		@ $mol_mem

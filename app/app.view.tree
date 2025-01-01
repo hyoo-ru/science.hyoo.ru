@@ -10,6 +10,7 @@ $hyoo_science_app $mol_page
 				dictionary *
 					sciencedirect \Science Direct
 					scopus \Scopus
+					crossref \CrossRef
 				value? <=> service? \scopus
 			<= Area $mol_select
 				hint \Science Area
@@ -44,6 +45,7 @@ $hyoo_science_app $mol_page
 					VETE \🐈 Veterinary
 					MULT \🤹 Multidiscipline
 				value? <=> area? \
+				enabled <= area_supported true
 		<= Title
 		<= Tools
 	tools /
@@ -55,10 +57,12 @@ $hyoo_science_app $mol_page
 				TITLE \Title
 				TITLE-ABS-KEY \Abstract
 			value? <=> place? \
+			enabled <= place_supported true
 		<= Open $mol_check_icon
 			hint \Open Access
 			Icon <= Open_icon $mol_icon_lock_open_variant_outline
 			checked? <=> open? true
+			enabled <= open_supported true
 		<= Help $mol_link
 			hint \Query Syntax
 			uri <= help \https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm
@@ -81,6 +85,8 @@ $hyoo_science_app $mol_page
 			Empty <= Found_none $mol_chip
 				title \Not Found
 		<= Request $mol_view
-			sub / <= request \Request: {request}
+			sub /
+				\Request: 
+				<= request \
 	plugins /
 		<= Theme $mol_theme_auto

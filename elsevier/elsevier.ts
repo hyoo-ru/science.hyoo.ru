@@ -77,7 +77,7 @@ namespace $ {
 					: entry.link.filter( l => [ 'scidir', 'scopus' ].includes( l["@ref"] ) )[0]["@href"],
 				doi: entry["prism:doi"] ?? null,
 				title: entry["dc:title"],
-				author: entry["dc:creator"] ?? '🥷',
+				// author: entry["dc:creator"] ?? '🥷',
 				journal: entry["prism:publicationName"],
 				date: entry["prism:coverDate"],
 				open: entry.openaccess,
