@@ -5,8 +5,9 @@ namespace $ {
 		'key': $mol_data_string,
 	})
 
-	export let $hyoo_science_crossref_moment = $mol_data_record({
-		'date-time': $mol_data_string,
+	export let $hyoo_science_crossref_date = $mol_data_record({
+		'date-parts': $mol_data_array( $mol_data_array( $mol_data_integer ) ),
+		'date-time': $mol_data_optional( $mol_data_string ),
 	})
 
 	export let $hyoo_science_crossref_person = $mol_data_record({
@@ -28,7 +29,9 @@ namespace $ {
 		'subtitle': $mol_data_optional( $mol_data_array( $mol_data_string ) ),
 		'reference': $mol_data_optional( $mol_data_array( $hyoo_science_crossref_ref ) ),
 		// 'author': $mol_data_optional( $mol_data_array( $hyoo_science_crossref_person ) ),
-		'deposited': $hyoo_science_crossref_moment,
+		'published': $hyoo_science_crossref_date,
+		'published-print': $mol_data_optional( $hyoo_science_crossref_date ),
+		'published-online': $mol_data_optional( $hyoo_science_crossref_date ),
 	})
 	
 	export let $hyoo_science_crossref_response = $mol_data_record({
@@ -38,7 +41,7 @@ namespace $ {
 		}),
 	})
 
-	export function $hyoo_science_crossref_search( this: $, query: string ) {
+	export function $hyoo_science_crossref_search( this: $, query: string, open = false ) {
 
 		const endpoint = `https://api.crossref.org/types/journal-article/works`
 
@@ -47,7 +50,21 @@ namespace $ {
 			rows: '100',
 			query: query,
 			sort: 'is-referenced-by-count',
-			select: 'title,subtitle,DOI,URL,container-title,deposited,is-referenced-by-count',
+			filter: [
+				'type:journal-article',
+				... open ? [ 'from-online-pub-date:1000-01-01' ] : [],
+			].join( ',' ),
+			select: [
+				'title',
+				'subtitle',
+				'DOI',
+				'URL',
+				'container-title',
+				'published',
+				'published-print',
+				'published-online',
+				'is-referenced-by-count',
+			].join( ',' ),
 		}), endpoint )
 
 		const resp = $hyoo_science_crossref_response( this.$mol_fetch.json( uri.toString() ) as any )["message"]
@@ -62,8 +79,11 @@ namespace $ {
 				title: entry.title![0] + ( entry.subtitle ? `: ${ entry.subtitle[0] }` : '' ),
 				// author: entry.author?.[0] ? ( `${ entry.author?.[0].given } ${ entry.author?.[0].family }` ) : '🐱‍👤',
 				journal: entry["container-title"]![0],
-				date: new $mol_time_moment( entry.deposited["date-time"] ).mask( '0000-00-00' ),
-				open: true,
+				date: new $mol_time_moment({
+					year: entry["published"]["date-parts"][0][0],
+					month: entry["published"]["date-parts"][0][1],
+				}),
+				open: Boolean( entry["published-online"] ),
 				rank: entry["is-referenced-by-count"],
 			}) ),
 		}

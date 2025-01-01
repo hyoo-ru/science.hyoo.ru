@@ -43,7 +43,7 @@ namespace $.$$ {
 		}
 
 		open_supported() {
-			return [ 'scopus', 'sciencedirect' ].includes( this.service() )
+			return [ 'scopus', 'sciencedirect', 'crossref' ].includes( this.service() )
 		}
 
 		@ $mol_mem
@@ -91,7 +91,7 @@ namespace $.$$ {
 			const self = this
 			return {
 				get crossref() {
-					return self.$.$hyoo_science_crossref_search( self.request() )
+					return self.$.$hyoo_science_crossref_search( self.request(), self.open() )
 				},
 				get sciencedirect() {
 					return self.$.$hyoo_science_elsevier_search( self.service(), self.request() )
