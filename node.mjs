@@ -8575,13 +8575,20 @@ var $;
 		Service(){
 			const obj = new this.$.$mol_select();
 			(obj.hint) = () => ("Indexing Service");
-			(obj.dictionary) = () => ({"sciencedirect": "Science Direct", "scopus": "Scopus"});
+			(obj.dictionary) = () => ({
+				"sciencedirect": "Science Direct", 
+				"scopus": "Scopus", 
+				"crossref": "CrossRef"
+			});
 			(obj.value) = (next) => ((this.service(next)));
 			return obj;
 		}
 		area(next){
 			if(next !== undefined) return next;
 			return "";
+		}
+		area_supported(){
+			return true;
 		}
 		Area(){
 			const obj = new this.$.$mol_select();
@@ -8617,6 +8624,7 @@ var $;
 				"MULT": "🤹 Multidiscipline"
 			});
 			(obj.value) = (next) => ((this.area(next)));
+			(obj.enabled) = () => ((this.area_supported()));
 			return obj;
 		}
 		Zone(){
@@ -8628,6 +8636,9 @@ var $;
 			if(next !== undefined) return next;
 			return "";
 		}
+		place_supported(){
+			return true;
+		}
 		Place(){
 			const obj = new this.$.$mol_select();
 			(obj.hint) = () => ("Text Place");
@@ -8637,6 +8648,7 @@ var $;
 				"TITLE-ABS-KEY": "Abstract"
 			});
 			(obj.value) = (next) => ((this.place(next)));
+			(obj.enabled) = () => ((this.place_supported()));
 			return obj;
 		}
 		Open_icon(){
@@ -8647,11 +8659,15 @@ var $;
 			if(next !== undefined) return next;
 			return true;
 		}
+		open_supported(){
+			return true;
+		}
 		Open(){
 			const obj = new this.$.$mol_check_icon();
 			(obj.hint) = () => ("Open Access");
 			(obj.Icon) = () => ((this.Open_icon()));
 			(obj.checked) = (next) => ((this.open(next)));
+			(obj.enabled) = () => ((this.open_supported()));
 			return obj;
 		}
 		help(){
@@ -8722,11 +8738,11 @@ var $;
 			return obj;
 		}
 		request(){
-			return "Request: {request}";
+			return "";
 		}
 		Request(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.request())]);
+			(obj.sub) = () => (["Request: ", (this.request())]);
 			return obj;
 		}
 		Theme(){
@@ -8792,9 +8808,6 @@ var $;
 
 ;
 "use strict";
-
-;
-"use strict";
 var $;
 (function ($) {
     function $mol_data_setup(value, config) {
@@ -8805,57 +8818,6 @@ var $;
     }
     $.$mol_data_setup = $mol_data_setup;
 })($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_func_is_class(func) {
-        return Object.getOwnPropertyDescriptor(func, 'prototype')?.writable === false;
-    }
-    $.$mol_func_is_class = $mol_func_is_class;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_data_pipe(...funcs) {
-        return $mol_data_setup(function (input) {
-            let value = input;
-            for (const func of funcs)
-                value = $mol_func_is_class(func) ? new func(value) : func.call(this, value);
-            return value;
-        }, { funcs });
-    }
-    $.$mol_data_pipe = $mol_data_pipe;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_data_error extends $mol_error_mix {
-    }
-    $.$mol_data_error = $mol_data_error;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_data_string = (val) => {
-        if (typeof val === 'string')
-            return val;
-        return $mol_fail(new $mol_data_error(`${val} is not a string`));
-    };
-})($ || ($ = {}));
-
-;
-"use strict";
 
 ;
 "use strict";
@@ -8886,27 +8848,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    function $mol_data_enum(name, dict) {
-        const index = {};
-        for (let key in dict) {
-            if (Number.isNaN(Number(key))) {
-                index[dict[key]] = key;
-            }
-        }
-        return $mol_data_setup((value) => {
-            if (typeof index[value] !== 'string') {
-                return $mol_fail(new $mol_data_error(`${value} is not value of ${name} enum`));
-            }
-            return value;
-        }, { name, dict });
-    }
-    $.$mol_data_enum = $mol_data_enum;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     function $mol_data_optional(sub, fallback) {
         return $mol_data_setup((val) => {
             if (val === undefined) {
@@ -8916,6 +8857,26 @@ var $;
         }, { sub, fallback });
     }
     $.$mol_data_optional = $mol_data_optional;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_data_error extends $mol_error_mix {
+    }
+    $.$mol_data_error = $mol_data_error;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_data_string = (val) => {
+        if (typeof val === 'string')
+            return val;
+        return $mol_fail(new $mol_data_error(`${val} is not a string`));
+    };
 })($ || ($ = {}));
 
 ;
@@ -8946,29 +8907,24 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    function $mol_data_variant(...sub) {
-        return $mol_data_setup((val) => {
-            const errors = [];
-            for (const type of sub) {
-                let hidden = $.$mol_fail_hidden;
-                try {
-                    $.$mol_fail = $.$mol_fail_hidden;
-                    return type(val);
-                }
-                catch (error) {
-                    $.$mol_fail = hidden;
-                    if (error instanceof $mol_data_error) {
-                        errors.push(error);
-                    }
-                    else {
-                        return $mol_fail_hidden(error);
-                    }
-                }
-            }
-            return $mol_fail(new $mol_data_error(`${val} is not any of variants`, {}, ...errors));
-        }, sub);
+    $.$mol_data_number = (val) => {
+        if (typeof val === 'number')
+            return val;
+        return $mol_fail(new $mol_data_error(`${val} is not a number`));
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_integer(val) {
+        const val2 = $mol_data_number(val);
+        if (Math.floor(val2) === val2)
+            return val2;
+        return $mol_fail(new $mol_data_error(`${val} is not an integer`));
     }
-    $.$mol_data_variant = $mol_data_variant;
+    $.$mol_data_integer = $mol_data_integer;
 })($ || ($ = {}));
 
 ;
@@ -9146,6 +9102,151 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    $.$hyoo_science_crossref_ref = $mol_data_record({
+        'DOI': $mol_data_optional($mol_data_string),
+        'key': $mol_data_string,
+    });
+    $.$hyoo_science_crossref_moment = $mol_data_record({
+        'date-time': $mol_data_string,
+    });
+    $.$hyoo_science_crossref_person = $mol_data_record({
+        'ORCID': $mol_data_optional($mol_data_string),
+        'given': $mol_data_string,
+        'family': $mol_data_string,
+    });
+    $.$hyoo_science_crossref_entry = $mol_data_record({
+        'DOI': $mol_data_string,
+        'ISSN': $mol_data_optional($mol_data_array($mol_data_string)),
+        'URL': $mol_data_string,
+        'abstract': $mol_data_optional($mol_data_string),
+        'container-title': $mol_data_array($mol_data_string),
+        'is-referenced-by-count': $mol_data_integer,
+        'title': $mol_data_array($mol_data_string),
+        'subtitle': $mol_data_optional($mol_data_array($mol_data_string)),
+        'reference': $mol_data_optional($mol_data_array($.$hyoo_science_crossref_ref)),
+        'deposited': $.$hyoo_science_crossref_moment,
+    });
+    $.$hyoo_science_crossref_response = $mol_data_record({
+        'message': $mol_data_record({
+            'total-results': $mol_data_integer,
+            'items': $mol_data_array($.$hyoo_science_crossref_entry),
+        }),
+    });
+    function $hyoo_science_crossref_search(query) {
+        const endpoint = `https://api.crossref.org/types/journal-article/works`;
+        const uri = new URL('?' + new URLSearchParams({
+            offset: '0',
+            rows: '100',
+            query: query,
+            sort: 'is-referenced-by-count',
+            select: 'title,subtitle,DOI,URL,container-title,deposited,is-referenced-by-count',
+        }), endpoint);
+        const resp = $.$hyoo_science_crossref_response(this.$mol_fetch.json(uri.toString()))["message"];
+        return {
+            total: resp["total-results"],
+            article: resp.items
+                .map(entry => ({
+                link: entry.URL,
+                doi: entry.DOI,
+                title: entry.title[0] + (entry.subtitle ? `: ${entry.subtitle[0]}` : ''),
+                journal: entry["container-title"][0],
+                date: new $mol_time_moment(entry.deposited["date-time"]).mask('0000-00-00'),
+                open: true,
+                rank: entry["is-referenced-by-count"],
+            })),
+        };
+    }
+    $.$hyoo_science_crossref_search = $hyoo_science_crossref_search;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_func_is_class(func) {
+        return Object.getOwnPropertyDescriptor(func, 'prototype')?.writable === false;
+    }
+    $.$mol_func_is_class = $mol_func_is_class;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_pipe(...funcs) {
+        return $mol_data_setup(function (input) {
+            let value = input;
+            for (const func of funcs)
+                value = $mol_func_is_class(func) ? new func(value) : func.call(this, value);
+            return value;
+        }, { funcs });
+    }
+    $.$mol_data_pipe = $mol_data_pipe;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_enum(name, dict) {
+        const index = {};
+        for (let key in dict) {
+            if (Number.isNaN(Number(key))) {
+                index[dict[key]] = key;
+            }
+        }
+        return $mol_data_setup((value) => {
+            if (typeof index[value] !== 'string') {
+                return $mol_fail(new $mol_data_error(`${value} is not value of ${name} enum`));
+            }
+            return value;
+        }, { name, dict });
+    }
+    $.$mol_data_enum = $mol_data_enum;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_data_variant(...sub) {
+        return $mol_data_setup((val) => {
+            const errors = [];
+            for (const type of sub) {
+                let hidden = $.$mol_fail_hidden;
+                try {
+                    $.$mol_fail = $.$mol_fail_hidden;
+                    return type(val);
+                }
+                catch (error) {
+                    $.$mol_fail = hidden;
+                    if (error instanceof $mol_data_error) {
+                        errors.push(error);
+                    }
+                    else {
+                        return $mol_fail_hidden(error);
+                    }
+                }
+            }
+            return $mol_fail(new $mol_data_error(`${val} is not any of variants`, {}, ...errors));
+        }, sub);
+    }
+    $.$mol_data_variant = $mol_data_variant;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     const moment = $mol_data_pipe($mol_data_string, $mol_time_moment);
     let Link_type;
     (function (Link_type) {
@@ -9207,7 +9308,6 @@ var $;
                     : entry.link.filter(l => ['scidir', 'scopus'].includes(l["@ref"]))[0]["@href"],
                 doi: entry["prism:doi"] ?? null,
                 title: entry["dc:title"],
-                author: entry["dc:creator"] ?? '🥷',
                 journal: entry["prism:publicationName"],
                 date: entry["prism:coverDate"],
                 open: entry.openaccess,
@@ -9238,26 +9338,54 @@ var $;
                 return this.query().trim() || super.title();
             }
             area(next) {
+                if (!this.area_supported())
+                    return '';
                 return this.$.$mol_state_arg.value('area', next) ?? super.area();
             }
+            area_supported() {
+                return ['scopus'].includes(this.service());
+            }
             place(next) {
+                if (!this.place_supported())
+                    return '';
                 return this.$.$mol_state_arg.value('place', next) ?? super.place();
             }
+            place_supported() {
+                return ['scopus', 'sciencedirect'].includes(this.service());
+            }
             open(next) {
+                if (!this.open_supported())
+                    return false;
                 return this.$.$mol_state_arg.value('open', next?.toString()) !== 'false';
+            }
+            open_supported() {
+                return ['scopus', 'sciencedirect'].includes(this.service());
             }
             request() {
                 let request = this.query();
-                if (request.trim() && this.place())
-                    request = `${this.place()}(${request})`;
-                if (this.open())
-                    request += ` openaccess(1)`;
-                if (this.area())
-                    request += ` SUBJAREA(${this.area()})`;
-                return super.request().replace('{request}', request);
+                switch (this.service()) {
+                    case 'scopus': {
+                        if (request.trim() && this.place())
+                            request = `${this.place()}(${request})`;
+                        if (this.open())
+                            request += ` openaccess(1)`;
+                        if (this.area())
+                            request += ` SUBJAREA(${this.area()})`;
+                        break;
+                    }
+                    case 'sciencedirect': {
+                        if (request.trim() && this.place())
+                            request = `${this.place()}(${request})`;
+                        if (this.open())
+                            request += ` openaccess(1)`;
+                        break;
+                    }
+                }
+                return request;
             }
             help() {
                 return {
+                    crossref: 'https://github.com/CrossRef/rest-api-doc',
                     sciencedirect: 'https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm',
                     scopus: 'https://schema.elsevier.com/dtds/document/bkapi/search/SCOPUSSearchTips.htm',
                 }[this.service()] ?? '';
@@ -9270,7 +9398,18 @@ var $;
                 });
             }
             data() {
-                return this.$.$hyoo_science_elsevier_search(this.service(), this.request());
+                const self = this;
+                return {
+                    get crossref() {
+                        return self.$.$hyoo_science_crossref_search(self.request());
+                    },
+                    get sciencedirect() {
+                        return self.$.$hyoo_science_elsevier_search(self.service(), self.request());
+                    },
+                    get scopus() {
+                        return self.$.$hyoo_science_elsevier_search(self.service(), self.request());
+                    },
+                }[this.service()];
             }
             found_rows() {
                 return this.data().article.map((_, i) => this.Found_row(i));
