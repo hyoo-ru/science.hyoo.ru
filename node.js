@@ -9310,8 +9310,12 @@ var $;
         const endpoint = `https://api.elsevier.com/content/search/${service}`;
         const uri = new URL('?' + new URLSearchParams({
             start: '0',
-            count: '25',
+            count: {
+                sciencedirect: '100',
+                scopus: '25',
+            }[service] ?? '20',
             query: query,
+            sort: 'citedby-count',
             apiKey: {
                 sciencedirect: '7f59af901d2d86f78a1fd60c1bf9426a',
                 scopus: 'd5bc1fbad583a2e8c0145f6552bbb5bd',
