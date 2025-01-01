@@ -55,8 +55,12 @@ namespace $ {
 
 		const uri = new URL( '?' + new URLSearchParams({
 			start: '0',
-			count: '25',
+			count: {
+				sciencedirect: '100',
+				scopus: '25',
+			}[ service ] ?? '20',
 			query: query,
+			sort: 'citedby-count',
 			// apiKey: , // 
 			apiKey: {
 				sciencedirect: '7f59af901d2d86f78a1fd60c1bf9426a',
