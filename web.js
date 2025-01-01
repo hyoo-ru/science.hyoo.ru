@@ -8449,8 +8449,9 @@ var $;
         'DOI': $mol_data_optional($mol_data_string),
         'key': $mol_data_string,
     });
-    $.$hyoo_science_crossref_moment = $mol_data_record({
-        'date-time': $mol_data_string,
+    $.$hyoo_science_crossref_date = $mol_data_record({
+        'date-parts': $mol_data_array($mol_data_array($mol_data_integer)),
+        'date-time': $mol_data_optional($mol_data_string),
     });
     $.$hyoo_science_crossref_person = $mol_data_record({
         'ORCID': $mol_data_optional($mol_data_string),
@@ -8467,7 +8468,9 @@ var $;
         'title': $mol_data_array($mol_data_string),
         'subtitle': $mol_data_optional($mol_data_array($mol_data_string)),
         'reference': $mol_data_optional($mol_data_array($.$hyoo_science_crossref_ref)),
-        'deposited': $.$hyoo_science_crossref_moment,
+        'published': $.$hyoo_science_crossref_date,
+        'published-print': $mol_data_optional($.$hyoo_science_crossref_date),
+        'published-online': $mol_data_optional($.$hyoo_science_crossref_date),
     });
     $.$hyoo_science_crossref_response = $mol_data_record({
         'message': $mol_data_record({
@@ -8475,14 +8478,28 @@ var $;
             'items': $mol_data_array($.$hyoo_science_crossref_entry),
         }),
     });
-    function $hyoo_science_crossref_search(query) {
+    function $hyoo_science_crossref_search(query, open = false) {
         const endpoint = `https://api.crossref.org/types/journal-article/works`;
         const uri = new URL('?' + new URLSearchParams({
             offset: '0',
             rows: '100',
             query: query,
             sort: 'is-referenced-by-count',
-            select: 'title,subtitle,DOI,URL,container-title,deposited,is-referenced-by-count',
+            filter: [
+                'type:journal-article',
+                ...open ? ['from-online-pub-date:1000-01-01'] : [],
+            ].join(','),
+            select: [
+                'title',
+                'subtitle',
+                'DOI',
+                'URL',
+                'container-title',
+                'published',
+                'published-print',
+                'published-online',
+                'is-referenced-by-count',
+            ].join(','),
         }), endpoint);
         const resp = $.$hyoo_science_crossref_response(this.$mol_fetch.json(uri.toString()))["message"];
         return {
@@ -8493,8 +8510,11 @@ var $;
                 doi: entry.DOI,
                 title: entry.title[0] + (entry.subtitle ? `: ${entry.subtitle[0]}` : ''),
                 journal: entry["container-title"][0],
-                date: new $mol_time_moment(entry.deposited["date-time"]).mask('0000-00-00'),
-                open: true,
+                date: new $mol_time_moment({
+                    year: entry["published"]["date-parts"][0][0],
+                    month: entry["published"]["date-parts"][0][1],
+                }),
+                open: Boolean(entry["published-online"]),
                 rank: entry["is-referenced-by-count"],
             })),
         };
@@ -8702,7 +8722,7 @@ var $;
                 return this.$.$mol_state_arg.value('open', next?.toString()) !== 'false';
             }
             open_supported() {
-                return ['scopus', 'sciencedirect'].includes(this.service());
+                return ['scopus', 'sciencedirect', 'crossref'].includes(this.service());
             }
             request() {
                 let request = this.query();
@@ -8744,7 +8764,7 @@ var $;
                 const self = this;
                 return {
                     get crossref() {
-                        return self.$.$hyoo_science_crossref_search(self.request());
+                        return self.$.$hyoo_science_crossref_search(self.request(), self.open());
                     },
                     get sciencedirect() {
                         return self.$.$hyoo_science_elsevier_search(self.service(), self.request());
