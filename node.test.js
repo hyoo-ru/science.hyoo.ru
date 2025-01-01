@@ -8466,6 +8466,7 @@ var $;
             Journal: {
                 color: $mol_theme.shade,
                 padding: $mol_gap.text,
+                textAlign: 'right',
                 flex: {
                     shrink: 1,
                 },
