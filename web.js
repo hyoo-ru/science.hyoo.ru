@@ -8449,6 +8449,27 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    function $mol_html_decode(text) {
+        return text
+            .replace(/&(?:#(\d+)|(lt|gt|quot|amp));/gi, (str, numb, name) => {
+            if (numb)
+                return String.fromCharCode(numb);
+            const mapping = {
+                'lt': '<',
+                'gt': '>',
+                'quot': '"',
+                'amp': '&',
+            };
+            return mapping[name];
+        });
+    }
+    $.$mol_html_decode = $mol_html_decode;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     $.$hyoo_science_crossref_ref = $mol_data_record({
         'DOI': $mol_data_optional($mol_data_string),
         'key': $mol_data_string,
@@ -8512,8 +8533,8 @@ var $;
                 .map(entry => ({
                 link: entry.URL,
                 doi: entry.DOI,
-                title: entry.title[0] + (entry.subtitle ? `: ${entry.subtitle[0]}` : ''),
-                journal: entry["container-title"][0],
+                title: $mol_html_decode((entry.title[0] + (entry.subtitle ? `: ${entry.subtitle[0]}` : '')).replace(/<.*?>/g, ' ')),
+                journal: $mol_html_decode(entry["container-title"][0]),
                 date: new $mol_time_moment({
                     year: entry["published"]["date-parts"][0][0],
                     month: entry["published"]["date-parts"][0][1],

@@ -210,6 +210,8 @@
     "$mol_data_number",
     "$mol_fetch",
     "$mol_dom_parse",
+    "$mol_html_decode",
+    "$mol_html",
     "$hyoo_science_elsevier",
     "$mol_data_pipe",
     "$mol_type_unary",

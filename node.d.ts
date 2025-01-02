@@ -3076,6 +3076,10 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_html_decode(text: string): string;
+}
+
+declare namespace $ {
     let $hyoo_science_crossref_ref: ((val: {
         DOI?: string | undefined;
         key: string;
