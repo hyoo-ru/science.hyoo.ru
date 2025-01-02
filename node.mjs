@@ -9356,8 +9356,8 @@ var $;
                     ? `https://doi.org/${entry["prism:doi"]}`
                     : entry.link.filter(l => ['scidir', 'scopus'].includes(l["@ref"]))[0]["@href"],
                 doi: entry["prism:doi"] ?? null,
-                title: entry["dc:title"],
-                journal: entry["prism:publicationName"],
+                title: $mol_html_decode(entry["dc:title"].replace(/<.*?>/g, ' ')),
+                journal: $mol_html_decode(entry["prism:publicationName"]),
                 date: entry["prism:coverDate"],
                 open: entry.openaccess,
                 rank: Number(entry["citedby-count"]),
