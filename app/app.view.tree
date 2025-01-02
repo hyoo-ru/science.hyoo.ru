@@ -63,6 +63,15 @@ $hyoo_science_app $mol_page
 			Icon <= Open_icon $mol_icon_lock_open_variant_outline
 			checked? <=> open? true
 			enabled <= open_supported true
+		<= Sort $mol_select
+			hint \Sorting
+			dictionary *
+				\
+					\⬆ Match
+				refs \⬆ Refs
+				date \⬆ Date
+			value? <=> sort? \
+			enabled <= sort_supported true
 		<= Help $mol_link
 			hint \Query Syntax
 			uri <= help \https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm

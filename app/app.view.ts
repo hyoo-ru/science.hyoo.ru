@@ -47,6 +47,16 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
+		sort( next?: string ) {
+			if( !this.sort_supported() ) return ''
+			return this.$.$mol_state_arg.value( 'sort', next ) ?? super.sort()
+		}
+
+		sort_supported() {
+			return [ 'scopus', 'crossref' ].includes( this.service() )
+		}
+
+		@ $mol_mem
 		request() {
 			let request = this.query()
 			switch( this.service() ) {
@@ -92,13 +102,31 @@ namespace $.$$ {
 			const self = this
 			return {
 				get crossref() {
-					return self.$.$hyoo_science_crossref_search( self.request(), self.open() )
+					return self.$.$hyoo_science_crossref_search(
+						self.request(),
+						self.open(),
+						{
+							refs: 'is-referenced-by-count',
+							date: 'published',
+						}[ self.sort() ] ?? '',
+					)
 				},
 				get sciencedirect() {
-					return self.$.$hyoo_science_elsevier_search( self.service(), self.request() )
+					return self.$.$hyoo_science_elsevier_search( 
+						self.service(),
+						self.request(),
+						'',
+					)
 				},
 				get scopus() {
-					return self.$.$hyoo_science_elsevier_search( self.service(), self.request() )
+					return self.$.$hyoo_science_elsevier_search(
+						self.service(),
+						self.request(),
+						{
+							refs: 'citedby-count',
+							date: 'coverDate',
+						}[ self.sort() ] ?? '',
+					)
 				},
 			}[ this.service() ]!
 		}

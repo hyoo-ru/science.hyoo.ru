@@ -49,7 +49,7 @@ namespace $ {
 		}),
 	})
 
-	export function $hyoo_science_elsevier_search( this: $, service: string, query: string ) {
+	export function $hyoo_science_elsevier_search( this: $, service: string, query: string, sort: string ) {
 
 		const endpoint = `https://api.elsevier.com/content/search/${service}`
 
@@ -60,7 +60,7 @@ namespace $ {
 				scopus: '25',
 			}[ service ] ?? '20',
 			query: query,
-			sort: 'citedby-count',
+			sort,
 			// apiKey: , // 
 			apiKey: {
 				sciencedirect: '7f59af901d2d86f78a1fd60c1bf9426a',

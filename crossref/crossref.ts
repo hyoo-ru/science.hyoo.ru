@@ -41,7 +41,7 @@ namespace $ {
 		}),
 	})
 
-	export function $hyoo_science_crossref_search( this: $, query: string, open = false ) {
+	export function $hyoo_science_crossref_search( this: $, query: string, open: boolean, sort: string ) {
 
 		const endpoint = `https://api.crossref.org/types/journal-article/works`
 
@@ -49,7 +49,7 @@ namespace $ {
 			offset: '0',
 			rows: '100',
 			query: query,
-			sort: 'is-referenced-by-count',
+			... sort ? { sort } : {},
 			filter: [
 				'type:journal-article',
 				... open ? [ 'from-online-pub-date:1000-01-01' ] : [],
