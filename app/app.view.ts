@@ -82,6 +82,7 @@ namespace $.$$ {
 			this.$.$mol_state_arg.go({
 				area: this.area(),
 				query: this.query_changed(),
+				place: this.place(),
 				open: this.open().toString(),
 			})
 		}
