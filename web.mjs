@@ -8158,6 +8158,25 @@ var $;
 			(obj.enabled) = () => ((this.open_supported()));
 			return obj;
 		}
+		sort(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		sort_supported(){
+			return true;
+		}
+		Sort(){
+			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ("Sorting");
+			(obj.dictionary) = () => ({
+				"": "⬆ Match", 
+				"refs": "⬆ Refs", 
+				"date": "⬆ Date"
+			});
+			(obj.value) = (next) => ((this.sort(next)));
+			(obj.enabled) = () => ((this.sort_supported()));
+			return obj;
+		}
 		help(){
 			return "https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm";
 		}
@@ -8251,6 +8270,7 @@ var $;
 			return [
 				(this.Place()), 
 				(this.Open()), 
+				(this.Sort()), 
 				(this.Help()), 
 				(this.Lights()), 
 				(this.Source())
@@ -8276,6 +8296,8 @@ var $;
 	($mol_mem(($.$hyoo_science_app.prototype), "Open_icon"));
 	($mol_mem(($.$hyoo_science_app.prototype), "open"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Open"));
+	($mol_mem(($.$hyoo_science_app.prototype), "sort"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Sort"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Help_icon"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Help"));
 	($mol_mem(($.$hyoo_science_app.prototype), "Lights"));
@@ -8503,13 +8525,13 @@ var $;
             'items': $mol_data_array($.$hyoo_science_crossref_entry),
         }),
     });
-    function $hyoo_science_crossref_search(query, open = false) {
+    function $hyoo_science_crossref_search(query, open, sort) {
         const endpoint = `https://api.crossref.org/types/journal-article/works`;
         const uri = new URL('?' + new URLSearchParams({
             offset: '0',
             rows: '100',
             query: query,
-            sort: 'is-referenced-by-count',
+            ...sort ? { sort } : {},
             filter: [
                 'type:journal-article',
                 ...open ? ['from-online-pub-date:1000-01-01'] : [],
@@ -8674,7 +8696,7 @@ var $;
             'entry': $mol_data_variant($mol_data_array($.$hyoo_science_elsevier_entry), $mol_data_array($.$hyoo_science_elsevier_error)),
         }),
     });
-    function $hyoo_science_elsevier_search(service, query) {
+    function $hyoo_science_elsevier_search(service, query, sort) {
         const endpoint = `https://api.elsevier.com/content/search/${service}`;
         const uri = new URL('?' + new URLSearchParams({
             start: '0',
@@ -8683,7 +8705,7 @@ var $;
                 scopus: '25',
             }[service] ?? '20',
             query: query,
-            sort: 'citedby-count',
+            sort,
             apiKey: {
                 sciencedirect: '7f59af901d2d86f78a1fd60c1bf9426a',
                 scopus: 'd5bc1fbad583a2e8c0145f6552bbb5bd',
@@ -8753,6 +8775,14 @@ var $;
             open_supported() {
                 return ['scopus', 'sciencedirect', 'crossref'].includes(this.service());
             }
+            sort(next) {
+                if (!this.sort_supported())
+                    return '';
+                return this.$.$mol_state_arg.value('sort', next) ?? super.sort();
+            }
+            sort_supported() {
+                return ['scopus', 'crossref'].includes(this.service());
+            }
             request() {
                 let request = this.query();
                 switch (this.service()) {
@@ -8794,13 +8824,19 @@ var $;
                 const self = this;
                 return {
                     get crossref() {
-                        return self.$.$hyoo_science_crossref_search(self.request(), self.open());
+                        return self.$.$hyoo_science_crossref_search(self.request(), self.open(), {
+                            refs: 'is-referenced-by-count',
+                            date: 'published',
+                        }[self.sort()] ?? '');
                     },
                     get sciencedirect() {
-                        return self.$.$hyoo_science_elsevier_search(self.service(), self.request());
+                        return self.$.$hyoo_science_elsevier_search(self.service(), self.request(), '');
                     },
                     get scopus() {
-                        return self.$.$hyoo_science_elsevier_search(self.service(), self.request());
+                        return self.$.$hyoo_science_elsevier_search(self.service(), self.request(), {
+                            refs: 'citedby-count',
+                            date: 'coverDate',
+                        }[self.sort()] ?? '');
                     },
                 }[this.service()];
             }
@@ -8844,6 +8880,9 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_science_app.prototype, "open", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_science_app.prototype, "sort", null);
         __decorate([
             $mol_mem
         ], $hyoo_science_app.prototype, "request", null);

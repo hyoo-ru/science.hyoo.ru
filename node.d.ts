@@ -3163,14 +3163,14 @@ declare namespace $ {
             'date-parts': readonly (readonly number[])[];
         } | undefined;
         title: readonly string[];
-        DOI: string;
-        URL: string;
-        'container-title': readonly string[];
         'is-referenced-by-count': number;
         published: {
             'date-time'?: string | undefined;
             'date-parts': readonly (readonly number[])[];
         };
+        DOI: string;
+        URL: string;
+        'container-title': readonly string[];
     }) => Readonly<{
         ISSN?: readonly string[] | undefined;
         abstract?: string | undefined;
@@ -3188,14 +3188,14 @@ declare namespace $ {
             'date-parts': readonly (readonly number[])[];
         }> | undefined;
         title: readonly string[];
-        DOI: string;
-        URL: string;
-        'container-title': readonly string[];
         'is-referenced-by-count': number;
         published: Readonly<{
             'date-time'?: string | undefined;
             'date-parts': readonly (readonly number[])[];
         }>;
+        DOI: string;
+        URL: string;
+        'container-title': readonly string[];
     }>) & {
         config: {
             DOI: (val: string) => string;
@@ -3407,14 +3407,14 @@ declare namespace $ {
                     'date-parts': readonly (readonly number[])[];
                 } | undefined;
                 title: readonly string[];
-                DOI: string;
-                URL: string;
-                'container-title': readonly string[];
                 'is-referenced-by-count': number;
                 published: {
                     'date-time'?: string | undefined;
                     'date-parts': readonly (readonly number[])[];
                 };
+                DOI: string;
+                URL: string;
+                'container-title': readonly string[];
             }[];
         };
     }) => Readonly<{
@@ -3437,14 +3437,14 @@ declare namespace $ {
                     'date-parts': readonly (readonly number[])[];
                 }> | undefined;
                 title: readonly string[];
-                DOI: string;
-                URL: string;
-                'container-title': readonly string[];
                 'is-referenced-by-count': number;
                 published: Readonly<{
                     'date-time'?: string | undefined;
                     'date-parts': readonly (readonly number[])[];
                 }>;
+                DOI: string;
+                URL: string;
+                'container-title': readonly string[];
             }>[];
         }>;
     }>) & {
@@ -3468,14 +3468,14 @@ declare namespace $ {
                         'date-parts': readonly (readonly number[])[];
                     } | undefined;
                     title: readonly string[];
-                    DOI: string;
-                    URL: string;
-                    'container-title': readonly string[];
                     'is-referenced-by-count': number;
                     published: {
                         'date-time'?: string | undefined;
                         'date-parts': readonly (readonly number[])[];
                     };
+                    DOI: string;
+                    URL: string;
+                    'container-title': readonly string[];
                 }[];
             }) => Readonly<{
                 'total-results': number;
@@ -3496,14 +3496,14 @@ declare namespace $ {
                         'date-parts': readonly (readonly number[])[];
                     }> | undefined;
                     title: readonly string[];
-                    DOI: string;
-                    URL: string;
-                    'container-title': readonly string[];
                     'is-referenced-by-count': number;
                     published: Readonly<{
                         'date-time'?: string | undefined;
                         'date-parts': readonly (readonly number[])[];
                     }>;
+                    DOI: string;
+                    URL: string;
+                    'container-title': readonly string[];
                 }>[];
             }>) & {
                 config: {
@@ -3525,14 +3525,14 @@ declare namespace $ {
                             'date-parts': readonly (readonly number[])[];
                         } | undefined;
                         title: readonly string[];
-                        DOI: string;
-                        URL: string;
-                        'container-title': readonly string[];
                         'is-referenced-by-count': number;
                         published: {
                             'date-time'?: string | undefined;
                             'date-parts': readonly (readonly number[])[];
                         };
+                        DOI: string;
+                        URL: string;
+                        'container-title': readonly string[];
                     }[]) => readonly Readonly<{
                         ISSN?: readonly string[] | undefined;
                         abstract?: string | undefined;
@@ -3550,14 +3550,14 @@ declare namespace $ {
                             'date-parts': readonly (readonly number[])[];
                         }> | undefined;
                         title: readonly string[];
-                        DOI: string;
-                        URL: string;
-                        'container-title': readonly string[];
                         'is-referenced-by-count': number;
                         published: Readonly<{
                             'date-time'?: string | undefined;
                             'date-parts': readonly (readonly number[])[];
                         }>;
+                        DOI: string;
+                        URL: string;
+                        'container-title': readonly string[];
                     }>[]) & {
                         config: ((val: {
                             ISSN?: readonly string[] | undefined;
@@ -3576,14 +3576,14 @@ declare namespace $ {
                                 'date-parts': readonly (readonly number[])[];
                             } | undefined;
                             title: readonly string[];
-                            DOI: string;
-                            URL: string;
-                            'container-title': readonly string[];
                             'is-referenced-by-count': number;
                             published: {
                                 'date-time'?: string | undefined;
                                 'date-parts': readonly (readonly number[])[];
                             };
+                            DOI: string;
+                            URL: string;
+                            'container-title': readonly string[];
                         }) => Readonly<{
                             ISSN?: readonly string[] | undefined;
                             abstract?: string | undefined;
@@ -3601,14 +3601,14 @@ declare namespace $ {
                                 'date-parts': readonly (readonly number[])[];
                             }> | undefined;
                             title: readonly string[];
-                            DOI: string;
-                            URL: string;
-                            'container-title': readonly string[];
                             'is-referenced-by-count': number;
                             published: Readonly<{
                                 'date-time'?: string | undefined;
                                 'date-parts': readonly (readonly number[])[];
                             }>;
+                            DOI: string;
+                            URL: string;
+                            'container-title': readonly string[];
                         }>) & {
                             config: {
                                 DOI: (val: string) => string;
@@ -3808,7 +3808,7 @@ declare namespace $ {
         };
         Value: ReturnType<Value>;
     };
-    function $hyoo_science_crossref_search(this: $, query: string, open?: boolean): {
+    function $hyoo_science_crossref_search(this: $, query: string, open: boolean, sort: string): {
         total: number;
         article: {
             link: string;
@@ -4316,7 +4316,7 @@ declare namespace $ {
         };
         Value: ReturnType<Value>;
     };
-    export function $hyoo_science_elsevier_search(this: $, service: string, query: string): {
+    export function $hyoo_science_elsevier_search(this: $, service: string, query: string, sort: string): {
         total: number;
         article: {
             link: string;
@@ -4465,77 +4465,101 @@ declare namespace $ {
 		,
 		ReturnType< $mol_check_icon['enabled'] >
 	>
-	type $mol_link__hint_hyoo_science_app_20 = $mol_type_enforce<
+	type $mol_select__hint_hyoo_science_app_20 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_select['hint'] >
+	>
+	type $mol_select__dictionary_hyoo_science_app_21 = $mol_type_enforce<
+		({ 
+			'': string,
+			'refs': string,
+			'date': string,
+		}) 
+		,
+		ReturnType< $mol_select['dictionary'] >
+	>
+	type $mol_select__value_hyoo_science_app_22 = $mol_type_enforce<
+		ReturnType< $hyoo_science_app['sort'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $mol_select__enabled_hyoo_science_app_23 = $mol_type_enforce<
+		ReturnType< $hyoo_science_app['sort_supported'] >
+		,
+		ReturnType< $mol_select['enabled'] >
+	>
+	type $mol_link__hint_hyoo_science_app_24 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link['hint'] >
 	>
-	type $mol_link__uri_hyoo_science_app_21 = $mol_type_enforce<
+	type $mol_link__uri_hyoo_science_app_25 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['help'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_link__sub_hyoo_science_app_22 = $mol_type_enforce<
+	type $mol_link__sub_hyoo_science_app_26 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_link['sub'] >
 	>
-	type $mol_link_source__uri_hyoo_science_app_23 = $mol_type_enforce<
+	type $mol_link_source__uri_hyoo_science_app_27 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link_source['uri'] >
 	>
-	type $hyoo_science_article__open_hyoo_science_app_24 = $mol_type_enforce<
+	type $hyoo_science_article__open_hyoo_science_app_28 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_open'] >
 		,
 		ReturnType< $hyoo_science_article['open'] >
 	>
-	type $hyoo_science_article__highlight_hyoo_science_app_25 = $mol_type_enforce<
+	type $hyoo_science_article__highlight_hyoo_science_app_29 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['query'] >
 		,
 		ReturnType< $hyoo_science_article['highlight'] >
 	>
-	type $hyoo_science_article__title_hyoo_science_app_26 = $mol_type_enforce<
+	type $hyoo_science_article__title_hyoo_science_app_30 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_title'] >
 		,
 		ReturnType< $hyoo_science_article['title'] >
 	>
-	type $hyoo_science_article__uri_hyoo_science_app_27 = $mol_type_enforce<
+	type $hyoo_science_article__uri_hyoo_science_app_31 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_link'] >
 		,
 		ReturnType< $hyoo_science_article['uri'] >
 	>
-	type $hyoo_science_article__rank_hyoo_science_app_28 = $mol_type_enforce<
+	type $hyoo_science_article__rank_hyoo_science_app_32 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_rank'] >
 		,
 		ReturnType< $hyoo_science_article['rank'] >
 	>
-	type $hyoo_science_article__date_hyoo_science_app_29 = $mol_type_enforce<
+	type $hyoo_science_article__date_hyoo_science_app_33 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_date'] >
 		,
 		ReturnType< $hyoo_science_article['date'] >
 	>
-	type $hyoo_science_article__journal_title_hyoo_science_app_30 = $mol_type_enforce<
+	type $hyoo_science_article__journal_title_hyoo_science_app_34 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_journal'] >
 		,
 		ReturnType< $hyoo_science_article['journal_title'] >
 	>
-	type $mol_chip__title_hyoo_science_app_31 = $mol_type_enforce<
+	type $mol_chip__title_hyoo_science_app_35 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_chip['title'] >
 	>
-	type $mol_list__rows_hyoo_science_app_32 = $mol_type_enforce<
+	type $mol_list__rows_hyoo_science_app_36 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['found_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_list__Empty_hyoo_science_app_33 = $mol_type_enforce<
+	type $mol_list__Empty_hyoo_science_app_37 = $mol_type_enforce<
 		ReturnType< $hyoo_science_app['Found_none'] >
 		,
 		ReturnType< $mol_list['Empty'] >
 	>
-	type $mol_view__sub_hyoo_science_app_34 = $mol_type_enforce<
+	type $mol_view__sub_hyoo_science_app_38 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -4559,6 +4583,9 @@ declare namespace $ {
 		open( next?: boolean ): boolean
 		open_supported( ): boolean
 		Open( ): $mol_check_icon
+		sort( next?: string ): string
+		sort_supported( ): boolean
+		Sort( ): $mol_select
 		help( ): string
 		Help_icon( ): $mol_icon_hint
 		Help( ): $mol_link
@@ -4598,6 +4625,8 @@ declare namespace $.$$ {
         place_supported(): boolean;
         open(next?: boolean): boolean;
         open_supported(): boolean;
+        sort(next?: string): string;
+        sort_supported(): boolean;
         request(): string;
         help(): string;
         search(): void;
