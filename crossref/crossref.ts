@@ -76,9 +76,9 @@ namespace $ {
 			.map( entry => ({
 				link: entry.URL,
 				doi: entry.DOI,
-				title: entry.title![0] + ( entry.subtitle ? `: ${ entry.subtitle[0] }` : '' ),
+				title: $mol_html_decode( ( entry.title![0] + ( entry.subtitle ? `: ${ entry.subtitle[0] }` : '' ) ).replace( /<.*?>/g, ' ' ) ),
 				// author: entry.author?.[0] ? ( `${ entry.author?.[0].given } ${ entry.author?.[0].family }` ) : '🐱‍👤',
-				journal: entry["container-title"]![0],
+				journal: $mol_html_decode( entry["container-title"]![0] ),
 				date: new $mol_time_moment({
 					year: entry["published"]["date-parts"][0][0],
 					month: entry["published"]["date-parts"][0][1],
