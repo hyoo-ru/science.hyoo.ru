@@ -2998,7 +2998,7 @@ declare namespace $ {
 declare namespace $ {
     function $mol_data_record<Sub extends Record<string, $mol_data_value>>(sub: Sub): ((val: $mol_type_merge<$mol_type_override<Partial<{ [key in keyof Sub]: Parameters<Sub[key]>[0]; }>, Pick<{ [key in keyof Sub]: Parameters<Sub[key]>[0]; }, { [Field in keyof { [key in keyof Sub]: Parameters<Sub[key]>[0]; }]: undefined extends { [key in keyof Sub]: Parameters<Sub[key]>[0]; }[Field] ? never : Field; }[keyof Sub]>>>) => Readonly<$mol_type_merge<$mol_type_override<Partial<{ [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }>, Pick<{ [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }, { [Field_1 in keyof { [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }]: undefined extends { [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }[Field_1] ? never : Field_1; }[keyof Sub]>>>>) & {
         config: Sub;
-        Value: ReturnType<Value>;
+        Value: Readonly<$mol_type_merge<$mol_type_override<Partial<{ [key in keyof Sub]: ReturnType<Sub[key]>; }>, Pick<{ [key in keyof Sub]: ReturnType<Sub[key]>; }, { [Field in keyof { [key in keyof Sub]: ReturnType<Sub[key]>; }]: undefined extends { [key in keyof Sub]: ReturnType<Sub[key]>; }[Field] ? never : Field; }[keyof Sub]>>>>;
     };
 }
 
@@ -3008,7 +3008,7 @@ declare namespace $ {
             sub: Sub;
             fallback: Fallback | undefined;
         };
-        Value: ReturnType<Value>;
+        Value: ReturnType<Sub> | (Fallback extends undefined ? undefined : ReturnType<Extract<Fallback, () => any>>);
     };
 }
 
@@ -3024,7 +3024,7 @@ declare namespace $ {
 declare namespace $ {
     function $mol_data_array<Sub extends $mol_data_value>(sub: Sub): ((val: readonly Parameters<Sub>[0][]) => readonly ReturnType<Sub>[]) & {
         config: Sub;
-        Value: ReturnType<Value>;
+        Value: readonly ReturnType<Sub>[];
     };
 }
 
@@ -3093,11 +3093,14 @@ declare namespace $ {
                     sub: (val: string) => string;
                     fallback: (() => string) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: string | undefined;
             };
             key: (val: string) => string;
         };
-        Value: ReturnType<Value>;
+        Value: Readonly<{
+            DOI?: string | undefined;
+            key: string;
+        }>;
     };
     let $hyoo_science_crossref_date: ((val: {
         'date-time'?: string | undefined;
@@ -3110,19 +3113,22 @@ declare namespace $ {
             'date-parts': ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
                 config: ((val: readonly number[]) => readonly number[]) & {
                     config: typeof $mol_data_integer;
-                    Value: ReturnType<Value>;
+                    Value: readonly number[];
                 };
-                Value: ReturnType<Value>;
+                Value: readonly (readonly number[])[];
             };
             'date-time': ((val: string | undefined) => string | undefined) & {
                 config: {
                     sub: (val: string) => string;
                     fallback: (() => string) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: string | undefined;
             };
         };
-        Value: ReturnType<Value>;
+        Value: Readonly<{
+            'date-time'?: string | undefined;
+            'date-parts': readonly (readonly number[])[];
+        }>;
     };
     let $hyoo_science_crossref_person: ((val: {
         ORCID?: string | undefined;
@@ -3139,12 +3145,16 @@ declare namespace $ {
                     sub: (val: string) => string;
                     fallback: (() => string) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: string | undefined;
             };
             given: (val: string) => string;
             family: (val: string) => string;
         };
-        Value: ReturnType<Value>;
+        Value: Readonly<{
+            ORCID?: string | undefined;
+            given: string;
+            family: string;
+        }>;
     };
     let $hyoo_science_crossref_entry: ((val: {
         ISSN?: readonly string[] | undefined;
@@ -3203,11 +3213,11 @@ declare namespace $ {
                 config: {
                     sub: ((val: readonly string[]) => readonly string[]) & {
                         config: (val: string) => string;
-                        Value: ReturnType<Value>;
+                        Value: readonly string[];
                     };
                     fallback: (() => readonly string[]) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: readonly string[] | undefined;
             };
             URL: (val: string) => string;
             abstract: ((val: string | undefined) => string | undefined) & {
@@ -3215,26 +3225,26 @@ declare namespace $ {
                     sub: (val: string) => string;
                     fallback: (() => string) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: string | undefined;
             };
             'container-title': ((val: readonly string[]) => readonly string[]) & {
                 config: (val: string) => string;
-                Value: ReturnType<Value>;
+                Value: readonly string[];
             };
             'is-referenced-by-count': typeof $mol_data_integer;
             title: ((val: readonly string[]) => readonly string[]) & {
                 config: (val: string) => string;
-                Value: ReturnType<Value>;
+                Value: readonly string[];
             };
             subtitle: ((val: readonly string[] | undefined) => readonly string[] | undefined) & {
                 config: {
                     sub: ((val: readonly string[]) => readonly string[]) & {
                         config: (val: string) => string;
-                        Value: ReturnType<Value>;
+                        Value: readonly string[];
                     };
                     fallback: (() => readonly string[]) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: readonly string[] | undefined;
             };
             reference: ((val: readonly {
                 DOI?: string | undefined;
@@ -3264,20 +3274,29 @@ declare namespace $ {
                                         sub: (val: string) => string;
                                         fallback: (() => string) | undefined;
                                     };
-                                    Value: ReturnType<Value>;
+                                    Value: string | undefined;
                                 };
                                 key: (val: string) => string;
                             };
-                            Value: ReturnType<Value>;
+                            Value: Readonly<{
+                                DOI?: string | undefined;
+                                key: string;
+                            }>;
                         };
-                        Value: ReturnType<Value>;
+                        Value: readonly Readonly<{
+                            DOI?: string | undefined;
+                            key: string;
+                        }>[];
                     };
                     fallback: (() => readonly Readonly<{
                         DOI?: string | undefined;
                         key: string;
                     }>[]) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: readonly Readonly<{
+                    DOI?: string | undefined;
+                    key: string;
+                }>[] | undefined;
             };
             published: ((val: {
                 'date-time'?: string | undefined;
@@ -3290,19 +3309,22 @@ declare namespace $ {
                     'date-parts': ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
                         config: ((val: readonly number[]) => readonly number[]) & {
                             config: typeof $mol_data_integer;
-                            Value: ReturnType<Value>;
+                            Value: readonly number[];
                         };
-                        Value: ReturnType<Value>;
+                        Value: readonly (readonly number[])[];
                     };
                     'date-time': ((val: string | undefined) => string | undefined) & {
                         config: {
                             sub: (val: string) => string;
                             fallback: (() => string) | undefined;
                         };
-                        Value: ReturnType<Value>;
+                        Value: string | undefined;
                     };
                 };
-                Value: ReturnType<Value>;
+                Value: Readonly<{
+                    'date-time'?: string | undefined;
+                    'date-parts': readonly (readonly number[])[];
+                }>;
             };
             'published-print': ((val: {
                 'date-time'?: string | undefined;
@@ -3323,26 +3345,32 @@ declare namespace $ {
                             'date-parts': ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
                                 config: ((val: readonly number[]) => readonly number[]) & {
                                     config: typeof $mol_data_integer;
-                                    Value: ReturnType<Value>;
+                                    Value: readonly number[];
                                 };
-                                Value: ReturnType<Value>;
+                                Value: readonly (readonly number[])[];
                             };
                             'date-time': ((val: string | undefined) => string | undefined) & {
                                 config: {
                                     sub: (val: string) => string;
                                     fallback: (() => string) | undefined;
                                 };
-                                Value: ReturnType<Value>;
+                                Value: string | undefined;
                             };
                         };
-                        Value: ReturnType<Value>;
+                        Value: Readonly<{
+                            'date-time'?: string | undefined;
+                            'date-parts': readonly (readonly number[])[];
+                        }>;
                     };
                     fallback: (() => Readonly<{
                         'date-time'?: string | undefined;
                         'date-parts': readonly (readonly number[])[];
                     }>) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: Readonly<{
+                    'date-time'?: string | undefined;
+                    'date-parts': readonly (readonly number[])[];
+                }> | undefined;
             };
             'published-online': ((val: {
                 'date-time'?: string | undefined;
@@ -3363,29 +3391,60 @@ declare namespace $ {
                             'date-parts': ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
                                 config: ((val: readonly number[]) => readonly number[]) & {
                                     config: typeof $mol_data_integer;
-                                    Value: ReturnType<Value>;
+                                    Value: readonly number[];
                                 };
-                                Value: ReturnType<Value>;
+                                Value: readonly (readonly number[])[];
                             };
                             'date-time': ((val: string | undefined) => string | undefined) & {
                                 config: {
                                     sub: (val: string) => string;
                                     fallback: (() => string) | undefined;
                                 };
-                                Value: ReturnType<Value>;
+                                Value: string | undefined;
                             };
                         };
-                        Value: ReturnType<Value>;
+                        Value: Readonly<{
+                            'date-time'?: string | undefined;
+                            'date-parts': readonly (readonly number[])[];
+                        }>;
                     };
                     fallback: (() => Readonly<{
                         'date-time'?: string | undefined;
                         'date-parts': readonly (readonly number[])[];
                     }>) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: Readonly<{
+                    'date-time'?: string | undefined;
+                    'date-parts': readonly (readonly number[])[];
+                }> | undefined;
             };
         };
-        Value: ReturnType<Value>;
+        Value: Readonly<{
+            ISSN?: readonly string[] | undefined;
+            abstract?: string | undefined;
+            subtitle?: readonly string[] | undefined;
+            reference?: readonly Readonly<{
+                DOI?: string | undefined;
+                key: string;
+            }>[] | undefined;
+            'published-print'?: Readonly<{
+                'date-time'?: string | undefined;
+                'date-parts': readonly (readonly number[])[];
+            }> | undefined;
+            'published-online'?: Readonly<{
+                'date-time'?: string | undefined;
+                'date-parts': readonly (readonly number[])[];
+            }> | undefined;
+            title: readonly string[];
+            'is-referenced-by-count': number;
+            published: Readonly<{
+                'date-time'?: string | undefined;
+                'date-parts': readonly (readonly number[])[];
+            }>;
+            DOI: string;
+            URL: string;
+            'container-title': readonly string[];
+        }>;
     };
     let $hyoo_science_crossref_response: ((val: {
         message: {
@@ -3616,11 +3675,11 @@ declare namespace $ {
                                     config: {
                                         sub: ((val: readonly string[]) => readonly string[]) & {
                                             config: (val: string) => string;
-                                            Value: ReturnType<Value>;
+                                            Value: readonly string[];
                                         };
                                         fallback: (() => readonly string[]) | undefined;
                                     };
-                                    Value: ReturnType<Value>;
+                                    Value: readonly string[] | undefined;
                                 };
                                 URL: (val: string) => string;
                                 abstract: ((val: string | undefined) => string | undefined) & {
@@ -3628,26 +3687,26 @@ declare namespace $ {
                                         sub: (val: string) => string;
                                         fallback: (() => string) | undefined;
                                     };
-                                    Value: ReturnType<Value>;
+                                    Value: string | undefined;
                                 };
                                 'container-title': ((val: readonly string[]) => readonly string[]) & {
                                     config: (val: string) => string;
-                                    Value: ReturnType<Value>;
+                                    Value: readonly string[];
                                 };
                                 'is-referenced-by-count': typeof $mol_data_integer;
                                 title: ((val: readonly string[]) => readonly string[]) & {
                                     config: (val: string) => string;
-                                    Value: ReturnType<Value>;
+                                    Value: readonly string[];
                                 };
                                 subtitle: ((val: readonly string[] | undefined) => readonly string[] | undefined) & {
                                     config: {
                                         sub: ((val: readonly string[]) => readonly string[]) & {
                                             config: (val: string) => string;
-                                            Value: ReturnType<Value>;
+                                            Value: readonly string[];
                                         };
                                         fallback: (() => readonly string[]) | undefined;
                                     };
-                                    Value: ReturnType<Value>;
+                                    Value: readonly string[] | undefined;
                                 };
                                 reference: ((val: readonly {
                                     DOI?: string | undefined;
@@ -3677,20 +3736,29 @@ declare namespace $ {
                                                             sub: (val: string) => string;
                                                             fallback: (() => string) | undefined;
                                                         };
-                                                        Value: ReturnType<Value>;
+                                                        Value: string | undefined;
                                                     };
                                                     key: (val: string) => string;
                                                 };
-                                                Value: ReturnType<Value>;
+                                                Value: Readonly<{
+                                                    DOI?: string | undefined;
+                                                    key: string;
+                                                }>;
                                             };
-                                            Value: ReturnType<Value>;
+                                            Value: readonly Readonly<{
+                                                DOI?: string | undefined;
+                                                key: string;
+                                            }>[];
                                         };
                                         fallback: (() => readonly Readonly<{
                                             DOI?: string | undefined;
                                             key: string;
                                         }>[]) | undefined;
                                     };
-                                    Value: ReturnType<Value>;
+                                    Value: readonly Readonly<{
+                                        DOI?: string | undefined;
+                                        key: string;
+                                    }>[] | undefined;
                                 };
                                 published: ((val: {
                                     'date-time'?: string | undefined;
@@ -3703,19 +3771,22 @@ declare namespace $ {
                                         'date-parts': ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
                                             config: ((val: readonly number[]) => readonly number[]) & {
                                                 config: typeof $mol_data_integer;
-                                                Value: ReturnType<Value>;
+                                                Value: readonly number[];
                                             };
-                                            Value: ReturnType<Value>;
+                                            Value: readonly (readonly number[])[];
                                         };
                                         'date-time': ((val: string | undefined) => string | undefined) & {
                                             config: {
                                                 sub: (val: string) => string;
                                                 fallback: (() => string) | undefined;
                                             };
-                                            Value: ReturnType<Value>;
+                                            Value: string | undefined;
                                         };
                                     };
-                                    Value: ReturnType<Value>;
+                                    Value: Readonly<{
+                                        'date-time'?: string | undefined;
+                                        'date-parts': readonly (readonly number[])[];
+                                    }>;
                                 };
                                 'published-print': ((val: {
                                     'date-time'?: string | undefined;
@@ -3736,26 +3807,32 @@ declare namespace $ {
                                                 'date-parts': ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
                                                     config: ((val: readonly number[]) => readonly number[]) & {
                                                         config: typeof $mol_data_integer;
-                                                        Value: ReturnType<Value>;
+                                                        Value: readonly number[];
                                                     };
-                                                    Value: ReturnType<Value>;
+                                                    Value: readonly (readonly number[])[];
                                                 };
                                                 'date-time': ((val: string | undefined) => string | undefined) & {
                                                     config: {
                                                         sub: (val: string) => string;
                                                         fallback: (() => string) | undefined;
                                                     };
-                                                    Value: ReturnType<Value>;
+                                                    Value: string | undefined;
                                                 };
                                             };
-                                            Value: ReturnType<Value>;
+                                            Value: Readonly<{
+                                                'date-time'?: string | undefined;
+                                                'date-parts': readonly (readonly number[])[];
+                                            }>;
                                         };
                                         fallback: (() => Readonly<{
                                             'date-time'?: string | undefined;
                                             'date-parts': readonly (readonly number[])[];
                                         }>) | undefined;
                                     };
-                                    Value: ReturnType<Value>;
+                                    Value: Readonly<{
+                                        'date-time'?: string | undefined;
+                                        'date-parts': readonly (readonly number[])[];
+                                    }> | undefined;
                                 };
                                 'published-online': ((val: {
                                     'date-time'?: string | undefined;
@@ -3776,37 +3853,151 @@ declare namespace $ {
                                                 'date-parts': ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
                                                     config: ((val: readonly number[]) => readonly number[]) & {
                                                         config: typeof $mol_data_integer;
-                                                        Value: ReturnType<Value>;
+                                                        Value: readonly number[];
                                                     };
-                                                    Value: ReturnType<Value>;
+                                                    Value: readonly (readonly number[])[];
                                                 };
                                                 'date-time': ((val: string | undefined) => string | undefined) & {
                                                     config: {
                                                         sub: (val: string) => string;
                                                         fallback: (() => string) | undefined;
                                                     };
-                                                    Value: ReturnType<Value>;
+                                                    Value: string | undefined;
                                                 };
                                             };
-                                            Value: ReturnType<Value>;
+                                            Value: Readonly<{
+                                                'date-time'?: string | undefined;
+                                                'date-parts': readonly (readonly number[])[];
+                                            }>;
                                         };
                                         fallback: (() => Readonly<{
                                             'date-time'?: string | undefined;
                                             'date-parts': readonly (readonly number[])[];
                                         }>) | undefined;
                                     };
-                                    Value: ReturnType<Value>;
+                                    Value: Readonly<{
+                                        'date-time'?: string | undefined;
+                                        'date-parts': readonly (readonly number[])[];
+                                    }> | undefined;
                                 };
                             };
-                            Value: ReturnType<Value>;
+                            Value: Readonly<{
+                                ISSN?: readonly string[] | undefined;
+                                abstract?: string | undefined;
+                                subtitle?: readonly string[] | undefined;
+                                reference?: readonly Readonly<{
+                                    DOI?: string | undefined;
+                                    key: string;
+                                }>[] | undefined;
+                                'published-print'?: Readonly<{
+                                    'date-time'?: string | undefined;
+                                    'date-parts': readonly (readonly number[])[];
+                                }> | undefined;
+                                'published-online'?: Readonly<{
+                                    'date-time'?: string | undefined;
+                                    'date-parts': readonly (readonly number[])[];
+                                }> | undefined;
+                                title: readonly string[];
+                                'is-referenced-by-count': number;
+                                published: Readonly<{
+                                    'date-time'?: string | undefined;
+                                    'date-parts': readonly (readonly number[])[];
+                                }>;
+                                DOI: string;
+                                URL: string;
+                                'container-title': readonly string[];
+                            }>;
                         };
-                        Value: ReturnType<Value>;
+                        Value: readonly Readonly<{
+                            ISSN?: readonly string[] | undefined;
+                            abstract?: string | undefined;
+                            subtitle?: readonly string[] | undefined;
+                            reference?: readonly Readonly<{
+                                DOI?: string | undefined;
+                                key: string;
+                            }>[] | undefined;
+                            'published-print'?: Readonly<{
+                                'date-time'?: string | undefined;
+                                'date-parts': readonly (readonly number[])[];
+                            }> | undefined;
+                            'published-online'?: Readonly<{
+                                'date-time'?: string | undefined;
+                                'date-parts': readonly (readonly number[])[];
+                            }> | undefined;
+                            title: readonly string[];
+                            'is-referenced-by-count': number;
+                            published: Readonly<{
+                                'date-time'?: string | undefined;
+                                'date-parts': readonly (readonly number[])[];
+                            }>;
+                            DOI: string;
+                            URL: string;
+                            'container-title': readonly string[];
+                        }>[];
                     };
                 };
-                Value: ReturnType<Value>;
+                Value: Readonly<{
+                    'total-results': number;
+                    items: readonly Readonly<{
+                        ISSN?: readonly string[] | undefined;
+                        abstract?: string | undefined;
+                        subtitle?: readonly string[] | undefined;
+                        reference?: readonly Readonly<{
+                            DOI?: string | undefined;
+                            key: string;
+                        }>[] | undefined;
+                        'published-print'?: Readonly<{
+                            'date-time'?: string | undefined;
+                            'date-parts': readonly (readonly number[])[];
+                        }> | undefined;
+                        'published-online'?: Readonly<{
+                            'date-time'?: string | undefined;
+                            'date-parts': readonly (readonly number[])[];
+                        }> | undefined;
+                        title: readonly string[];
+                        'is-referenced-by-count': number;
+                        published: Readonly<{
+                            'date-time'?: string | undefined;
+                            'date-parts': readonly (readonly number[])[];
+                        }>;
+                        DOI: string;
+                        URL: string;
+                        'container-title': readonly string[];
+                    }>[];
+                }>;
             };
         };
-        Value: ReturnType<Value>;
+        Value: Readonly<{
+            message: Readonly<{
+                'total-results': number;
+                items: readonly Readonly<{
+                    ISSN?: readonly string[] | undefined;
+                    abstract?: string | undefined;
+                    subtitle?: readonly string[] | undefined;
+                    reference?: readonly Readonly<{
+                        DOI?: string | undefined;
+                        key: string;
+                    }>[] | undefined;
+                    'published-print'?: Readonly<{
+                        'date-time'?: string | undefined;
+                        'date-parts': readonly (readonly number[])[];
+                    }> | undefined;
+                    'published-online'?: Readonly<{
+                        'date-time'?: string | undefined;
+                        'date-parts': readonly (readonly number[])[];
+                    }> | undefined;
+                    title: readonly string[];
+                    'is-referenced-by-count': number;
+                    published: Readonly<{
+                        'date-time'?: string | undefined;
+                        'date-parts': readonly (readonly number[])[];
+                    }>;
+                    DOI: string;
+                    URL: string;
+                    'container-title': readonly string[];
+                }>[];
+            }>;
+        }>;
     };
     function $hyoo_science_crossref_search(this: $, query: string, open: boolean, sort: string): {
         total: number;
@@ -3849,7 +4040,7 @@ declare namespace $ {
         config: {
             funcs: Funcs & Guard<Funcs>;
         };
-        Value: ReturnType<Value>;
+        Value: $mol_type_result<$mol_type_foot<Funcs>>;
     };
     export {};
 }
@@ -3860,14 +4051,14 @@ declare namespace $ {
             name: string;
             dict: Dict;
         };
-        Value: ReturnType<Value>;
+        Value: Dict[keyof Dict];
     };
 }
 
 declare namespace $ {
     function $mol_data_variant<Sub extends $mol_data_value[]>(...sub: Sub): ((val: Parameters<Sub[number]>[0]) => ReturnType<Sub[number]>) & {
         config: Sub;
-        Value: ReturnType<Value>;
+        Value: ReturnType<Sub[number]>;
     };
 }
 
@@ -3893,11 +4084,14 @@ declare namespace $ {
                     name: string;
                     dict: typeof Link_type;
                 };
-                Value: ReturnType<Value>;
+                Value: Link_type;
             };
             '@href': (val: string) => string;
         };
-        Value: ReturnType<Value>;
+        Value: Readonly<{
+            '@ref': Link_type;
+            '@href': string;
+        }>;
     };
     export let $hyoo_science_elsevier_error: ((val: {
         error: string;
@@ -3907,7 +4101,9 @@ declare namespace $ {
         config: {
             error: (val: string) => string;
         };
-        Value: ReturnType<Value>;
+        Value: Readonly<{
+            error: string;
+        }>;
     };
     export let $hyoo_science_elsevier_entry: ((val: {
         openaccess?: any;
@@ -3947,21 +4143,21 @@ declare namespace $ {
                 config: {
                     funcs: [(v: any) => number, (v: number) => boolean] & [(input: any) => number, (input: number) => unknown];
                 };
-                Value: ReturnType<Value>;
+                Value: boolean;
             };
             'citedby-count': ((val: string | undefined) => string | undefined) & {
                 config: {
                     sub: (val: string) => string;
                     fallback: (() => string) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: string | undefined;
             };
             'dc:creator': ((val: string | undefined) => string | undefined) & {
                 config: {
                     sub: (val: string) => string;
                     fallback: (() => string) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: string | undefined;
             };
             'dc:identifier': (val: string) => string;
             'dc:title': (val: string) => string;
@@ -3969,14 +4165,14 @@ declare namespace $ {
                 config: {
                     funcs: [(val: string) => string, typeof $mol_time_moment] & [(input: string) => $mol_time_moment_config | undefined, new (input: $mol_time_moment_config | undefined) => unknown];
                 };
-                Value: ReturnType<Value>;
+                Value: $mol_time_moment;
             };
             'prism:doi': ((val: string | undefined) => string | undefined) & {
                 config: {
                     sub: (val: string) => string;
                     fallback: (() => string) | undefined;
                 };
-                Value: ReturnType<Value>;
+                Value: string | undefined;
             };
             'prism:publicationName': (val: string) => string;
             'prism:startingPage': typeof parseInt;
@@ -4002,16 +4198,38 @@ declare namespace $ {
                                 name: string;
                                 dict: typeof Link_type;
                             };
-                            Value: ReturnType<Value>;
+                            Value: Link_type;
                         };
                         '@href': (val: string) => string;
                     };
-                    Value: ReturnType<Value>;
+                    Value: Readonly<{
+                        '@ref': Link_type;
+                        '@href': string;
+                    }>;
                 };
-                Value: ReturnType<Value>;
+                Value: readonly Readonly<{
+                    '@ref': Link_type;
+                    '@href': string;
+                }>[];
             };
         };
-        Value: ReturnType<Value>;
+        Value: Readonly<{
+            'citedby-count'?: string | undefined;
+            'dc:creator'?: string | undefined;
+            'prism:doi'?: string | undefined;
+            link: readonly Readonly<{
+                '@ref': Link_type;
+                '@href': string;
+            }>[];
+            openaccess: boolean;
+            'dc:identifier': string;
+            'dc:title': string;
+            'prism:coverDate': $mol_time_moment;
+            'prism:publicationName': string;
+            'prism:startingPage': number;
+            'prism:url': string;
+            'prism:volume': number;
+        }>;
     };
     export let $hyoo_science_elsevier_response: ((val: {
         'search-results': {
@@ -4224,21 +4442,21 @@ declare namespace $ {
                                         config: {
                                             funcs: [(v: any) => number, (v: number) => boolean] & [(input: any) => number, (input: number) => unknown];
                                         };
-                                        Value: ReturnType<Value>;
+                                        Value: boolean;
                                     };
                                     'citedby-count': ((val: string | undefined) => string | undefined) & {
                                         config: {
                                             sub: (val: string) => string;
                                             fallback: (() => string) | undefined;
                                         };
-                                        Value: ReturnType<Value>;
+                                        Value: string | undefined;
                                     };
                                     'dc:creator': ((val: string | undefined) => string | undefined) & {
                                         config: {
                                             sub: (val: string) => string;
                                             fallback: (() => string) | undefined;
                                         };
-                                        Value: ReturnType<Value>;
+                                        Value: string | undefined;
                                     };
                                     'dc:identifier': (val: string) => string;
                                     'dc:title': (val: string) => string;
@@ -4246,14 +4464,14 @@ declare namespace $ {
                                         config: {
                                             funcs: [(val: string) => string, typeof $mol_time_moment] & [(input: string) => $mol_time_moment_config | undefined, new (input: $mol_time_moment_config | undefined) => unknown];
                                         };
-                                        Value: ReturnType<Value>;
+                                        Value: $mol_time_moment;
                                     };
                                     'prism:doi': ((val: string | undefined) => string | undefined) & {
                                         config: {
                                             sub: (val: string) => string;
                                             fallback: (() => string) | undefined;
                                         };
-                                        Value: ReturnType<Value>;
+                                        Value: string | undefined;
                                     };
                                     'prism:publicationName': (val: string) => string;
                                     'prism:startingPage': typeof parseInt;
@@ -4279,18 +4497,56 @@ declare namespace $ {
                                                         name: string;
                                                         dict: typeof Link_type;
                                                     };
-                                                    Value: ReturnType<Value>;
+                                                    Value: Link_type;
                                                 };
                                                 '@href': (val: string) => string;
                                             };
-                                            Value: ReturnType<Value>;
+                                            Value: Readonly<{
+                                                '@ref': Link_type;
+                                                '@href': string;
+                                            }>;
                                         };
-                                        Value: ReturnType<Value>;
+                                        Value: readonly Readonly<{
+                                            '@ref': Link_type;
+                                            '@href': string;
+                                        }>[];
                                     };
                                 };
-                                Value: ReturnType<Value>;
+                                Value: Readonly<{
+                                    'citedby-count'?: string | undefined;
+                                    'dc:creator'?: string | undefined;
+                                    'prism:doi'?: string | undefined;
+                                    link: readonly Readonly<{
+                                        '@ref': Link_type;
+                                        '@href': string;
+                                    }>[];
+                                    openaccess: boolean;
+                                    'dc:identifier': string;
+                                    'dc:title': string;
+                                    'prism:coverDate': $mol_time_moment;
+                                    'prism:publicationName': string;
+                                    'prism:startingPage': number;
+                                    'prism:url': string;
+                                    'prism:volume': number;
+                                }>;
                             };
-                            Value: ReturnType<Value>;
+                            Value: readonly Readonly<{
+                                'citedby-count'?: string | undefined;
+                                'dc:creator'?: string | undefined;
+                                'prism:doi'?: string | undefined;
+                                link: readonly Readonly<{
+                                    '@ref': Link_type;
+                                    '@href': string;
+                                }>[];
+                                openaccess: boolean;
+                                'dc:identifier': string;
+                                'dc:title': string;
+                                'prism:coverDate': $mol_time_moment;
+                                'prism:publicationName': string;
+                                'prism:startingPage': number;
+                                'prism:url': string;
+                                'prism:volume': number;
+                            }>[];
                         }, ((val: readonly {
                             error: string;
                         }[]) => readonly Readonly<{
@@ -4304,17 +4560,87 @@ declare namespace $ {
                                 config: {
                                     error: (val: string) => string;
                                 };
-                                Value: ReturnType<Value>;
+                                Value: Readonly<{
+                                    error: string;
+                                }>;
                             };
-                            Value: ReturnType<Value>;
+                            Value: readonly Readonly<{
+                                error: string;
+                            }>[];
                         }];
-                        Value: ReturnType<Value>;
+                        Value: readonly Readonly<{
+                            'citedby-count'?: string | undefined;
+                            'dc:creator'?: string | undefined;
+                            'prism:doi'?: string | undefined;
+                            link: readonly Readonly<{
+                                '@ref': Link_type;
+                                '@href': string;
+                            }>[];
+                            openaccess: boolean;
+                            'dc:identifier': string;
+                            'dc:title': string;
+                            'prism:coverDate': $mol_time_moment;
+                            'prism:publicationName': string;
+                            'prism:startingPage': number;
+                            'prism:url': string;
+                            'prism:volume': number;
+                        }>[] | readonly Readonly<{
+                            error: string;
+                        }>[];
                     };
                 };
-                Value: ReturnType<Value>;
+                Value: Readonly<{
+                    'opensearch:totalResults': number;
+                    'opensearch:startIndex': number;
+                    'opensearch:itemsPerPage': number;
+                    entry: readonly Readonly<{
+                        'citedby-count'?: string | undefined;
+                        'dc:creator'?: string | undefined;
+                        'prism:doi'?: string | undefined;
+                        link: readonly Readonly<{
+                            '@ref': Link_type;
+                            '@href': string;
+                        }>[];
+                        openaccess: boolean;
+                        'dc:identifier': string;
+                        'dc:title': string;
+                        'prism:coverDate': $mol_time_moment;
+                        'prism:publicationName': string;
+                        'prism:startingPage': number;
+                        'prism:url': string;
+                        'prism:volume': number;
+                    }>[] | readonly Readonly<{
+                        error: string;
+                    }>[];
+                }>;
             };
         };
-        Value: ReturnType<Value>;
+        Value: Readonly<{
+            'search-results': Readonly<{
+                'opensearch:totalResults': number;
+                'opensearch:startIndex': number;
+                'opensearch:itemsPerPage': number;
+                entry: readonly Readonly<{
+                    'citedby-count'?: string | undefined;
+                    'dc:creator'?: string | undefined;
+                    'prism:doi'?: string | undefined;
+                    link: readonly Readonly<{
+                        '@ref': Link_type;
+                        '@href': string;
+                    }>[];
+                    openaccess: boolean;
+                    'dc:identifier': string;
+                    'dc:title': string;
+                    'prism:coverDate': $mol_time_moment;
+                    'prism:publicationName': string;
+                    'prism:startingPage': number;
+                    'prism:url': string;
+                    'prism:volume': number;
+                }>[] | readonly Readonly<{
+                    error: string;
+                }>[];
+            }>;
+        }>;
     };
     export function $hyoo_science_elsevier_search(this: $, service: string, query: string, sort: string): {
         total: number;
