@@ -13,7 +13,8 @@ namespace $ {
 	export let $hyoo_science_crossref_person = $mol_data_record({
 		'ORCID': $mol_data_optional( $mol_data_string ),
 		'given': $mol_data_optional( $mol_data_string ),
-		'family': $mol_data_string,
+		'family': $mol_data_optional( $mol_data_string ),
+		'name': $mol_data_optional( $mol_data_string ),
 	})
 
 	export let $hyoo_science_crossref_entry = $mol_data_record({
@@ -115,7 +116,7 @@ namespace $ {
 			link: entry.URL,
 			title: html2text( entry.title?.[0] ?? '' ),
 			title_sub: html2text( entry.subtitle?.[0] ?? '' ),
-			authors: entry.author?.map( person => `${ person.given ?? '' } ${ person.family }` ) ?? [],
+			authors: entry.author?.map( person => person.name || `${ person.given ?? '' } ${ person.family ?? '' }` ) ?? [],
 			journal: html2text( entry["container-title"]?.[0] ?? '' ),
 			abstract: html2text( entry.abstract ?? '' ),
 			rank: entry["is-referenced-by-count"],
