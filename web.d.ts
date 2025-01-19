@@ -3247,11 +3247,13 @@ declare namespace $ {
     let $hyoo_science_crossref_person: ((val: {
         ORCID?: string | undefined;
         given?: string | undefined;
-        family: string;
+        family?: string | undefined;
+        name?: string | undefined;
     }) => Readonly<{
         ORCID?: string | undefined;
         given?: string | undefined;
-        family: string;
+        family?: string | undefined;
+        name?: string | undefined;
     }>) & {
         config: {
             ORCID: ((val: string | undefined) => string | undefined) & {
@@ -3268,12 +3270,26 @@ declare namespace $ {
                 };
                 Value: string | undefined;
             };
-            family: (val: string) => string;
+            family: ((val: string | undefined) => string | undefined) & {
+                config: {
+                    sub: (val: string) => string;
+                    fallback: (() => string) | undefined;
+                };
+                Value: string | undefined;
+            };
+            name: ((val: string | undefined) => string | undefined) & {
+                config: {
+                    sub: (val: string) => string;
+                    fallback: (() => string) | undefined;
+                };
+                Value: string | undefined;
+            };
         };
         Value: Readonly<{
             ORCID?: string | undefined;
             given?: string | undefined;
-            family: string;
+            family?: string | undefined;
+            name?: string | undefined;
         }>;
     };
     let $hyoo_science_crossref_entry: ((val: {
@@ -3287,7 +3303,8 @@ declare namespace $ {
         author?: readonly {
             ORCID?: string | undefined;
             given?: string | undefined;
-            family: string;
+            family?: string | undefined;
+            name?: string | undefined;
         }[] | undefined;
         'published-print'?: {
             'date-time'?: string | undefined;
@@ -3319,7 +3336,8 @@ declare namespace $ {
         author?: readonly Readonly<{
             ORCID?: string | undefined;
             given?: string | undefined;
-            family: string;
+            family?: string | undefined;
+            name?: string | undefined;
         }>[] | undefined;
         'published-print'?: Readonly<{
             'date-time'?: string | undefined;
@@ -3435,30 +3453,36 @@ declare namespace $ {
             author: ((val: readonly {
                 ORCID?: string | undefined;
                 given?: string | undefined;
-                family: string;
+                family?: string | undefined;
+                name?: string | undefined;
             }[] | undefined) => readonly Readonly<{
                 ORCID?: string | undefined;
                 given?: string | undefined;
-                family: string;
+                family?: string | undefined;
+                name?: string | undefined;
             }>[] | undefined) & {
                 config: {
                     sub: ((val: readonly {
                         ORCID?: string | undefined;
                         given?: string | undefined;
-                        family: string;
+                        family?: string | undefined;
+                        name?: string | undefined;
                     }[]) => readonly Readonly<{
                         ORCID?: string | undefined;
                         given?: string | undefined;
-                        family: string;
+                        family?: string | undefined;
+                        name?: string | undefined;
                     }>[]) & {
                         config: ((val: {
                             ORCID?: string | undefined;
                             given?: string | undefined;
-                            family: string;
+                            family?: string | undefined;
+                            name?: string | undefined;
                         }) => Readonly<{
                             ORCID?: string | undefined;
                             given?: string | undefined;
-                            family: string;
+                            family?: string | undefined;
+                            name?: string | undefined;
                         }>) & {
                             config: {
                                 ORCID: ((val: string | undefined) => string | undefined) & {
@@ -3475,30 +3499,47 @@ declare namespace $ {
                                     };
                                     Value: string | undefined;
                                 };
-                                family: (val: string) => string;
+                                family: ((val: string | undefined) => string | undefined) & {
+                                    config: {
+                                        sub: (val: string) => string;
+                                        fallback: (() => string) | undefined;
+                                    };
+                                    Value: string | undefined;
+                                };
+                                name: ((val: string | undefined) => string | undefined) & {
+                                    config: {
+                                        sub: (val: string) => string;
+                                        fallback: (() => string) | undefined;
+                                    };
+                                    Value: string | undefined;
+                                };
                             };
                             Value: Readonly<{
                                 ORCID?: string | undefined;
                                 given?: string | undefined;
-                                family: string;
+                                family?: string | undefined;
+                                name?: string | undefined;
                             }>;
                         };
                         Value: readonly Readonly<{
                             ORCID?: string | undefined;
                             given?: string | undefined;
-                            family: string;
+                            family?: string | undefined;
+                            name?: string | undefined;
                         }>[];
                     };
                     fallback: (() => readonly Readonly<{
                         ORCID?: string | undefined;
                         given?: string | undefined;
-                        family: string;
+                        family?: string | undefined;
+                        name?: string | undefined;
                     }>[]) | undefined;
                 };
                 Value: readonly Readonly<{
                     ORCID?: string | undefined;
                     given?: string | undefined;
-                    family: string;
+                    family?: string | undefined;
+                    name?: string | undefined;
                 }>[] | undefined;
             };
             published: ((val: {
@@ -3647,7 +3688,8 @@ declare namespace $ {
             author?: readonly Readonly<{
                 ORCID?: string | undefined;
                 given?: string | undefined;
-                family: string;
+                family?: string | undefined;
+                name?: string | undefined;
             }>[] | undefined;
             'published-print'?: Readonly<{
                 'date-time'?: string | undefined;
@@ -3684,7 +3726,8 @@ declare namespace $ {
                 author?: readonly {
                     ORCID?: string | undefined;
                     given?: string | undefined;
-                    family: string;
+                    family?: string | undefined;
+                    name?: string | undefined;
                 }[] | undefined;
                 'published-print'?: {
                     'date-time'?: string | undefined;
@@ -3721,7 +3764,8 @@ declare namespace $ {
                 author?: readonly Readonly<{
                     ORCID?: string | undefined;
                     given?: string | undefined;
-                    family: string;
+                    family?: string | undefined;
+                    name?: string | undefined;
                 }>[] | undefined;
                 'published-print'?: Readonly<{
                     'date-time'?: string | undefined;
@@ -3759,7 +3803,8 @@ declare namespace $ {
                     author?: readonly {
                         ORCID?: string | undefined;
                         given?: string | undefined;
-                        family: string;
+                        family?: string | undefined;
+                        name?: string | undefined;
                     }[] | undefined;
                     'published-print'?: {
                         'date-time'?: string | undefined;
@@ -3794,7 +3839,8 @@ declare namespace $ {
                     author?: readonly Readonly<{
                         ORCID?: string | undefined;
                         given?: string | undefined;
-                        family: string;
+                        family?: string | undefined;
+                        name?: string | undefined;
                     }>[] | undefined;
                     'published-print'?: Readonly<{
                         'date-time'?: string | undefined;
@@ -3830,7 +3876,8 @@ declare namespace $ {
                         author?: readonly {
                             ORCID?: string | undefined;
                             given?: string | undefined;
-                            family: string;
+                            family?: string | undefined;
+                            name?: string | undefined;
                         }[] | undefined;
                         'published-print'?: {
                             'date-time'?: string | undefined;
@@ -3862,7 +3909,8 @@ declare namespace $ {
                         author?: readonly Readonly<{
                             ORCID?: string | undefined;
                             given?: string | undefined;
-                            family: string;
+                            family?: string | undefined;
+                            name?: string | undefined;
                         }>[] | undefined;
                         'published-print'?: Readonly<{
                             'date-time'?: string | undefined;
@@ -3895,7 +3943,8 @@ declare namespace $ {
                             author?: readonly {
                                 ORCID?: string | undefined;
                                 given?: string | undefined;
-                                family: string;
+                                family?: string | undefined;
+                                name?: string | undefined;
                             }[] | undefined;
                             'published-print'?: {
                                 'date-time'?: string | undefined;
@@ -3927,7 +3976,8 @@ declare namespace $ {
                             author?: readonly Readonly<{
                                 ORCID?: string | undefined;
                                 given?: string | undefined;
-                                family: string;
+                                family?: string | undefined;
+                                name?: string | undefined;
                             }>[] | undefined;
                             'published-print'?: Readonly<{
                                 'date-time'?: string | undefined;
@@ -4043,30 +4093,36 @@ declare namespace $ {
                                 author: ((val: readonly {
                                     ORCID?: string | undefined;
                                     given?: string | undefined;
-                                    family: string;
+                                    family?: string | undefined;
+                                    name?: string | undefined;
                                 }[] | undefined) => readonly Readonly<{
                                     ORCID?: string | undefined;
                                     given?: string | undefined;
-                                    family: string;
+                                    family?: string | undefined;
+                                    name?: string | undefined;
                                 }>[] | undefined) & {
                                     config: {
                                         sub: ((val: readonly {
                                             ORCID?: string | undefined;
                                             given?: string | undefined;
-                                            family: string;
+                                            family?: string | undefined;
+                                            name?: string | undefined;
                                         }[]) => readonly Readonly<{
                                             ORCID?: string | undefined;
                                             given?: string | undefined;
-                                            family: string;
+                                            family?: string | undefined;
+                                            name?: string | undefined;
                                         }>[]) & {
                                             config: ((val: {
                                                 ORCID?: string | undefined;
                                                 given?: string | undefined;
-                                                family: string;
+                                                family?: string | undefined;
+                                                name?: string | undefined;
                                             }) => Readonly<{
                                                 ORCID?: string | undefined;
                                                 given?: string | undefined;
-                                                family: string;
+                                                family?: string | undefined;
+                                                name?: string | undefined;
                                             }>) & {
                                                 config: {
                                                     ORCID: ((val: string | undefined) => string | undefined) & {
@@ -4083,30 +4139,47 @@ declare namespace $ {
                                                         };
                                                         Value: string | undefined;
                                                     };
-                                                    family: (val: string) => string;
+                                                    family: ((val: string | undefined) => string | undefined) & {
+                                                        config: {
+                                                            sub: (val: string) => string;
+                                                            fallback: (() => string) | undefined;
+                                                        };
+                                                        Value: string | undefined;
+                                                    };
+                                                    name: ((val: string | undefined) => string | undefined) & {
+                                                        config: {
+                                                            sub: (val: string) => string;
+                                                            fallback: (() => string) | undefined;
+                                                        };
+                                                        Value: string | undefined;
+                                                    };
                                                 };
                                                 Value: Readonly<{
                                                     ORCID?: string | undefined;
                                                     given?: string | undefined;
-                                                    family: string;
+                                                    family?: string | undefined;
+                                                    name?: string | undefined;
                                                 }>;
                                             };
                                             Value: readonly Readonly<{
                                                 ORCID?: string | undefined;
                                                 given?: string | undefined;
-                                                family: string;
+                                                family?: string | undefined;
+                                                name?: string | undefined;
                                             }>[];
                                         };
                                         fallback: (() => readonly Readonly<{
                                             ORCID?: string | undefined;
                                             given?: string | undefined;
-                                            family: string;
+                                            family?: string | undefined;
+                                            name?: string | undefined;
                                         }>[]) | undefined;
                                     };
                                     Value: readonly Readonly<{
                                         ORCID?: string | undefined;
                                         given?: string | undefined;
-                                        family: string;
+                                        family?: string | undefined;
+                                        name?: string | undefined;
                                     }>[] | undefined;
                                 };
                                 published: ((val: {
@@ -4255,7 +4328,8 @@ declare namespace $ {
                                 author?: readonly Readonly<{
                                     ORCID?: string | undefined;
                                     given?: string | undefined;
-                                    family: string;
+                                    family?: string | undefined;
+                                    name?: string | undefined;
                                 }>[] | undefined;
                                 'published-print'?: Readonly<{
                                     'date-time'?: string | undefined;
@@ -4289,7 +4363,8 @@ declare namespace $ {
                             author?: readonly Readonly<{
                                 ORCID?: string | undefined;
                                 given?: string | undefined;
-                                family: string;
+                                family?: string | undefined;
+                                name?: string | undefined;
                             }>[] | undefined;
                             'published-print'?: Readonly<{
                                 'date-time'?: string | undefined;
@@ -4326,7 +4401,8 @@ declare namespace $ {
                         author?: readonly Readonly<{
                             ORCID?: string | undefined;
                             given?: string | undefined;
-                            family: string;
+                            family?: string | undefined;
+                            name?: string | undefined;
                         }>[] | undefined;
                         'published-print'?: Readonly<{
                             'date-time'?: string | undefined;
@@ -4365,7 +4441,8 @@ declare namespace $ {
                     author?: readonly Readonly<{
                         ORCID?: string | undefined;
                         given?: string | undefined;
-                        family: string;
+                        family?: string | undefined;
+                        name?: string | undefined;
                     }>[] | undefined;
                     'published-print'?: Readonly<{
                         'date-time'?: string | undefined;
@@ -4402,7 +4479,8 @@ declare namespace $ {
             author?: readonly {
                 ORCID?: string | undefined;
                 given?: string | undefined;
-                family: string;
+                family?: string | undefined;
+                name?: string | undefined;
             }[] | undefined;
             'published-print'?: {
                 'date-time'?: string | undefined;
@@ -4436,7 +4514,8 @@ declare namespace $ {
             author?: readonly Readonly<{
                 ORCID?: string | undefined;
                 given?: string | undefined;
-                family: string;
+                family?: string | undefined;
+                name?: string | undefined;
             }>[] | undefined;
             'published-print'?: Readonly<{
                 'date-time'?: string | undefined;
@@ -4471,7 +4550,8 @@ declare namespace $ {
                 author?: readonly {
                     ORCID?: string | undefined;
                     given?: string | undefined;
-                    family: string;
+                    family?: string | undefined;
+                    name?: string | undefined;
                 }[] | undefined;
                 'published-print'?: {
                     'date-time'?: string | undefined;
@@ -4503,7 +4583,8 @@ declare namespace $ {
                 author?: readonly Readonly<{
                     ORCID?: string | undefined;
                     given?: string | undefined;
-                    family: string;
+                    family?: string | undefined;
+                    name?: string | undefined;
                 }>[] | undefined;
                 'published-print'?: Readonly<{
                     'date-time'?: string | undefined;
@@ -4619,30 +4700,36 @@ declare namespace $ {
                     author: ((val: readonly {
                         ORCID?: string | undefined;
                         given?: string | undefined;
-                        family: string;
+                        family?: string | undefined;
+                        name?: string | undefined;
                     }[] | undefined) => readonly Readonly<{
                         ORCID?: string | undefined;
                         given?: string | undefined;
-                        family: string;
+                        family?: string | undefined;
+                        name?: string | undefined;
                     }>[] | undefined) & {
                         config: {
                             sub: ((val: readonly {
                                 ORCID?: string | undefined;
                                 given?: string | undefined;
-                                family: string;
+                                family?: string | undefined;
+                                name?: string | undefined;
                             }[]) => readonly Readonly<{
                                 ORCID?: string | undefined;
                                 given?: string | undefined;
-                                family: string;
+                                family?: string | undefined;
+                                name?: string | undefined;
                             }>[]) & {
                                 config: ((val: {
                                     ORCID?: string | undefined;
                                     given?: string | undefined;
-                                    family: string;
+                                    family?: string | undefined;
+                                    name?: string | undefined;
                                 }) => Readonly<{
                                     ORCID?: string | undefined;
                                     given?: string | undefined;
-                                    family: string;
+                                    family?: string | undefined;
+                                    name?: string | undefined;
                                 }>) & {
                                     config: {
                                         ORCID: ((val: string | undefined) => string | undefined) & {
@@ -4659,30 +4746,47 @@ declare namespace $ {
                                             };
                                             Value: string | undefined;
                                         };
-                                        family: (val: string) => string;
+                                        family: ((val: string | undefined) => string | undefined) & {
+                                            config: {
+                                                sub: (val: string) => string;
+                                                fallback: (() => string) | undefined;
+                                            };
+                                            Value: string | undefined;
+                                        };
+                                        name: ((val: string | undefined) => string | undefined) & {
+                                            config: {
+                                                sub: (val: string) => string;
+                                                fallback: (() => string) | undefined;
+                                            };
+                                            Value: string | undefined;
+                                        };
                                     };
                                     Value: Readonly<{
                                         ORCID?: string | undefined;
                                         given?: string | undefined;
-                                        family: string;
+                                        family?: string | undefined;
+                                        name?: string | undefined;
                                     }>;
                                 };
                                 Value: readonly Readonly<{
                                     ORCID?: string | undefined;
                                     given?: string | undefined;
-                                    family: string;
+                                    family?: string | undefined;
+                                    name?: string | undefined;
                                 }>[];
                             };
                             fallback: (() => readonly Readonly<{
                                 ORCID?: string | undefined;
                                 given?: string | undefined;
-                                family: string;
+                                family?: string | undefined;
+                                name?: string | undefined;
                             }>[]) | undefined;
                         };
                         Value: readonly Readonly<{
                             ORCID?: string | undefined;
                             given?: string | undefined;
-                            family: string;
+                            family?: string | undefined;
+                            name?: string | undefined;
                         }>[] | undefined;
                     };
                     published: ((val: {
@@ -4831,7 +4935,8 @@ declare namespace $ {
                     author?: readonly Readonly<{
                         ORCID?: string | undefined;
                         given?: string | undefined;
-                        family: string;
+                        family?: string | undefined;
+                        name?: string | undefined;
                     }>[] | undefined;
                     'published-print'?: Readonly<{
                         'date-time'?: string | undefined;
@@ -4867,7 +4972,8 @@ declare namespace $ {
                 author?: readonly Readonly<{
                     ORCID?: string | undefined;
                     given?: string | undefined;
-                    family: string;
+                    family?: string | undefined;
+                    name?: string | undefined;
                 }>[] | undefined;
                 'published-print'?: Readonly<{
                     'date-time'?: string | undefined;
