@@ -2626,6 +2626,21 @@ var $;
 })($ || ($ = {}));
 
 ;
+"use strict";
+var $;
+(function ($) {
+    class $mol_plugin extends $mol_view {
+        dom_node_external(next) {
+            return next ?? $mol_owning_get(this).host.dom_node();
+        }
+        render() {
+            this.dom_node_actual();
+        }
+    }
+    $.$mol_plugin = $mol_plugin;
+})($ || ($ = {}));
+
+;
 	($.$mol_scroll) = class $mol_scroll extends ($.$mol_view) {
 		tabindex(){
 			return -1;
@@ -2932,107 +2947,62 @@ var $;
 })($ || ($ = {}));
 
 ;
-"use strict";
-
-;
-	($.$mol_page) = class $mol_page extends ($.$mol_view) {
-		tabindex(){
-			return -1;
-		}
-		Logo(){
-			return null;
-		}
-		title_content(){
-			return [(this.Logo()), (this.title())];
-		}
-		Title(){
-			const obj = new this.$.$mol_view();
-			(obj.dom_name) = () => ("h1");
-			(obj.sub) = () => ((this.title_content()));
-			return obj;
-		}
-		tools(){
+	($.$mol_book2) = class $mol_book2 extends ($.$mol_scroll) {
+		pages(){
 			return [];
 		}
-		Tools(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.tools()));
-			return obj;
-		}
-		head(){
-			return [(this.Title()), (this.Tools())];
-		}
-		Head(){
-			const obj = new this.$.$mol_view();
-			(obj.minimal_height) = () => (64);
-			(obj.dom_name) = () => ("header");
-			(obj.sub) = () => ((this.head()));
-			return obj;
-		}
-		body_scroll_top(next){
-			return (this.Body().scroll_top(next));
-		}
-		body(){
-			return [];
-		}
-		Body_content(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.body()));
-			return obj;
-		}
-		body_content(){
-			return [(this.Body_content())];
-		}
-		Body(){
-			const obj = new this.$.$mol_scroll();
-			(obj.sub) = () => ((this.body_content()));
-			return obj;
-		}
-		foot(){
-			return [];
-		}
-		Foot(){
-			const obj = new this.$.$mol_view();
-			(obj.dom_name) = () => ("footer");
-			(obj.sub) = () => ((this.foot()));
-			return obj;
-		}
-		dom_name(){
-			return "article";
-		}
-		attr(){
-			return {...(super.attr()), "tabIndex": (this.tabindex())};
+		menu_title(){
+			return "";
 		}
 		sub(){
-			return [
-				(this.Head()), 
-				(this.Body()), 
-				(this.Foot())
-			];
+			return (this.pages());
+		}
+		minimal_width(){
+			return 0;
+		}
+		Placeholder(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		Gap(id){
+			const obj = new this.$.$mol_view();
+			(obj.title) = () => ("");
+			return obj;
 		}
 	};
-	($mol_mem(($.$mol_page.prototype), "Title"));
-	($mol_mem(($.$mol_page.prototype), "Tools"));
-	($mol_mem(($.$mol_page.prototype), "Head"));
-	($mol_mem(($.$mol_page.prototype), "Body_content"));
-	($mol_mem(($.$mol_page.prototype), "Body"));
-	($mol_mem(($.$mol_page.prototype), "Foot"));
+	($mol_mem(($.$mol_book2.prototype), "Placeholder"));
+	($mol_mem_key(($.$mol_book2.prototype), "Gap"));
 
 
 ;
 "use strict";
 var $;
 (function ($) {
-    class $mol_plugin extends $mol_view {
-        dom_node_external(next) {
-            return next ?? $mol_owning_get(this).host.dom_node();
-        }
-        render() {
-            this.dom_node_actual();
-        }
-    }
-    $.$mol_plugin = $mol_plugin;
+    $.$mol_mem_cached = $mol_wire_probe;
 })($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_layer = $mol_style_prop('mol_layer', [
+        'hover',
+        'focus',
+        'speck',
+        'float',
+        'popup',
+    ]);
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/layer/layer.css", ":root {\n\t--mol_layer_hover: 1;\n\t--mol_layer_focus: 2;\n\t--mol_layer_speck: 3;\n\t--mol_layer_float: 4;\n\t--mol_layer_popup: 5;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
 
 ;
 "use strict";
@@ -3043,123 +3013,65 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        const { per, rem } = $mol_style_unit;
-        const { hsla, blur } = $mol_style_func;
-        $mol_style_define($mol_page, {
-            display: 'flex',
-            flex: {
-                basis: 'auto',
-                direction: 'column',
-            },
-            position: 'relative',
-            alignSelf: 'stretch',
-            maxWidth: per(100),
-            maxHeight: per(100),
-            boxSizing: 'border-box',
-            color: $mol_theme.text,
-            ':focus': {
-                outline: 'none',
-            },
-            Head: {
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'flex-end',
-                flex: 'none',
-                position: 'relative',
-                margin: 0,
-                minHeight: rem(4),
-                padding: $mol_gap.block,
-                background: {
-                    color: $mol_theme.card,
-                },
-                border: {
-                    radius: $mol_gap.round,
-                },
-                box: {
-                    shadow: [[0, `0.5rem`, `0.5rem`, `-0.5rem`, hsla(0, 0, 0, .25)]],
-                },
-                zIndex: 2,
-                '@media': {
-                    'print': {
-                        box: {
-                            shadow: [[0, `1px`, 0, 0, hsla(0, 0, 0, .25)]],
-                        },
-                    },
-                },
-            },
-            Title: {
-                minHeight: rem(2),
-                margin: 0,
-                padding: $mol_gap.text,
-                gap: $mol_gap.text,
-                wordBreak: 'normal',
-                textShadow: '0 0',
-                font: {
-                    size: 'inherit',
-                    weight: 'normal',
-                },
-                flex: {
-                    grow: 1,
-                    shrink: 1,
-                    basis: 'auto',
-                },
-            },
-            Tools: {
-                flex: {
-                    basis: 'auto',
-                    grow: 0,
-                    shrink: 1,
-                },
-                display: 'flex',
-                justifyContent: 'flex-end',
-                alignItems: 'flex-start',
-                flexWrap: 'wrap',
-                '@media': {
-                    'print': {
-                        display: 'none',
-                    },
-                },
-            },
-            Body: {
-                flex: {
-                    grow: 1000,
-                    shrink: 1,
-                    basis: per(100),
-                },
-            },
-            Body_content: {
-                padding: $mol_gap.block,
-                flex: {
-                    direction: 'column',
-                    shrink: 1,
-                    grow: 1,
-                },
-                justify: {
-                    self: 'stretch',
-                },
-            },
-            Foot: {
-                display: 'flex',
-                justifyContent: 'space-between',
-                flex: 'none',
-                margin: 0,
-                background: {
-                    color: $mol_theme.card,
-                },
-                border: {
-                    radius: $mol_gap.round,
-                },
-                box: {
-                    shadow: [[0, `-0.5rem`, `0.5rem`, `-0.5rem`, hsla(0, 0, 0, .25)]],
-                },
-                zIndex: 1,
-                padding: $mol_gap.block,
-                ':empty': {
-                    display: 'none',
-                },
-            },
-        });
+        class $mol_book2 extends $.$mol_book2 {
+            title() {
+                return this.pages().map(page => {
+                    try {
+                        return page?.title();
+                    }
+                    catch (error) {
+                        $mol_fail_log(error);
+                    }
+                }).reverse().filter(Boolean).join(' | ');
+            }
+            menu_title() {
+                return this.pages()[0]?.title() || this.title();
+            }
+            sub() {
+                const placeholder = this.Placeholder();
+                const next = [...this.pages(), placeholder];
+                const prev = $mol_mem_cached(() => this.sub()) ?? [];
+                for (let i = 1; i++;) {
+                    const p = prev[prev.length - i];
+                    const n = next[next.length - i];
+                    if (!n)
+                        break;
+                    if (p === n)
+                        continue;
+                    if (n === placeholder)
+                        continue;
+                    new this.$.$mol_after_tick(() => {
+                        const b = this.dom_node();
+                        const p = n.dom_node();
+                        b.scroll({
+                            left: p.offsetLeft + p.offsetWidth - b.offsetWidth,
+                            behavior: 'smooth',
+                        });
+                    });
+                    break;
+                }
+                return next;
+            }
+            bring() {
+                const pages = this.pages();
+                if (pages.length)
+                    pages[pages.length - 1].bring();
+                else
+                    super.bring();
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_book2.prototype, "sub", null);
+        $$.$mol_book2 = $mol_book2;
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/book2/book2.view.css", "[mol_book2] {\n\tdisplay: flex;\n\tflex-flow: row nowrap;\n\talign-items: stretch;\n\tflex: 1 1 auto;\n\talign-self: stretch;\n\tmargin: 0;\n\t/* box-shadow: 0 0 0 1px var(--mol_theme_line); */\n\t/* transform: translateZ(0); */\n\ttransition: none;\n\tscroll-snap-type: x mandatory;\n\t/* padding: 0 1px;\n\tscroll-padding: 0 1px;\n\tgap: 1px; */\n}\n\n[mol_book2] > * {\n/* \tflex: none; */\n\tscroll-snap-stop: always;\n\tscroll-snap-align: end;\n\tposition: relative;\n\tmin-height: 100%;\n\tmax-height: 100%;\n\tmax-width: 100%;\n\tflex-shrink: 0;\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_field);\n}\n\n[mol_book2] > *:not(:first-of-type):before,\n[mol_book2] > *:not(:last-of-type)::after {\n\tcontent: '';\n\tposition: absolute;\n\ttop: 1.5rem;\n\twidth: 3px;\n\theight: 1rem;\n\tbackground: linear-gradient(\n\t\tto bottom,\n\t\tvar(--mol_theme_focus) 0%,\n\t\tvar(--mol_theme_focus) 14%,\n\t\ttransparent 15%,\n\t\ttransparent 42%,\n\t\tvar(--mol_theme_focus) 43%,\n\t\tvar(--mol_theme_focus) 57%,\n\t\ttransparent 58%,\n\t\ttransparent 85%,\n\t\tvar(--mol_theme_focus) 86%,\n\t\tvar(--mol_theme_focus) 100%\n\t);\n\topacity: .5;\n\tz-index: var(--mol_layer_speck);\n}\n[mol_book2] > *:not(:first-of-type):before {\n\tleft: -1px;\n}\n[mol_book2] > *:not(:last-of-type)::after {\n\tright: -1px;\n}\n\n:where([mol_book2]) > * {\n\tbackground-color: var(--mol_theme_card);\n\t/* box-shadow: 0 0 0 1px var(--mol_theme_back); */\n}\n\n[mol_book2] > [mol_book2] {\n\tdisplay: contents;\n}\n\n[mol_book2] > *:first-child {\n\tscroll-snap-align: start;\n}\n\n[mol_book2] > [mol_view] {\n\ttransform: none; /* prevent content clipping */\n}\n\n[mol_book2_placeholder] {\n\tflex: 1 1 0;\n\tbackground: none;\n}\n\n[mol_book2_gap] {\n\tbackground: none;\n\tflex-grow: 1;\n\tscroll-snap-align: none;\n\tmargin-right: -1px;\n\tbox-shadow: none;\n}\n\n[mol_book2_gap]::before,\n[mol_book2_gap]::after {\n\tdisplay: none;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -3230,26 +3142,6 @@ var $;
 		}
 	};
 
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_layer = $mol_style_prop('mol_layer', [
-        'hover',
-        'focus',
-        'speck',
-        'float',
-        'popup',
-    ]);
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/layer/layer.css", ":root {\n\t--mol_layer_hover: 1;\n\t--mol_layer_focus: 2;\n\t--mol_layer_speck: 3;\n\t--mol_layer_float: 4;\n\t--mol_layer_popup: 5;\n}\n");
-})($ || ($ = {}));
 
 ;
 "use strict";
@@ -3696,13 +3588,6 @@ var $;
 var $;
 (function ($) {
     $.$mol_mem_persist = $mol_wire_solid;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_mem_cached = $mol_wire_probe;
 })($ || ($ = {}));
 
 ;
@@ -7200,6 +7085,128 @@ var $;
 "use strict";
 
 ;
+	($.$mol_icon_page_next) = class $mol_icon_page_next extends ($.$mol_icon) {
+		path(){
+			return "M20,3H5A2,2 0 0,0 3,5V11H7V9L11,12L7,15V13H3V19A2,2 0 0,0 5,21H20A2,2 0 0,0 22,19V5A2,2 0 0,0 20,3M17,17H13V15H17V17M20,13H13V11H20V13M20,9H13V7H20V9M3,13H0V11H3V13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_page_next_outline) = class $mol_icon_page_next_outline extends ($.$mol_icon) {
+		path(){
+			return "M22,3H5A2,2 0 0,0 3,5V9H5V5H22V19H5V15H3V19A2,2 0 0,0 5,21H22A2,2 0 0,0 24,19V5A2,2 0 0,0 22,3M7,15V13H0V11H7V9L11,12L7,15M20,13H13V11H20V13M20,9H13V7H20V9M17,17H13V15H17V17Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$hyoo_science_article) = class $hyoo_science_article extends ($.$mol_view) {
+		uri(){
+			return "";
+		}
+		open_icon(){
+			return "";
+		}
+		Open(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.open_icon())]);
+			return obj;
+		}
+		highlight(){
+			return "";
+		}
+		title(){
+			return "";
+		}
+		Title(){
+			const obj = new this.$.$mol_dimmer();
+			(obj.needle) = () => ((this.highlight()));
+			(obj.haystack) = () => ((this.title()));
+			return obj;
+		}
+		rank_view(){
+			return "";
+		}
+		Rank(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.rank_view())]);
+			return obj;
+		}
+		Link(){
+			const obj = new this.$.$mol_link();
+			(obj.uri) = () => ((this.uri()));
+			(obj.sub) = () => ([
+				(this.Open()), 
+				(this.Title()), 
+				(this.Rank())
+			]);
+			return obj;
+		}
+		journal_title(){
+			return "";
+		}
+		Journal(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.journal_title())]);
+			return obj;
+		}
+		date_view(){
+			return "";
+		}
+		Date(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.date_view())]);
+			return obj;
+		}
+		doi(){
+			return null;
+		}
+		Details_icon(){
+			const obj = new this.$.$mol_icon_page_next_outline();
+			return obj;
+		}
+		Details(){
+			const obj = new this.$.$mol_link();
+			(obj.arg) = () => ({"doi": (this.doi())});
+			(obj.sub) = () => ([(this.Details_icon())]);
+			return obj;
+		}
+		open(){
+			return false;
+		}
+		date(){
+			return null;
+		}
+		rank(){
+			return 0;
+		}
+		sub(){
+			return [
+				(this.Link()), 
+				(this.Journal()), 
+				(this.Date()), 
+				(this.Details())
+			];
+		}
+	};
+	($mol_mem(($.$hyoo_science_article.prototype), "Open"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Title"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Rank"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Link"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Journal"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Date"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Details_icon"));
+	($mol_mem(($.$hyoo_science_article.prototype), "Details"));
+
+
+;
 "use strict";
 var $;
 (function ($) {
@@ -7841,92 +7848,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_science_article) = class $hyoo_science_article extends ($.$mol_view) {
-		uri(){
-			return "";
-		}
-		open_icon(){
-			return "";
-		}
-		Open(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.open_icon())]);
-			return obj;
-		}
-		highlight(){
-			return "";
-		}
-		title(){
-			return "";
-		}
-		Title(){
-			const obj = new this.$.$mol_dimmer();
-			(obj.needle) = () => ((this.highlight()));
-			(obj.haystack) = () => ((this.title()));
-			return obj;
-		}
-		rank_view(){
-			return "";
-		}
-		Rank(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.rank_view())]);
-			return obj;
-		}
-		Link(){
-			const obj = new this.$.$mol_link();
-			(obj.uri) = () => ((this.uri()));
-			(obj.sub) = () => ([
-				(this.Open()), 
-				(this.Title()), 
-				(this.Rank())
-			]);
-			return obj;
-		}
-		journal_title(){
-			return "";
-		}
-		Journal(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.journal_title())]);
-			return obj;
-		}
-		date_view(){
-			return "";
-		}
-		Date(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.date_view())]);
-			return obj;
-		}
-		open(){
-			return false;
-		}
-		date(){
-			const obj = new this.$.$mol_time_moment();
-			return obj;
-		}
-		rank(){
-			return 0;
-		}
-		sub(){
-			return [
-				(this.Link()), 
-				(this.Journal()), 
-				(this.Date())
-			];
-		}
-	};
-	($mol_mem(($.$hyoo_science_article.prototype), "Open"));
-	($mol_mem(($.$hyoo_science_article.prototype), "Title"));
-	($mol_mem(($.$hyoo_science_article.prototype), "Rank"));
-	($mol_mem(($.$hyoo_science_article.prototype), "Link"));
-	($mol_mem(($.$hyoo_science_article.prototype), "Journal"));
-	($mol_mem(($.$hyoo_science_article.prototype), "Date"));
-	($mol_mem(($.$hyoo_science_article.prototype), "date"));
-
-
-;
 "use strict";
 
 ;
@@ -8029,14 +7950,88 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_theme_auto) = class $mol_theme_auto extends ($.$mol_plugin) {
-		theme(){
-			return "";
+	($.$mol_page) = class $mol_page extends ($.$mol_view) {
+		tabindex(){
+			return -1;
+		}
+		Logo(){
+			return null;
+		}
+		title_content(){
+			return [(this.Logo()), (this.title())];
+		}
+		Title(){
+			const obj = new this.$.$mol_view();
+			(obj.dom_name) = () => ("h1");
+			(obj.sub) = () => ((this.title_content()));
+			return obj;
+		}
+		tools(){
+			return [];
+		}
+		Tools(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.tools()));
+			return obj;
+		}
+		head(){
+			return [(this.Title()), (this.Tools())];
+		}
+		Head(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (64);
+			(obj.dom_name) = () => ("header");
+			(obj.sub) = () => ((this.head()));
+			return obj;
+		}
+		body_scroll_top(next){
+			return (this.Body().scroll_top(next));
+		}
+		body(){
+			return [];
+		}
+		Body_content(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.body()));
+			return obj;
+		}
+		body_content(){
+			return [(this.Body_content())];
+		}
+		Body(){
+			const obj = new this.$.$mol_scroll();
+			(obj.sub) = () => ((this.body_content()));
+			return obj;
+		}
+		foot(){
+			return [];
+		}
+		Foot(){
+			const obj = new this.$.$mol_view();
+			(obj.dom_name) = () => ("footer");
+			(obj.sub) = () => ((this.foot()));
+			return obj;
+		}
+		dom_name(){
+			return "article";
 		}
 		attr(){
-			return {"mol_theme": (this.theme())};
+			return {...(super.attr()), "tabIndex": (this.tabindex())};
+		}
+		sub(){
+			return [
+				(this.Head()), 
+				(this.Body()), 
+				(this.Foot())
+			];
 		}
 	};
+	($mol_mem(($.$mol_page.prototype), "Title"));
+	($mol_mem(($.$mol_page.prototype), "Tools"));
+	($mol_mem(($.$mol_page.prototype), "Head"));
+	($mol_mem(($.$mol_page.prototype), "Body_content"));
+	($mol_mem(($.$mol_page.prototype), "Body"));
+	($mol_mem(($.$mol_page.prototype), "Foot"));
 
 
 ;
@@ -8048,290 +8043,618 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $mol_theme_auto extends $.$mol_theme_auto {
-            theme() {
-                return this.$.$mol_lights() ? '$mol_theme_light' : '$mol_theme_dark';
-            }
-        }
-        $$.$mol_theme_auto = $mol_theme_auto;
+        const { per, rem } = $mol_style_unit;
+        const { hsla, blur } = $mol_style_func;
+        $mol_style_define($mol_page, {
+            display: 'flex',
+            flex: {
+                basis: 'auto',
+                direction: 'column',
+            },
+            position: 'relative',
+            alignSelf: 'stretch',
+            maxWidth: per(100),
+            maxHeight: per(100),
+            boxSizing: 'border-box',
+            color: $mol_theme.text,
+            ':focus': {
+                outline: 'none',
+            },
+            Head: {
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'flex-end',
+                flex: 'none',
+                position: 'relative',
+                margin: 0,
+                minHeight: rem(4),
+                padding: $mol_gap.block,
+                background: {
+                    color: $mol_theme.card,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                box: {
+                    shadow: [[0, `0.5rem`, `0.5rem`, `-0.5rem`, hsla(0, 0, 0, .25)]],
+                },
+                zIndex: 2,
+                '@media': {
+                    'print': {
+                        box: {
+                            shadow: [[0, `1px`, 0, 0, hsla(0, 0, 0, .25)]],
+                        },
+                    },
+                },
+            },
+            Title: {
+                minHeight: rem(2),
+                margin: 0,
+                padding: $mol_gap.text,
+                gap: $mol_gap.text,
+                wordBreak: 'normal',
+                textShadow: '0 0',
+                font: {
+                    size: 'inherit',
+                    weight: 'normal',
+                },
+                flex: {
+                    grow: 1,
+                    shrink: 1,
+                    basis: 'auto',
+                },
+            },
+            Tools: {
+                flex: {
+                    basis: 'auto',
+                    grow: 0,
+                    shrink: 1,
+                },
+                display: 'flex',
+                justifyContent: 'flex-end',
+                alignItems: 'flex-start',
+                flexWrap: 'wrap',
+                '@media': {
+                    'print': {
+                        display: 'none',
+                    },
+                },
+            },
+            Body: {
+                flex: {
+                    grow: 1000,
+                    shrink: 1,
+                    basis: per(100),
+                },
+            },
+            Body_content: {
+                padding: $mol_gap.block,
+                flex: {
+                    direction: 'column',
+                    shrink: 1,
+                    grow: 1,
+                },
+                justify: {
+                    self: 'stretch',
+                },
+            },
+            Foot: {
+                display: 'flex',
+                justifyContent: 'space-between',
+                flex: 'none',
+                margin: 0,
+                background: {
+                    color: $mol_theme.card,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                box: {
+                    shadow: [[0, `-0.5rem`, `0.5rem`, `-0.5rem`, hsla(0, 0, 0, .25)]],
+                },
+                zIndex: 1,
+                padding: $mol_gap.block,
+                ':empty': {
+                    display: 'none',
+                },
+            },
+        });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
 ;
-	($.$hyoo_science_app) = class $hyoo_science_app extends ($.$mol_page) {
-		title(){
-			return "Science Publications Searcher";
+"use strict";
+var $;
+(function ($) {
+    $.$mol_blob = ($node.buffer?.Blob ?? $mol_dom_context.Blob);
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_clipboard) = class $mol_icon_clipboard extends ($.$mol_icon) {
+		path(){
+			return "M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3";
 		}
-		query(){
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_clipboard_outline) = class $mol_icon_clipboard_outline extends ($.$mol_icon) {
+		path(){
+			return "M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_button_copy) = class $mol_button_copy extends ($.$mol_button_minor) {
+		text(){
+			return (this.title());
+		}
+		text_blob(next){
+			if(next !== undefined) return next;
+			const obj = new this.$.$mol_blob([(this.text())], {"type": "text/plain"});
+			return obj;
+		}
+		html(){
 			return "";
 		}
-		query_changed(next){
+		html_blob(next){
 			if(next !== undefined) return next;
-			return (this.query());
+			const obj = new this.$.$mol_blob([(this.html())], {"type": "text/html"});
+			return obj;
 		}
-		search(next){
+		Icon(){
+			const obj = new this.$.$mol_icon_clipboard_outline();
+			return obj;
+		}
+		title(){
+			return "";
+		}
+		blobs(){
+			return [(this.text_blob()), (this.html_blob())];
+		}
+		data(){
+			return {};
+		}
+		sub(){
+			return [(this.Icon()), (this.title())];
+		}
+	};
+	($mol_mem(($.$mol_button_copy.prototype), "text_blob"));
+	($mol_mem(($.$mol_button_copy.prototype), "html_blob"));
+	($mol_mem(($.$mol_button_copy.prototype), "Icon"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    const mapping = {
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        '&': '&amp;',
+    };
+    function $mol_html_encode(text) {
+        return text.replace(/[&<">]/gi, str => mapping[str]);
+    }
+    $.$mol_html_encode = $mol_html_encode;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_button_copy extends $.$mol_button_copy {
+            data() {
+                return Object.fromEntries(this.blobs().map(blob => [blob.type, blob]));
+            }
+            html() {
+                return $mol_html_encode(this.text());
+            }
+            attachments() {
+                return [new ClipboardItem(this.data())];
+            }
+            click(event) {
+                const cb = $mol_wire_sync(this.$.$mol_dom_context.navigator.clipboard);
+                cb.writeText?.(this.text());
+                cb.write?.(this.attachments());
+                if (cb.writeText === undefined && cb.write === undefined) {
+                    throw new Error("doesn't support copy to clipoard");
+                }
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_button_copy.prototype, "html", null);
+        __decorate([
+            $mol_mem
+        ], $mol_button_copy.prototype, "attachments", null);
+        $$.$mol_button_copy = $mol_button_copy;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_labeler) = class $mol_labeler extends ($.$mol_list) {
+		label(){
+			return [(this.title())];
+		}
+		Label(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (32);
+			(obj.sub) = () => ((this.label()));
+			return obj;
+		}
+		content(){
+			return [];
+		}
+		Content(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (24);
+			(obj.sub) = () => ((this.content()));
+			return obj;
+		}
+		rows(){
+			return [(this.Label()), (this.Content())];
+		}
+	};
+	($mol_mem(($.$mol_labeler.prototype), "Label"));
+	($mol_mem(($.$mol_labeler.prototype), "Content"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/labeler/labeler.view.css", "[mol_labeler] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tcursor: inherit;\n}\n\n[mol_labeler_label] {\n\tmin-height: 2rem;\n\tcolor: var(--mol_theme_shade);\n\tpadding: .5rem .75rem 0;\n\tgap: 0 var(--mol_gap_block);\n\tflex-wrap: wrap;\n}\n\n[mol_labeler_content] {\n\tdisplay: flex;\n\tpadding: var(--mol_gap_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_form) = class $mol_form extends ($.$mol_list) {
+		keydown(next){
 			if(next !== undefined) return next;
 			return null;
 		}
-		Query(){
-			const obj = new this.$.$mol_search();
-			(obj.hint) = () => ((this.title()));
-			(obj.query) = (next) => ((this.query_changed(next)));
-			(obj.submit) = (next) => ((this.search(next)));
-			return obj;
-		}
-		service(next){
-			if(next !== undefined) return next;
-			return "scopus";
-		}
-		Service(){
-			const obj = new this.$.$mol_select();
-			(obj.hint) = () => ("Indexing Service");
-			(obj.dictionary) = () => ({
-				"sciencedirect": "Science Direct", 
-				"scopus": "Scopus", 
-				"crossref": "CrossRef"
-			});
-			(obj.value) = (next) => ((this.service(next)));
-			return obj;
-		}
-		area(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		area_supported(){
-			return true;
-		}
-		Area(){
-			const obj = new this.$.$mol_select();
-			(obj.hint) = () => ("Science Area");
-			(obj.dictionary) = () => ({
-				"": "Any Area", 
-				"AGRI": "🌽 Agri & Biology", 
-				"ARTS": "🖼️ Arts & Humanities", 
-				"BIOC": "🧬 Biochemistry & Genetics", 
-				"BUSI": "💼 Business & Accounting", 
-				"CENG": "⚗️ Chemical Engineering", 
-				"CHEM": "🧪 Chemistry", 
-				"COMP": "🖥️ Computing", 
-				"DECI": "🔀 Decisions", 
-				"DENT": "🦷 Dentistry", 
-				"EART": "🌍 Earth and Planetary", 
-				"ECON": "💰 Economics & Finance", 
-				"ENER": "⚡ Energy", 
-				"ENGI": "🏗️ Engineering", 
-				"ENVI": "🌌 Environment", 
-				"HEAL": "💓 Health", 
-				"IMMU": "☣️ Immunology & Microbio", 
-				"MATE": "💎 Materials", 
-				"MATH": "➗ Math", 
-				"MEDI": "💉 Medicine", 
-				"NEUR": "🧠 Neurology", 
-				"NURS": "⚕️ Nursing", 
-				"PHAR": "💊 Pharma & Toxic", 
-				"PHYS": "🚀 Physics & Astronomy", 
-				"PSYC": "🥴 Psychology", 
-				"SOCI": "💬 Social", 
-				"VETE": "🐈 Veterinary", 
-				"MULT": "🤹 Multidiscipline"
-			});
-			(obj.value) = (next) => ((this.area(next)));
-			(obj.enabled) = () => ((this.area_supported()));
-			return obj;
-		}
-		Zone(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Service()), (this.Area())]);
-			return obj;
-		}
-		place(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		place_supported(){
-			return true;
-		}
-		Place(){
-			const obj = new this.$.$mol_select();
-			(obj.hint) = () => ("Text Place");
-			(obj.dictionary) = () => ({
-				"": "Anywhere", 
-				"TITLE": "Title", 
-				"TITLE-ABS-KEY": "Abstract"
-			});
-			(obj.value) = (next) => ((this.place(next)));
-			(obj.enabled) = () => ((this.place_supported()));
-			return obj;
-		}
-		Open_icon(){
-			const obj = new this.$.$mol_icon_lock_open_variant_outline();
-			return obj;
-		}
-		open(next){
-			if(next !== undefined) return next;
-			return true;
-		}
-		open_supported(){
-			return true;
-		}
-		Open(){
-			const obj = new this.$.$mol_check_icon();
-			(obj.hint) = () => ("Open Access");
-			(obj.Icon) = () => ((this.Open_icon()));
-			(obj.checked) = (next) => ((this.open(next)));
-			(obj.enabled) = () => ((this.open_supported()));
-			return obj;
-		}
-		sort(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		sort_supported(){
-			return true;
-		}
-		Sort(){
-			const obj = new this.$.$mol_select();
-			(obj.hint) = () => ("Sorting");
-			(obj.dictionary) = () => ({
-				"": "⬆ Match", 
-				"refs": "⬆ Refs", 
-				"date": "⬆ Date"
-			});
-			(obj.value) = (next) => ((this.sort(next)));
-			(obj.enabled) = () => ((this.sort_supported()));
-			return obj;
-		}
-		help(){
-			return "https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm";
-		}
-		Help_icon(){
-			const obj = new this.$.$mol_icon_hint();
-			return obj;
-		}
-		Help(){
-			const obj = new this.$.$mol_link();
-			(obj.hint) = () => ("Query Syntax");
-			(obj.uri) = () => ((this.help()));
-			(obj.sub) = () => ([(this.Help_icon())]);
-			return obj;
-		}
-		Lights(){
-			const obj = new this.$.$mol_lights_toggle();
-			return obj;
-		}
-		Source(){
-			const obj = new this.$.$mol_link_source();
-			(obj.uri) = () => ("https://github.com/hyoo-ru/science.hyoo.ru");
-			return obj;
-		}
-		found_open(id){
-			return false;
-		}
-		found_title(id){
-			return "";
-		}
-		found_link(id){
-			return "";
-		}
-		found_rank(id){
-			return 0;
-		}
-		found_date(id){
-			const obj = new this.$.$mol_time_moment();
-			return obj;
-		}
-		found_journal(id){
-			return "";
-		}
-		Found_row(id){
-			const obj = new this.$.$hyoo_science_article();
-			(obj.open) = () => ((this.found_open(id)));
-			(obj.highlight) = () => ((this.query()));
-			(obj.title) = () => ((this.found_title(id)));
-			(obj.uri) = () => ((this.found_link(id)));
-			(obj.rank) = () => ((this.found_rank(id)));
-			(obj.date) = () => ((this.found_date(id)));
-			(obj.journal_title) = () => ((this.found_journal(id)));
-			return obj;
-		}
-		found_rows(){
-			return [(this.Found_row("0"))];
-		}
-		Found_none(){
-			const obj = new this.$.$mol_chip();
-			(obj.title) = () => ("Not Found");
-			return obj;
-		}
-		Found_rows(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.found_rows()));
-			(obj.Empty) = () => ((this.Found_none()));
-			return obj;
-		}
-		request(){
-			return "";
-		}
-		Request(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => (["Request: ", (this.request())]);
-			return obj;
-		}
-		Theme(){
-			const obj = new this.$.$mol_theme_auto();
-			return obj;
-		}
-		Title(){
-			return (this.Query());
-		}
-		head(){
-			return [
-				(this.Zone()), 
-				(this.Title()), 
-				(this.Tools())
-			];
-		}
-		tools(){
-			return [
-				(this.Place()), 
-				(this.Open()), 
-				(this.Sort()), 
-				(this.Help()), 
-				(this.Lights()), 
-				(this.Source())
-			];
+		form_fields(){
+			return [];
 		}
 		body(){
-			return [(this.Found_rows()), (this.Request())];
+			return (this.form_fields());
 		}
-		plugins(){
-			return [(this.Theme())];
+		Body(){
+			const obj = new this.$.$mol_list();
+			(obj.sub) = () => ((this.body()));
+			return obj;
+		}
+		buttons(){
+			return [];
+		}
+		foot(){
+			return (this.buttons());
+		}
+		Foot(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ((this.foot()));
+			return obj;
+		}
+		submit_allowed(){
+			return true;
+		}
+		submit_blocked(){
+			return false;
+		}
+		event(){
+			return {...(super.event()), "keydown": (next) => (this.keydown(next))};
+		}
+		submit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		rows(){
+			return [(this.Body()), (this.Foot())];
 		}
 	};
-	($mol_mem(($.$hyoo_science_app.prototype), "query_changed"));
-	($mol_mem(($.$hyoo_science_app.prototype), "search"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Query"));
-	($mol_mem(($.$hyoo_science_app.prototype), "service"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Service"));
-	($mol_mem(($.$hyoo_science_app.prototype), "area"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Area"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Zone"));
-	($mol_mem(($.$hyoo_science_app.prototype), "place"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Place"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Open_icon"));
-	($mol_mem(($.$hyoo_science_app.prototype), "open"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Open"));
-	($mol_mem(($.$hyoo_science_app.prototype), "sort"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Sort"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Help_icon"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Help"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Lights"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Source"));
-	($mol_mem_key(($.$hyoo_science_app.prototype), "found_date"));
-	($mol_mem_key(($.$hyoo_science_app.prototype), "Found_row"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Found_none"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Found_rows"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Request"));
-	($mol_mem(($.$hyoo_science_app.prototype), "Theme"));
+	($mol_mem(($.$mol_form.prototype), "keydown"));
+	($mol_mem(($.$mol_form.prototype), "Body"));
+	($mol_mem(($.$mol_form.prototype), "Foot"));
+	($mol_mem(($.$mol_form.prototype), "submit"));
+
+
+;
+	($.$mol_form_field) = class $mol_form_field extends ($.$mol_labeler) {
+		name(){
+			return "";
+		}
+		bid(){
+			return "";
+		}
+		Bid(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.bid())]);
+			return obj;
+		}
+		control(){
+			return null;
+		}
+		bids(){
+			return [];
+		}
+		label(){
+			return [(this.name()), (this.Bid())];
+		}
+		content(){
+			return [(this.control())];
+		}
+	};
+	($mol_mem(($.$mol_form_field.prototype), "Bid"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_form_field extends $.$mol_form_field {
+            bid() {
+                return this.bids().filter(Boolean)[0] ?? '';
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_form_field.prototype, "bid", null);
+        $$.$mol_form_field = $mol_form_field;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/form/field/field.view.css", "[mol_form_field] {\n\talign-items: stretch;\n}\n\n[mol_form_field_bid] {\n\tcolor: var(--mol_theme_focus);\n\tdisplay: inline-block;\n\ttext-shadow: 0 0;\n}\n\n[mol_form_field_content] {\n\tborder-radius: var(--mol_gap_round);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_form extends $.$mol_form {
+            form_fields() {
+                return [...this.view_find(view => view instanceof $mol_form_field)]
+                    .map(path => path[path.length - 1]);
+            }
+            submit_allowed() {
+                return this.form_fields().every(field => !field.bid());
+            }
+            submit_blocked() {
+                return !this.submit_allowed();
+            }
+            keydown(next) {
+                if (next.ctrlKey && next.keyCode === $mol_keyboard_code.enter && !this.submit_blocked())
+                    this.submit(event);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_form.prototype, "form_fields", null);
+        __decorate([
+            $mol_mem
+        ], $mol_form.prototype, "submit_allowed", null);
+        $$.$mol_form = $mol_form;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/form/form.view.css", "[mol_form] {\r\n\tgap: var(--mol_gap_block);\r\n}\r\n\r\n[mol_form_body] {\r\n\tgap: var(--mol_gap_block);\r\n}");
+})($ || ($ = {}));
+
+;
+	($.$mol_form_group) = class $mol_form_group extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/form/group/group.view.css", "[mol_form_group] {\n\tflex-wrap: wrap;\n\tgap: var(--mol_gap_block);\n}\n\n[mol_form_group] > * {\n\tflex: 1 1 18rem;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$hyoo_science_details) = class $hyoo_science_details extends ($.$mol_page) {
+		cite(){
+			return "";
+		}
+		Cite(){
+			const obj = new this.$.$mol_button_copy();
+			(obj.hint) = () => ("Copy cite");
+			(obj.text) = () => ((this.cite()));
+			return obj;
+		}
+		Close_icon(){
+			const obj = new this.$.$mol_icon_close();
+			return obj;
+		}
+		Close(){
+			const obj = new this.$.$mol_link();
+			(obj.arg) = () => ({"doi": null});
+			(obj.sub) = () => ([(this.Close_icon())]);
+			return obj;
+		}
+		link(){
+			return "";
+		}
+		doi(){
+			return "";
+		}
+		Doi(){
+			const obj = new this.$.$mol_link();
+			(obj.uri) = () => ((this.link()));
+			(obj.title) = () => ((this.doi()));
+			return obj;
+		}
+		Doi_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("DOI");
+			(obj.Content) = () => ((this.Doi()));
+			return obj;
+		}
+		rank_view(){
+			return "「0」";
+		}
+		Rank(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.rank_view()));
+			return obj;
+		}
+		Rank_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Rank");
+			(obj.Content) = () => ((this.Rank()));
+			return obj;
+		}
+		Main(){
+			const obj = new this.$.$mol_form_group();
+			(obj.sub) = () => ([(this.Doi_labeler()), (this.Rank_labeler())]);
+			return obj;
+		}
+		journal(){
+			return "";
+		}
+		Journal(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.journal()));
+			return obj;
+		}
+		Journal_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Journal");
+			(obj.Content) = () => ((this.Journal()));
+			return obj;
+		}
+		published(){
+			return "❓";
+		}
+		Published(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.published()));
+			return obj;
+		}
+		Published_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Published");
+			(obj.Content) = () => ((this.Published()));
+			return obj;
+		}
+		Publication(){
+			const obj = new this.$.$mol_form_group();
+			(obj.sub) = () => ([(this.Journal_labeler()), (this.Published_labeler())]);
+			return obj;
+		}
+		abstract(){
+			return "❓";
+		}
+		Abstract(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.abstract()));
+			return obj;
+		}
+		Abstract_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Abstract");
+			(obj.Content) = () => ((this.Abstract()));
+			return obj;
+		}
+		authors(){
+			return "";
+		}
+		Authors(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.authors()));
+			return obj;
+		}
+		Authors_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ("Authors");
+			(obj.Content) = () => ((this.Authors()));
+			return obj;
+		}
+		Content(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([
+				(this.Main()), 
+				(this.Publication()), 
+				(this.Abstract_labeler()), 
+				(this.Authors_labeler())
+			]);
+			return obj;
+		}
+		tools(){
+			return [(this.Cite()), (this.Close())];
+		}
+		body(){
+			return [(this.Content())];
+		}
+	};
+	($mol_mem(($.$hyoo_science_details.prototype), "Cite"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Close_icon"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Close"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Doi"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Doi_labeler"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Rank"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Rank_labeler"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Main"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Journal"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Journal_labeler"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Published"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Published_labeler"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Publication"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Abstract"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Abstract_labeler"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Authors"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Authors_labeler"));
+	($mol_mem(($.$hyoo_science_details.prototype), "Content"));
 
 
 ;
@@ -8526,7 +8849,7 @@ var $;
     });
     $.$hyoo_science_crossref_person = $mol_data_record({
         'ORCID': $mol_data_optional($mol_data_string),
-        'given': $mol_data_string,
+        'given': $mol_data_optional($mol_data_string),
         'family': $mol_data_string,
     });
     $.$hyoo_science_crossref_entry = $mol_data_record({
@@ -8539,16 +8862,33 @@ var $;
         'title': $mol_data_array($mol_data_string),
         'subtitle': $mol_data_optional($mol_data_array($mol_data_string)),
         'reference': $mol_data_optional($mol_data_array($.$hyoo_science_crossref_ref)),
+        'author': $mol_data_optional($mol_data_array($.$hyoo_science_crossref_person)),
         'published': $.$hyoo_science_crossref_date,
         'published-print': $mol_data_optional($.$hyoo_science_crossref_date),
         'published-online': $mol_data_optional($.$hyoo_science_crossref_date),
+        'page': $mol_data_optional($mol_data_string),
+        'volume': $mol_data_optional($mol_data_string),
     });
-    $.$hyoo_science_crossref_response = $mol_data_record({
+    $.$hyoo_science_crossref_search_response = $mol_data_record({
         'message': $mol_data_record({
             'total-results': $mol_data_integer,
             'items': $mol_data_array($.$hyoo_science_crossref_entry),
         }),
     });
+    $.$hyoo_science_crossref_details_response = $mol_data_record({
+        'message': $.$hyoo_science_crossref_entry,
+    });
+    function html2text(html) {
+        return $mol_html_decode(html.replace(/<.*?>/g, ' '));
+    }
+    function date2moment(date) {
+        if (!date)
+            return null;
+        return new $mol_time_moment({
+            year: date["date-parts"][0][0],
+            month: date["date-parts"][0][1],
+        });
+    }
     function $hyoo_science_crossref_search(query, open, sort) {
         const endpoint = `https://api.crossref.org/types/journal-article/works`;
         const uri = new URL('?' + new URLSearchParams({
@@ -8572,26 +8912,446 @@ var $;
                 'is-referenced-by-count',
             ].join(','),
         }), endpoint);
-        const resp = $.$hyoo_science_crossref_response(this.$mol_fetch.json(uri.toString()))["message"];
+        const resp = $.$hyoo_science_crossref_search_response(this.$mol_fetch.json(uri.toString()))["message"];
         return {
             total: resp["total-results"],
             article: resp.items
                 .map(entry => ({
                 link: entry.URL,
                 doi: entry.DOI,
-                title: $mol_html_decode((entry.title[0] + (entry.subtitle ? `: ${entry.subtitle[0]}` : '')).replace(/<.*?>/g, ' ')),
-                journal: $mol_html_decode(entry["container-title"][0]),
-                date: new $mol_time_moment({
-                    year: entry["published"]["date-parts"][0][0],
-                    month: entry["published"]["date-parts"][0][1],
-                }),
+                title: html2text(entry.title?.[0] ?? '') + (entry.subtitle ? `: ${html2text(entry.subtitle[0])}` : ''),
+                journal: html2text(entry["container-title"][0]),
+                date: date2moment(entry["published"]),
                 open: Boolean(entry["published-online"]),
                 rank: entry["is-referenced-by-count"],
             })),
         };
     }
     $.$hyoo_science_crossref_search = $hyoo_science_crossref_search;
+    function $hyoo_science_crossref_details(doi) {
+        const entry = $.$hyoo_science_crossref_details_response(this.$$.$mol_fetch.json(`https://api.crossref.org/works/${doi}`)).message;
+        return {
+            doi: entry.DOI,
+            link: entry.URL,
+            title: html2text(entry.title?.[0] ?? ''),
+            title_sub: html2text(entry.subtitle?.[0] ?? ''),
+            authors: entry.author?.map(person => `${person.given ?? ''} ${person.family}`) ?? [],
+            journal: html2text(entry["container-title"]?.[0] ?? ''),
+            abstract: html2text(entry.abstract ?? ''),
+            rank: entry["is-referenced-by-count"],
+            published: date2moment(entry['published']),
+            print_location: `vol. ${entry['volume']}, pp. ${entry['page']}`,
+        };
+    }
+    $.$hyoo_science_crossref_details = $hyoo_science_crossref_details;
 })($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_science_details extends $.$hyoo_science_details {
+            data() {
+                return this.$.$hyoo_science_crossref_details(this.doi());
+            }
+            title() {
+                const { title, title_sub } = this.data();
+                return title + (title_sub ? ': ' + title_sub : '');
+            }
+            rank_view() {
+                return `「${this.data().rank}」`;
+            }
+            journal() {
+                return this.data().journal;
+            }
+            authors() {
+                return this.data().authors.join(', ');
+            }
+            abstract() {
+                return this.data().abstract || super.abstract();
+            }
+            link() {
+                return this.data().link;
+            }
+            published() {
+                return this.data().published?.toString() ?? super.published();
+            }
+            print_location() {
+                return this.data().print_location;
+            }
+            cite() {
+                return `${this.authors()}, "${this.title()}", ${this.journal()}, ${this.print_location()}, ${this.link()}`;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $hyoo_science_details.prototype, "data", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_science_details.prototype, "title", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_science_details.prototype, "cite", null);
+        $$.$hyoo_science_details = $hyoo_science_details;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_science_details, {
+            Content: {
+                gap: $mol_gap.block,
+            },
+            Authors: {
+                padding: $mol_gap.text,
+            },
+            Journal: {
+                padding: $mol_gap.text,
+            },
+            Abstract: {
+                padding: $mol_gap.text,
+            },
+            Rank: {
+                padding: $mol_gap.text,
+            },
+            Published: {
+                padding: $mol_gap.text,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_theme_auto) = class $mol_theme_auto extends ($.$mol_plugin) {
+		theme(){
+			return "";
+		}
+		attr(){
+			return {"mol_theme": (this.theme())};
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_theme_auto extends $.$mol_theme_auto {
+            theme() {
+                return this.$.$mol_lights() ? '$mol_theme_light' : '$mol_theme_dark';
+            }
+        }
+        $$.$mol_theme_auto = $mol_theme_auto;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$hyoo_science_app) = class $hyoo_science_app extends ($.$mol_book2) {
+		Search_tools(){
+			return (this.Search().Tools());
+		}
+		title(){
+			return "Science Publications Searcher";
+		}
+		query(){
+			return "";
+		}
+		query_changed(next){
+			if(next !== undefined) return next;
+			return (this.query());
+		}
+		search(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Query(){
+			const obj = new this.$.$mol_search();
+			(obj.hint) = () => ((this.title()));
+			(obj.query) = (next) => ((this.query_changed(next)));
+			(obj.submit) = (next) => ((this.search(next)));
+			return obj;
+		}
+		service(next){
+			if(next !== undefined) return next;
+			return "scopus";
+		}
+		Service(){
+			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ("Indexing Service");
+			(obj.dictionary) = () => ({
+				"sciencedirect": "Science Direct", 
+				"scopus": "Scopus", 
+				"crossref": "CrossRef"
+			});
+			(obj.value) = (next) => ((this.service(next)));
+			return obj;
+		}
+		area(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		area_supported(){
+			return true;
+		}
+		Area(){
+			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ("Science Area");
+			(obj.dictionary) = () => ({
+				"": "Any Area", 
+				"AGRI": "🌽 Agri & Biology", 
+				"ARTS": "🖼️ Arts & Humanities", 
+				"BIOC": "🧬 Biochemistry & Genetics", 
+				"BUSI": "💼 Business & Accounting", 
+				"CENG": "⚗️ Chemical Engineering", 
+				"CHEM": "🧪 Chemistry", 
+				"COMP": "🖥️ Computing", 
+				"DECI": "🔀 Decisions", 
+				"DENT": "🦷 Dentistry", 
+				"EART": "🌍 Earth and Planetary", 
+				"ECON": "💰 Economics & Finance", 
+				"ENER": "⚡ Energy", 
+				"ENGI": "🏗️ Engineering", 
+				"ENVI": "🌌 Environment", 
+				"HEAL": "💓 Health", 
+				"IMMU": "☣️ Immunology & Microbio", 
+				"MATE": "💎 Materials", 
+				"MATH": "➗ Math", 
+				"MEDI": "💉 Medicine", 
+				"NEUR": "🧠 Neurology", 
+				"NURS": "⚕️ Nursing", 
+				"PHAR": "💊 Pharma & Toxic", 
+				"PHYS": "🚀 Physics & Astronomy", 
+				"PSYC": "🥴 Psychology", 
+				"SOCI": "💬 Social", 
+				"VETE": "🐈 Veterinary", 
+				"MULT": "🤹 Multidiscipline"
+			});
+			(obj.value) = (next) => ((this.area(next)));
+			(obj.enabled) = () => ((this.area_supported()));
+			return obj;
+		}
+		Zone(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Service()), (this.Area())]);
+			return obj;
+		}
+		place(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		place_supported(){
+			return true;
+		}
+		Place(){
+			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ("Text Place");
+			(obj.dictionary) = () => ({
+				"": "Anywhere", 
+				"TITLE": "Title", 
+				"TITLE-ABS-KEY": "Abstract"
+			});
+			(obj.value) = (next) => ((this.place(next)));
+			(obj.enabled) = () => ((this.place_supported()));
+			return obj;
+		}
+		Open_icon(){
+			const obj = new this.$.$mol_icon_lock_open_variant_outline();
+			return obj;
+		}
+		open(next){
+			if(next !== undefined) return next;
+			return true;
+		}
+		open_supported(){
+			return true;
+		}
+		Open(){
+			const obj = new this.$.$mol_check_icon();
+			(obj.hint) = () => ("Open Access");
+			(obj.Icon) = () => ((this.Open_icon()));
+			(obj.checked) = (next) => ((this.open(next)));
+			(obj.enabled) = () => ((this.open_supported()));
+			return obj;
+		}
+		sort(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		sort_supported(){
+			return true;
+		}
+		Sort(){
+			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ("Sorting");
+			(obj.dictionary) = () => ({
+				"": "⬆ Match", 
+				"refs": "⬆ Refs", 
+				"date": "⬆ Date"
+			});
+			(obj.value) = (next) => ((this.sort(next)));
+			(obj.enabled) = () => ((this.sort_supported()));
+			return obj;
+		}
+		help(){
+			return "https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm";
+		}
+		Help_icon(){
+			const obj = new this.$.$mol_icon_hint();
+			return obj;
+		}
+		Help(){
+			const obj = new this.$.$mol_link();
+			(obj.hint) = () => ("Query Syntax");
+			(obj.uri) = () => ((this.help()));
+			(obj.sub) = () => ([(this.Help_icon())]);
+			return obj;
+		}
+		Lights(){
+			const obj = new this.$.$mol_lights_toggle();
+			return obj;
+		}
+		Source(){
+			const obj = new this.$.$mol_link_source();
+			(obj.uri) = () => ("https://github.com/hyoo-ru/science.hyoo.ru");
+			return obj;
+		}
+		found_open(id){
+			return false;
+		}
+		found_title(id){
+			return "";
+		}
+		found_doi(id){
+			return null;
+		}
+		found_link(id){
+			return "";
+		}
+		found_rank(id){
+			return 0;
+		}
+		found_date(id){
+			return null;
+		}
+		found_journal(id){
+			return "";
+		}
+		Found_row(id){
+			const obj = new this.$.$hyoo_science_article();
+			(obj.open) = () => ((this.found_open(id)));
+			(obj.highlight) = () => ((this.query()));
+			(obj.title) = () => ((this.found_title(id)));
+			(obj.doi) = () => ((this.found_doi(id)));
+			(obj.uri) = () => ((this.found_link(id)));
+			(obj.rank) = () => ((this.found_rank(id)));
+			(obj.date) = () => ((this.found_date(id)));
+			(obj.journal_title) = () => ((this.found_journal(id)));
+			return obj;
+		}
+		found_rows(){
+			return [(this.Found_row("0"))];
+		}
+		Found_none(){
+			const obj = new this.$.$mol_chip();
+			(obj.title) = () => ("Not Found");
+			return obj;
+		}
+		Found_rows(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.found_rows()));
+			(obj.Empty) = () => ((this.Found_none()));
+			return obj;
+		}
+		request(){
+			return "";
+		}
+		Request(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Request: ", (this.request())]);
+			return obj;
+		}
+		Search(){
+			const obj = new this.$.$mol_page();
+			(obj.Title) = () => ((this.Query()));
+			(obj.head) = () => ([
+				(this.Zone()), 
+				(this.Query()), 
+				(this.Search_tools())
+			]);
+			(obj.tools) = () => ([
+				(this.Place()), 
+				(this.Open()), 
+				(this.Sort()), 
+				(this.Help()), 
+				(this.Lights()), 
+				(this.Source())
+			]);
+			(obj.body) = () => ([(this.Found_rows()), (this.Request())]);
+			return obj;
+		}
+		doi(){
+			return "";
+		}
+		Details(){
+			const obj = new this.$.$hyoo_science_details();
+			(obj.doi) = () => ((this.doi()));
+			return obj;
+		}
+		Theme(){
+			const obj = new this.$.$mol_theme_auto();
+			return obj;
+		}
+		pages(){
+			return [(this.Search()), (this.Details())];
+		}
+		plugins(){
+			return [(this.Theme())];
+		}
+		Placeholder(){
+			return null;
+		}
+	};
+	($mol_mem(($.$hyoo_science_app.prototype), "query_changed"));
+	($mol_mem(($.$hyoo_science_app.prototype), "search"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Query"));
+	($mol_mem(($.$hyoo_science_app.prototype), "service"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Service"));
+	($mol_mem(($.$hyoo_science_app.prototype), "area"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Area"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Zone"));
+	($mol_mem(($.$hyoo_science_app.prototype), "place"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Place"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Open_icon"));
+	($mol_mem(($.$hyoo_science_app.prototype), "open"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Open"));
+	($mol_mem(($.$hyoo_science_app.prototype), "sort"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Sort"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Help_icon"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Help"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Lights"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Source"));
+	($mol_mem_key(($.$hyoo_science_app.prototype), "Found_row"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Found_none"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Found_rows"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Request"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Search"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Details"));
+	($mol_mem(($.$hyoo_science_app.prototype), "Theme"));
+
 
 ;
 "use strict";
@@ -8772,6 +9532,9 @@ var $;
             query() {
                 return this.$.$mol_state_arg.value('query') ?? '';
             }
+            doi() {
+                return this.$.$mol_state_arg.value('doi') ?? '';
+            }
             title() {
                 return this.query().trim() || super.title();
             }
@@ -8798,6 +9561,12 @@ var $;
             }
             open_supported() {
                 return ['scopus', 'sciencedirect', 'crossref'].includes(this.service());
+            }
+            pages() {
+                return [
+                    this.Search(),
+                    ...this.doi() ? [this.Details()] : [],
+                ];
             }
             sort(next) {
                 if (!this.sort_supported())
@@ -8844,7 +9613,7 @@ var $;
                     open: this.open().toString(),
                 });
             }
-            data() {
+            search_data() {
                 const self = this;
                 return {
                     get crossref() {
@@ -8865,25 +9634,28 @@ var $;
                 }[this.service()];
             }
             found_rows() {
-                return this.data().article.map((_, i) => this.Found_row(i));
+                return this.search_data().article.map((_, i) => this.Found_row(i));
             }
             found_open(index) {
-                return this.data().article[index].open;
+                return this.search_data().article[index].open;
             }
             found_title(index) {
-                return this.data().article[index].title;
+                return this.search_data().article[index].title;
+            }
+            found_doi(index) {
+                return this.search_data().article[index].doi;
             }
             found_link(index) {
-                return this.data().article[index].link;
+                return this.search_data().article[index].link;
             }
             found_rank(index) {
-                return this.data().article[index].rank;
+                return this.search_data().article[index].rank;
             }
             found_date(index) {
-                return this.data().article[index].date;
+                return this.search_data().article[index].date;
             }
             found_journal(index) {
-                return this.data().article[index].journal;
+                return this.search_data().article[index].journal;
             }
         }
         __decorate([
@@ -8892,6 +9664,9 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_science_app.prototype, "query", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_science_app.prototype, "doi", null);
         __decorate([
             $mol_mem
         ], $hyoo_science_app.prototype, "title", null);
@@ -8906,6 +9681,9 @@ var $;
         ], $hyoo_science_app.prototype, "open", null);
         __decorate([
             $mol_mem
+        ], $hyoo_science_app.prototype, "pages", null);
+        __decorate([
+            $mol_mem
         ], $hyoo_science_app.prototype, "sort", null);
         __decorate([
             $mol_mem
@@ -8918,7 +9696,7 @@ var $;
         ], $hyoo_science_app.prototype, "search", null);
         __decorate([
             $mol_mem
-        ], $hyoo_science_app.prototype, "data", null);
+        ], $hyoo_science_app.prototype, "search_data", null);
         __decorate([
             $mol_mem
         ], $hyoo_science_app.prototype, "found_rows", null);
@@ -8933,6 +9711,12 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($hyoo_science_app, {
+            Search: {
+                flex: {
+                    basis: '40rem',
+                    grow: 1,
+                },
+            },
             Zone: {
                 flex: {
                     grow: 1,
@@ -8951,6 +9735,11 @@ var $;
             Request: {
                 color: $mol_theme.shade,
                 padding: $mol_gap.text,
+            },
+            Details: {
+                flex: {
+                    basis: '40rem',
+                },
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
