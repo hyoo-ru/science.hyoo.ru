@@ -1,101 +1,108 @@
-$hyoo_science_app $mol_page
-	Title <= Query $mol_search
-		hint <= title \Science Publications Searcher
-		query? <=> query_changed? <= query \
-		submit? <=> search? null
-	head /
-		<= Zone $mol_view sub /
-			<= Service $mol_select
-				hint \Indexing Service
-				dictionary *
-					sciencedirect \Science Direct
-					scopus \Scopus
-					crossref \CrossRef
-				value? <=> service? \scopus
-			<= Area $mol_select
-				hint \Science Area
-				dictionary *
-					\
-						\Any Area
-					AGRI \🌽 Agri & Biology
-					ARTS \🖼️ Arts & Humanities
-					BIOC \🧬 Biochemistry & Genetics
-					BUSI \💼 Business & Accounting
-					CENG \⚗️ Chemical Engineering
-					CHEM \🧪 Chemistry
-					COMP \🖥️ Computing
-					DECI \🔀 Decisions
-					DENT \🦷 Dentistry
-					EART \🌍 Earth and Planetary
-					ECON \💰 Economics & Finance
-					ENER \⚡ Energy
-					ENGI \🏗️ Engineering
-					ENVI \🌌 Environment
-					HEAL \💓 Health
-					IMMU \☣️ Immunology & Microbio
-					MATE \💎 Materials
-					MATH \➗ Math
-					MEDI \💉 Medicine
-					NEUR \🧠 Neurology
-					NURS \⚕️ Nursing
-					PHAR \💊 Pharma & Toxic
-					PHYS \🚀 Physics & Astronomy
-					PSYC \🥴 Psychology
-					SOCI \💬 Social
-					VETE \🐈 Veterinary
-					MULT \🤹 Multidiscipline
-				value? <=> area? \
-				enabled <= area_supported true
-		<= Title
-		<= Tools
-	tools /
-		<= Place $mol_select
-			hint \Text Place
-			dictionary *
-				\
-					\Anywhere
-				TITLE \Title
-				TITLE-ABS-KEY \Abstract
-			value? <=> place? \
-			enabled <= place_supported true
-		<= Open $mol_check_icon
-			hint \Open Access
-			Icon <= Open_icon $mol_icon_lock_open_variant_outline
-			checked? <=> open? true
-			enabled <= open_supported true
-		<= Sort $mol_select
-			hint \Sorting
-			dictionary *
-				\
-					\⬆ Match
-				refs \⬆ Refs
-				date \⬆ Date
-			value? <=> sort? \
-			enabled <= sort_supported true
-		<= Help $mol_link
-			hint \Query Syntax
-			uri <= help \https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm
-			sub /
-				<= Help_icon $mol_icon_hint
-		<= Lights $mol_lights_toggle
-		<= Source $mol_link_source
-			uri \https://github.com/hyoo-ru/science.hyoo.ru
-	body /
-		<= Found_rows $mol_list
-			rows <= found_rows /
-				<= Found_row*0 $hyoo_science_article
-					open <= found_open* false
-					highlight <= query
-					title <= found_title* \
-					uri <= found_link* \
-					rank <= found_rank* 0
-					date <= found_date* $mol_time_moment
-					journal_title <= found_journal* \
-			Empty <= Found_none $mol_chip
-				title \Not Found
-		<= Request $mol_view
-			sub /
-				\Request: 
-				<= request \
+$hyoo_science_app $mol_book2
+	pages /
+		<= Search $mol_page
+			Tools => Search_tools
+			Title <= Query $mol_search
+				hint <= title \Science Publications Searcher
+				query? <=> query_changed? <= query \
+				submit? <=> search? null
+			head /
+				<= Zone $mol_view sub /
+					<= Service $mol_select
+						hint \Indexing Service
+						dictionary *
+							sciencedirect \Science Direct
+							scopus \Scopus
+							crossref \CrossRef
+						value? <=> service? \scopus
+					<= Area $mol_select
+						hint \Science Area
+						dictionary *
+							\
+								\Any Area
+							AGRI \🌽 Agri & Biology
+							ARTS \🖼️ Arts & Humanities
+							BIOC \🧬 Biochemistry & Genetics
+							BUSI \💼 Business & Accounting
+							CENG \⚗️ Chemical Engineering
+							CHEM \🧪 Chemistry
+							COMP \🖥️ Computing
+							DECI \🔀 Decisions
+							DENT \🦷 Dentistry
+							EART \🌍 Earth and Planetary
+							ECON \💰 Economics & Finance
+							ENER \⚡ Energy
+							ENGI \🏗️ Engineering
+							ENVI \🌌 Environment
+							HEAL \💓 Health
+							IMMU \☣️ Immunology & Microbio
+							MATE \💎 Materials
+							MATH \➗ Math
+							MEDI \💉 Medicine
+							NEUR \🧠 Neurology
+							NURS \⚕️ Nursing
+							PHAR \💊 Pharma & Toxic
+							PHYS \🚀 Physics & Astronomy
+							PSYC \🥴 Psychology
+							SOCI \💬 Social
+							VETE \🐈 Veterinary
+							MULT \🤹 Multidiscipline
+						value? <=> area? \
+						enabled <= area_supported true
+				<= Query
+				<= Search_tools
+			tools /
+				<= Place $mol_select
+					hint \Text Place
+					dictionary *
+						\
+							\Anywhere
+						TITLE \Title
+						TITLE-ABS-KEY \Abstract
+					value? <=> place? \
+					enabled <= place_supported true
+				<= Open $mol_check_icon
+					hint \Open Access
+					Icon <= Open_icon $mol_icon_lock_open_variant_outline
+					checked? <=> open? true
+					enabled <= open_supported true
+				<= Sort $mol_select
+					hint \Sorting
+					dictionary *
+						\
+							\⬆ Match
+						refs \⬆ Refs
+						date \⬆ Date
+					value? <=> sort? \
+					enabled <= sort_supported true
+				<= Help $mol_link
+					hint \Query Syntax
+					uri <= help \https://dev.elsevier.com/tips/ScienceDirectQueryTips.htm
+					sub /
+						<= Help_icon $mol_icon_hint
+				<= Lights $mol_lights_toggle
+				<= Source $mol_link_source
+					uri \https://github.com/hyoo-ru/science.hyoo.ru
+			body /
+				<= Found_rows $mol_list
+					rows <= found_rows /
+						<= Found_row*0 $hyoo_science_article
+							open <= found_open* false
+							highlight <= query
+							title <= found_title* \
+							doi <= found_doi* null string
+							uri <= found_link* \
+							rank <= found_rank* 0
+							date <= found_date* null $mol_time_moment
+							journal_title <= found_journal* \
+					Empty <= Found_none $mol_chip
+						title \Not Found
+				<= Request $mol_view
+					sub /
+						\Request: 
+						<= request \
+		<= Details $hyoo_science_details
+			doi <= doi \
 	plugins /
 		<= Theme $mol_theme_auto
+	Placeholder null

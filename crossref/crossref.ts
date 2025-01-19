@@ -12,7 +12,7 @@ namespace $ {
 
 	export let $hyoo_science_crossref_person = $mol_data_record({
 		'ORCID': $mol_data_optional( $mol_data_string ),
-		'given': $mol_data_string,
+		'given': $mol_data_optional( $mol_data_string ),
 		'family': $mol_data_string,
 	})
 
@@ -20,7 +20,6 @@ namespace $ {
 		'DOI': $mol_data_string,
 		'ISSN': $mol_data_optional( $mol_data_array( $mol_data_string ) ),
 		'URL': $mol_data_string,
-		// 'publisher': $mol_data_string,
 		'abstract': $mol_data_optional( $mol_data_string ),
 		'container-title': $mol_data_array( $mol_data_string ),
 		'is-referenced-by-count': $mol_data_integer,
@@ -28,19 +27,37 @@ namespace $ {
 		'title': $mol_data_array( $mol_data_string ),
 		'subtitle': $mol_data_optional( $mol_data_array( $mol_data_string ) ),
 		'reference': $mol_data_optional( $mol_data_array( $hyoo_science_crossref_ref ) ),
-		// 'author': $mol_data_optional( $mol_data_array( $hyoo_science_crossref_person ) ),
+		'author': $mol_data_optional( $mol_data_array( $hyoo_science_crossref_person ) ),
 		'published': $hyoo_science_crossref_date,
 		'published-print': $mol_data_optional( $hyoo_science_crossref_date ),
 		'published-online': $mol_data_optional( $hyoo_science_crossref_date ),
+		'page': $mol_data_optional( $mol_data_string ),
+		'volume': $mol_data_optional( $mol_data_string ),
 	})
 	
-	export let $hyoo_science_crossref_response = $mol_data_record({
+	export let $hyoo_science_crossref_search_response = $mol_data_record({
 		'message': $mol_data_record({
 			'total-results': $mol_data_integer,
 			'items': $mol_data_array( $hyoo_science_crossref_entry ),
 		}),
 	})
 
+	export let $hyoo_science_crossref_details_response = $mol_data_record({
+		'message': $hyoo_science_crossref_entry,
+	})
+
+	function html2text( html: string ) {
+		return $mol_html_decode( html.replace( /<.*?>/g, ' ' ) )
+	}
+
+	function date2moment( date: typeof $hyoo_science_crossref_date.Value | undefined ) {
+		if( !date ) return null
+		return new $mol_time_moment({
+			year: date["date-parts"][0][0],
+			month: date["date-parts"][0][1],
+		})
+	}
+	
 	export function $hyoo_science_crossref_search( this: $, query: string, open: boolean, sort: string ) {
 
 		const endpoint = `https://api.crossref.org/types/journal-article/works`
@@ -67,7 +84,7 @@ namespace $ {
 			].join( ',' ),
 		}), endpoint )
 
-		const resp = $hyoo_science_crossref_response( this.$mol_fetch.json( uri.toString() ) as any )["message"]
+		const resp = $hyoo_science_crossref_search_response( this.$mol_fetch.json( uri.toString() ) as any )["message"]
 
 		return {
 			total: resp["total-results"],
@@ -76,18 +93,36 @@ namespace $ {
 			.map( entry => ({
 				link: entry.URL,
 				doi: entry.DOI,
-				title: $mol_html_decode( ( entry.title![0] + ( entry.subtitle ? `: ${ entry.subtitle[0] }` : '' ) ).replace( /<.*?>/g, ' ' ) ),
+				title: html2text( entry.title?.[0] ?? '' ) + ( entry.subtitle ? `: ${ html2text( entry.subtitle[0] ) }` : '' ),
 				// author: entry.author?.[0] ? ( `${ entry.author?.[0].given } ${ entry.author?.[0].family }` ) : '🐱‍👤',
-				journal: $mol_html_decode( entry["container-title"]![0] ),
-				date: new $mol_time_moment({
-					year: entry["published"]["date-parts"][0][0],
-					month: entry["published"]["date-parts"][0][1],
-				}),
+				journal: html2text( entry["container-title"]![0] ),
+				date: date2moment( entry["published"] ),
 				open: Boolean( entry["published-online"] ),
 				rank: entry["is-referenced-by-count"],
 			}) ),
 		}
 
 	}
-	
+
+	export function $hyoo_science_crossref_details( this: $, doi: string ) {
+
+		const entry = $hyoo_science_crossref_details_response(
+			this.$$.$mol_fetch.json( `https://api.crossref.org/works/${doi}` ) as any
+		).message
+
+		return {
+			doi: entry.DOI,
+			link: entry.URL,
+			title: html2text( entry.title?.[0] ?? '' ),
+			title_sub: html2text( entry.subtitle?.[0] ?? '' ),
+			authors: entry.author?.map( person => `${ person.given ?? '' } ${ person.family }` ) ?? [],
+			journal: html2text( entry["container-title"]?.[0] ?? '' ),
+			abstract: html2text( entry.abstract ?? '' ),
+			rank: entry["is-referenced-by-count"],
+			published: date2moment( entry['published'] ),
+			print_location: `vol. ${ entry['volume'] }, pp. ${ entry['page'] }`,
+		}
+
+	}
+
 }

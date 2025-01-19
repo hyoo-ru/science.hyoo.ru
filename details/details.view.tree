@@ -1,0 +1,38 @@
+$hyoo_science_details $mol_page
+	tools /
+		<= Cite $mol_button_copy
+			hint \Copy cite
+			text <= cite \
+		<= Close $mol_link
+			arg * doi null
+			sub /
+				<= Close_icon $mol_icon_close
+	body /
+		<= Content $mol_list rows /
+			<= Main $mol_form_group sub /
+				<= Doi_labeler $mol_labeler
+					title \DOI
+					Content <= Doi $mol_link
+						uri <= link \
+						title <= doi \
+				<= Rank_labeler $mol_labeler
+					title \Rank
+					Content <= Rank $mol_paragraph
+						title <= rank_view \「0」
+			<= Publication $mol_form_group sub /
+				<= Journal_labeler $mol_labeler
+					title \Journal
+					Content <= Journal $mol_paragraph
+						title <= journal \
+				<= Published_labeler $mol_labeler
+					title \Published
+					Content <= Published $mol_paragraph
+						title <= published \❓
+			<= Abstract_labeler $mol_labeler
+				title \Abstract
+				Content <= Abstract $mol_paragraph
+					title <= abstract \❓
+			<= Authors_labeler $mol_labeler
+				title \Authors
+				Content <= Authors $mol_paragraph
+					title <= authors \

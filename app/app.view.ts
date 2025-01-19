@@ -12,6 +12,11 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
+		doi() {
+			return this.$.$mol_state_arg.value( 'doi' ) ?? ''
+		}
+
+		@ $mol_mem
 		title() {
 			return this.query().trim() || super.title()
 		}
@@ -44,6 +49,14 @@ namespace $.$$ {
 
 		open_supported() {
 			return [ 'scopus', 'sciencedirect', 'crossref' ].includes( this.service() )
+		}
+
+		@ $mol_mem
+		pages() {
+			return [
+				this.Search(),
+				... this.doi() ? [ this.Details() ] : [],
+			]
 		}
 
 		@ $mol_mem
@@ -98,7 +111,7 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
-		data() {
+		search_data() {
 			const self = this
 			return {
 				get crossref() {
@@ -133,32 +146,36 @@ namespace $.$$ {
 
 		@ $mol_mem
 		found_rows() {
-			return this.data().article.map( (_,i)=> this.Found_row( i ) )
+			return this.search_data().article.map( (_,i)=> this.Found_row( i ) )
 		}
 
 		found_open( index: number ) {
-			return this.data().article[ index ].open
+			return this.search_data().article[ index ].open
 		}
 		
 		found_title( index: number ) {
-			return this.data().article[ index ].title
+			return this.search_data().article[ index ].title
+		}
+		
+		found_doi( index: number ) {
+			return this.search_data().article[ index ].doi
 		}
 		
 		found_link( index: number ) {
-			return this.data().article[ index ].link
+			return this.search_data().article[ index ].link
 		}
 		
 		found_rank( index: number ) {
-			return this.data().article[ index ].rank
+			return this.search_data().article[ index ].rank
 		}
 		
 		found_date( index: number ) {
-			return this.data().article[ index ].date
+			return this.search_data().article[ index ].date
 		}
 		
 		found_journal( index: number ) {
-			return this.data().article[ index ].journal
+			return this.search_data().article[ index ].journal
 		}
-		
+
 	}
 }

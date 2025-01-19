@@ -1,6 +1,6 @@
 $hyoo_science_article $mol_view
 	open false
-	date $mol_time_moment
+	date null $mol_time_moment
 	rank 0
 	sub /
 		<= Link $mol_link
@@ -19,3 +19,6 @@ $hyoo_science_article $mol_view
 		<= Date $mol_view
 			sub /
 				<= date_view \
+		<= Details $mol_link
+			arg * doi <= doi null string
+			sub / <= Details_icon $mol_icon_page_next_outline
