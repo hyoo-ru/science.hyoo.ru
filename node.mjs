@@ -9593,7 +9593,10 @@ var $;
             abstract: html2text(entry.abstract ?? ''),
             rank: entry["is-referenced-by-count"],
             published: date2moment(entry['published']),
-            print_location: `vol. ${entry['volume']}, pp. ${entry['page']}`,
+            print_location: [
+                entry['volume'],
+                entry['page'],
+            ].filter(Boolean).join(', '),
         };
     }
     $.$hyoo_science_crossref_details = $hyoo_science_crossref_details;
@@ -9638,7 +9641,17 @@ var $;
                 return this.data().print_location;
             }
             cite() {
-                return `${this.authors()}, "${this.title()}", ${this.journal()}, ${this.print_location()}, ${this.link()}`;
+                const { authors, published, title, journal, print_location, link } = this.data();
+                return [
+                    authors.join(', '),
+                    published?.toString('YYYY') ?? '',
+                    title,
+                    [
+                        journal,
+                        print_location,
+                    ].filter(Boolean).join(', '),
+                    link,
+                ].filter(Boolean).join('. ');
             }
         }
         __decorate([
