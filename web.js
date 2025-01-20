@@ -8912,6 +8912,7 @@ var $;
                 'published-online',
                 'is-referenced-by-count',
             ].join(','),
+            mailto: 'webmaster@hyoo.ru',
         }), endpoint);
         const resp = $.$hyoo_science_crossref_search_response(this.$mol_fetch.json(uri.toString()))["message"];
         return {
@@ -8930,7 +8931,7 @@ var $;
     }
     $.$hyoo_science_crossref_search = $hyoo_science_crossref_search;
     function $hyoo_science_crossref_details(doi) {
-        const entry = $.$hyoo_science_crossref_details_response(this.$$.$mol_fetch.json(`https://api.crossref.org/works/${doi}`)).message;
+        const entry = $.$hyoo_science_crossref_details_response(this.$$.$mol_fetch.json(`https://api.crossref.org/works/${doi}?mailto=webmaster@hyoo.ru`)).message;
         return {
             doi: entry.DOI,
             link: entry.URL,
