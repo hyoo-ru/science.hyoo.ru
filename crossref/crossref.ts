@@ -83,6 +83,7 @@ namespace $ {
 				'published-online',
 				'is-referenced-by-count',
 			].join( ',' ),
+			mailto: 'webmaster@hyoo.ru',
 		}), endpoint )
 
 		const resp = $hyoo_science_crossref_search_response( this.$mol_fetch.json( uri.toString() ) as any )["message"]
@@ -108,7 +109,7 @@ namespace $ {
 	export function $hyoo_science_crossref_details( this: $, doi: string ) {
 
 		const entry = $hyoo_science_crossref_details_response(
-			this.$$.$mol_fetch.json( `https://api.crossref.org/works/${doi}` ) as any
+			this.$$.$mol_fetch.json( `https://api.crossref.org/works/${doi}?mailto=webmaster@hyoo.ru` ) as any
 		).message
 
 		return {
