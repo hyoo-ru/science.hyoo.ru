@@ -121,7 +121,10 @@ namespace $ {
 			abstract: html2text( entry.abstract ?? '' ),
 			rank: entry["is-referenced-by-count"],
 			published: date2moment( entry['published'] ),
-			print_location: `vol. ${ entry['volume'] }, pp. ${ entry['page'] }`,
+			print_location: [
+				entry['volume'],
+				entry['page'],
+			].filter( Boolean ).join( ', ' ),
 		}
 
 	}

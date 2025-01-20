@@ -21,7 +21,7 @@ namespace $.$$ {
 		}
 		
 		authors() {
-			return this.data().authors.join( ', ')
+			return this.data().authors.join( ', ' )
 		}
 
 		abstract() {
@@ -42,7 +42,17 @@ namespace $.$$ {
 
 		@ $mol_mem
 		cite() {
-			return `${ this.authors() }, "${ this.title() }", ${ this.journal() }, ${ this.print_location() }, ${ this.link() }`
+			const { authors, published, title, journal, print_location, link } = this.data()
+			return [
+				authors.join( ', ' ),
+				published?.toString( 'YYYY' ) ?? '',
+				title,
+				[
+					journal,
+					print_location,
+				].filter( Boolean ).join( ', ' ),
+				link,
+			].filter( Boolean ).join( '. ' )
 		}
 		
 	}
