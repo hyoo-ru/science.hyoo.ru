@@ -8867,8 +8867,9 @@ var $;
         'published': $.$hyoo_science_crossref_date,
         'published-print': $mol_data_optional($.$hyoo_science_crossref_date),
         'published-online': $mol_data_optional($.$hyoo_science_crossref_date),
-        'page': $mol_data_optional($mol_data_string),
         'volume': $mol_data_optional($mol_data_string),
+        'issue': $mol_data_optional($mol_data_string),
+        'page': $mol_data_optional($mol_data_string),
     });
     $.$hyoo_science_crossref_search_response = $mol_data_record({
         'message': $mol_data_record({
@@ -8941,10 +8942,11 @@ var $;
             journal: html2text(entry["container-title"]?.[0] ?? ''),
             abstract: html2text(entry.abstract ?? ''),
             rank: entry["is-referenced-by-count"],
-            published: date2moment(entry['published']),
+            published: date2moment(entry.published),
             print_location: [
-                entry['volume'],
-                entry['page'],
+                entry.volume,
+                entry.issue,
+                entry.page,
             ].filter(Boolean).join(', '),
         };
     }

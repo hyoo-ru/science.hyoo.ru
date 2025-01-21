@@ -3314,8 +3314,9 @@ declare namespace $ {
             'date-time'?: string | undefined;
             'date-parts': readonly (readonly number[])[];
         } | undefined;
-        page?: string | undefined;
         volume?: string | undefined;
+        issue?: string | undefined;
+        page?: string | undefined;
         title: readonly string[];
         DOI: string;
         URL: string;
@@ -3347,8 +3348,9 @@ declare namespace $ {
             'date-time'?: string | undefined;
             'date-parts': readonly (readonly number[])[];
         }> | undefined;
-        page?: string | undefined;
         volume?: string | undefined;
+        issue?: string | undefined;
+        page?: string | undefined;
         title: readonly string[];
         DOI: string;
         URL: string;
@@ -3662,14 +3664,21 @@ declare namespace $ {
                     'date-parts': readonly (readonly number[])[];
                 }> | undefined;
             };
-            page: ((val: string | undefined) => string | undefined) & {
+            volume: ((val: string | undefined) => string | undefined) & {
                 config: {
                     sub: (val: string) => string;
                     fallback: (() => string) | undefined;
                 };
                 Value: string | undefined;
             };
-            volume: ((val: string | undefined) => string | undefined) & {
+            issue: ((val: string | undefined) => string | undefined) & {
+                config: {
+                    sub: (val: string) => string;
+                    fallback: (() => string) | undefined;
+                };
+                Value: string | undefined;
+            };
+            page: ((val: string | undefined) => string | undefined) & {
                 config: {
                     sub: (val: string) => string;
                     fallback: (() => string) | undefined;
@@ -3699,8 +3708,9 @@ declare namespace $ {
                 'date-time'?: string | undefined;
                 'date-parts': readonly (readonly number[])[];
             }> | undefined;
-            page?: string | undefined;
             volume?: string | undefined;
+            issue?: string | undefined;
+            page?: string | undefined;
             title: readonly string[];
             DOI: string;
             URL: string;
@@ -3737,8 +3747,9 @@ declare namespace $ {
                     'date-time'?: string | undefined;
                     'date-parts': readonly (readonly number[])[];
                 } | undefined;
-                page?: string | undefined;
                 volume?: string | undefined;
+                issue?: string | undefined;
+                page?: string | undefined;
                 title: readonly string[];
                 DOI: string;
                 URL: string;
@@ -3775,8 +3786,9 @@ declare namespace $ {
                     'date-time'?: string | undefined;
                     'date-parts': readonly (readonly number[])[];
                 }> | undefined;
-                page?: string | undefined;
                 volume?: string | undefined;
+                issue?: string | undefined;
+                page?: string | undefined;
                 title: readonly string[];
                 DOI: string;
                 URL: string;
@@ -3814,8 +3826,9 @@ declare namespace $ {
                         'date-time'?: string | undefined;
                         'date-parts': readonly (readonly number[])[];
                     } | undefined;
-                    page?: string | undefined;
                     volume?: string | undefined;
+                    issue?: string | undefined;
+                    page?: string | undefined;
                     title: readonly string[];
                     DOI: string;
                     URL: string;
@@ -3850,8 +3863,9 @@ declare namespace $ {
                         'date-time'?: string | undefined;
                         'date-parts': readonly (readonly number[])[];
                     }> | undefined;
-                    page?: string | undefined;
                     volume?: string | undefined;
+                    issue?: string | undefined;
+                    page?: string | undefined;
                     title: readonly string[];
                     DOI: string;
                     URL: string;
@@ -3887,8 +3901,9 @@ declare namespace $ {
                             'date-time'?: string | undefined;
                             'date-parts': readonly (readonly number[])[];
                         } | undefined;
-                        page?: string | undefined;
                         volume?: string | undefined;
+                        issue?: string | undefined;
+                        page?: string | undefined;
                         title: readonly string[];
                         DOI: string;
                         URL: string;
@@ -3920,8 +3935,9 @@ declare namespace $ {
                             'date-time'?: string | undefined;
                             'date-parts': readonly (readonly number[])[];
                         }> | undefined;
-                        page?: string | undefined;
                         volume?: string | undefined;
+                        issue?: string | undefined;
+                        page?: string | undefined;
                         title: readonly string[];
                         DOI: string;
                         URL: string;
@@ -3954,8 +3970,9 @@ declare namespace $ {
                                 'date-time'?: string | undefined;
                                 'date-parts': readonly (readonly number[])[];
                             } | undefined;
-                            page?: string | undefined;
                             volume?: string | undefined;
+                            issue?: string | undefined;
+                            page?: string | undefined;
                             title: readonly string[];
                             DOI: string;
                             URL: string;
@@ -3987,8 +4004,9 @@ declare namespace $ {
                                 'date-time'?: string | undefined;
                                 'date-parts': readonly (readonly number[])[];
                             }> | undefined;
-                            page?: string | undefined;
                             volume?: string | undefined;
+                            issue?: string | undefined;
+                            page?: string | undefined;
                             title: readonly string[];
                             DOI: string;
                             URL: string;
@@ -4302,14 +4320,21 @@ declare namespace $ {
                                         'date-parts': readonly (readonly number[])[];
                                     }> | undefined;
                                 };
-                                page: ((val: string | undefined) => string | undefined) & {
+                                volume: ((val: string | undefined) => string | undefined) & {
                                     config: {
                                         sub: (val: string) => string;
                                         fallback: (() => string) | undefined;
                                     };
                                     Value: string | undefined;
                                 };
-                                volume: ((val: string | undefined) => string | undefined) & {
+                                issue: ((val: string | undefined) => string | undefined) & {
+                                    config: {
+                                        sub: (val: string) => string;
+                                        fallback: (() => string) | undefined;
+                                    };
+                                    Value: string | undefined;
+                                };
+                                page: ((val: string | undefined) => string | undefined) & {
                                     config: {
                                         sub: (val: string) => string;
                                         fallback: (() => string) | undefined;
@@ -4339,8 +4364,9 @@ declare namespace $ {
                                     'date-time'?: string | undefined;
                                     'date-parts': readonly (readonly number[])[];
                                 }> | undefined;
-                                page?: string | undefined;
                                 volume?: string | undefined;
+                                issue?: string | undefined;
+                                page?: string | undefined;
                                 title: readonly string[];
                                 DOI: string;
                                 URL: string;
@@ -4374,8 +4400,9 @@ declare namespace $ {
                                 'date-time'?: string | undefined;
                                 'date-parts': readonly (readonly number[])[];
                             }> | undefined;
-                            page?: string | undefined;
                             volume?: string | undefined;
+                            issue?: string | undefined;
+                            page?: string | undefined;
                             title: readonly string[];
                             DOI: string;
                             URL: string;
@@ -4412,8 +4439,9 @@ declare namespace $ {
                             'date-time'?: string | undefined;
                             'date-parts': readonly (readonly number[])[];
                         }> | undefined;
-                        page?: string | undefined;
                         volume?: string | undefined;
+                        issue?: string | undefined;
+                        page?: string | undefined;
                         title: readonly string[];
                         DOI: string;
                         URL: string;
@@ -4452,8 +4480,9 @@ declare namespace $ {
                         'date-time'?: string | undefined;
                         'date-parts': readonly (readonly number[])[];
                     }> | undefined;
-                    page?: string | undefined;
                     volume?: string | undefined;
+                    issue?: string | undefined;
+                    page?: string | undefined;
                     title: readonly string[];
                     DOI: string;
                     URL: string;
@@ -4490,8 +4519,9 @@ declare namespace $ {
                 'date-time'?: string | undefined;
                 'date-parts': readonly (readonly number[])[];
             } | undefined;
-            page?: string | undefined;
             volume?: string | undefined;
+            issue?: string | undefined;
+            page?: string | undefined;
             title: readonly string[];
             DOI: string;
             URL: string;
@@ -4525,8 +4555,9 @@ declare namespace $ {
                 'date-time'?: string | undefined;
                 'date-parts': readonly (readonly number[])[];
             }> | undefined;
-            page?: string | undefined;
             volume?: string | undefined;
+            issue?: string | undefined;
+            page?: string | undefined;
             title: readonly string[];
             DOI: string;
             URL: string;
@@ -4561,8 +4592,9 @@ declare namespace $ {
                     'date-time'?: string | undefined;
                     'date-parts': readonly (readonly number[])[];
                 } | undefined;
-                page?: string | undefined;
                 volume?: string | undefined;
+                issue?: string | undefined;
+                page?: string | undefined;
                 title: readonly string[];
                 DOI: string;
                 URL: string;
@@ -4594,8 +4626,9 @@ declare namespace $ {
                     'date-time'?: string | undefined;
                     'date-parts': readonly (readonly number[])[];
                 }> | undefined;
-                page?: string | undefined;
                 volume?: string | undefined;
+                issue?: string | undefined;
+                page?: string | undefined;
                 title: readonly string[];
                 DOI: string;
                 URL: string;
@@ -4909,14 +4942,21 @@ declare namespace $ {
                             'date-parts': readonly (readonly number[])[];
                         }> | undefined;
                     };
-                    page: ((val: string | undefined) => string | undefined) & {
+                    volume: ((val: string | undefined) => string | undefined) & {
                         config: {
                             sub: (val: string) => string;
                             fallback: (() => string) | undefined;
                         };
                         Value: string | undefined;
                     };
-                    volume: ((val: string | undefined) => string | undefined) & {
+                    issue: ((val: string | undefined) => string | undefined) & {
+                        config: {
+                            sub: (val: string) => string;
+                            fallback: (() => string) | undefined;
+                        };
+                        Value: string | undefined;
+                    };
+                    page: ((val: string | undefined) => string | undefined) & {
                         config: {
                             sub: (val: string) => string;
                             fallback: (() => string) | undefined;
@@ -4946,8 +4986,9 @@ declare namespace $ {
                         'date-time'?: string | undefined;
                         'date-parts': readonly (readonly number[])[];
                     }> | undefined;
-                    page?: string | undefined;
                     volume?: string | undefined;
+                    issue?: string | undefined;
+                    page?: string | undefined;
                     title: readonly string[];
                     DOI: string;
                     URL: string;
@@ -4983,8 +5024,9 @@ declare namespace $ {
                     'date-time'?: string | undefined;
                     'date-parts': readonly (readonly number[])[];
                 }> | undefined;
-                page?: string | undefined;
                 volume?: string | undefined;
+                issue?: string | undefined;
+                page?: string | undefined;
                 title: readonly string[];
                 DOI: string;
                 URL: string;
