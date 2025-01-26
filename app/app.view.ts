@@ -102,12 +102,25 @@ namespace $.$$ {
 
 		@ $mol_action
 		search() {
+			
+			const query = this.query_changed().trim()
+			
+			if( /^[\w.]+\/[\w.]+$/.test( query ) ) {
+				
+				this.$.$mol_state_arg.go({
+					doi: query,
+				})
+				return
+				
+			}
+			
 			this.$.$mol_state_arg.go({
 				area: this.area(),
-				query: this.query_changed(),
+				query,
 				place: this.place(),
 				open: this.open().toString(),
 			})
+			
 		}
 
 		@ $mol_mem
