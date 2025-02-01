@@ -46,7 +46,7 @@ namespace $.$$ {
 			return [
 				authors.join( ', ' ),
 				published?.toString( 'YYYY' ) ?? '',
-				title,
+				this.title(),
 				[
 					journal,
 					print_location,
