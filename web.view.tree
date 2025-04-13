@@ -384,6 +384,9 @@ $hyoo_science_article $mol_view
 			sub / <= Details_icon $mol_icon_page_next_outline
 
 $mol_chip $mol_view
+	attr *
+		^
+		title <= hint \
 	sub /
 		<= title
 
