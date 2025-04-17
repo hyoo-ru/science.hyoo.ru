@@ -384,6 +384,7 @@ $hyoo_science_article $mol_view
 			sub / <= Details_icon $mol_icon_page_next_outline
 
 $mol_chip $mol_view
+	minimal_height 40
 	attr *
 		^
 		title <= hint \
