@@ -512,7 +512,8 @@ $hyoo_science_details $mol_page
 					title <= authors \
 
 $mol_theme_auto $mol_plugin
-	attr * mol_theme <= theme \
+	light \$mol_theme_light
+	attr * mol_theme <= theme <= dark \$mol_theme_dark
 
 $hyoo_science_app $mol_book2
 	pages /
