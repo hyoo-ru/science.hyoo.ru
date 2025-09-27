@@ -215,6 +215,8 @@
     "$mol_labeler",
     "$mol_form_group",
     "$mol_form",
+    "$mol_button_major",
+    "$mol_status",
     "$mol_row",
     "$mol_form_field",
     "$hyoo_science_crossref",
