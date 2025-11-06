@@ -233,6 +233,8 @@
     "$mol_data_number",
     "$mol_html_decode",
     "$mol_fetch",
+    "$mol_rest_code",
+    "$mol_rest",
     "$mol_dom_parse",
     "$mol_theme_auto",
     "$hyoo_science_elsevier",
