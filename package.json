@@ -250,7 +250,6 @@
     "$mol_data_variant"
   ],
   "dependencies": {
-    "internal": "*",
     "jsdom": "*"
   }
 }
