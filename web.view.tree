@@ -577,7 +577,7 @@ $hyoo_science_app $mol_book2
 							sciencedirect \Science Direct
 							scopus \Scopus
 							crossref \CrossRef
-						value? <=> service? \scopus
+						value? <=> service? \crossref
 					<= Area $mol_select
 						hint \Science Area
 						dictionary *
