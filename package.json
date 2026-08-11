@@ -198,6 +198,7 @@
     "$mol_icon_hint",
     "$mol_link",
     "$mol_state_arg",
+    "$mol_dom_safe",
     "$mol_lights_toggle",
     "$mol_lights",
     "$mol_media",
