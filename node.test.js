@@ -10156,14 +10156,11 @@ var $;
                 basis: 'auto',
                 direction: 'column',
             },
-            position: 'relative',
             alignSelf: 'stretch',
             maxWidth: per(100),
             maxHeight: per(100),
             boxSizing: 'border-box',
             color: $mol_theme.text,
-            // backdropFilter: blur( `3px` ), enforces layering
-            // zIndex: 0 ,
             ':focus': {
                 outline: 'none',
             },
@@ -10172,7 +10169,6 @@ var $;
                 flexWrap: 'wrap',
                 justifyContent: 'flex-end',
                 flex: 'none',
-                position: 'relative',
                 margin: 0,
                 minHeight: rem(4),
                 padding: $mol_gap.block,
@@ -10188,7 +10184,6 @@ var $;
                         [0, `0.5rem`, `0.5rem`, `-0.5rem`, hsla(0, 0, 0, .25)],
                     ],
                 },
-                zIndex: 2,
                 '@media': {
                     'print': {
                         box: {
@@ -10267,7 +10262,6 @@ var $;
                         [0, `0.5rem`, `0.5rem`, `-0.5rem`, hsla(0, 0, 0, .25)],
                     ],
                 },
-                zIndex: 1,
                 padding: $mol_gap.block,
                 ':empty': {
                     display: 'none',
