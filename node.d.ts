@@ -4240,6 +4240,10 @@ declare namespace $ {
 
 //# sourceMappingURL=row.view.tree.d.ts.map
 declare namespace $ {
+    function $mol_error_fence<Data>(task: () => Data, fallback: (parent: Error) => Error | Data | PromiseLike<Data>, loading?: (parent: PromiseLike<Data>) => Error | Data | PromiseLike<Data>): Data;
+}
+
+declare namespace $ {
 
 	type $mol_view__sub_mol_form_field_1 = $mol_type_enforce<
 		readonly(any)[]
@@ -4269,6 +4273,7 @@ declare namespace $.$$ {
      */
     class $mol_form_field extends $.$mol_form_field {
         state(): string | null;
+        label(): readonly any[];
         bid(): string;
     }
 }
@@ -4526,10 +4531,6 @@ declare namespace $ {
         'Network Read Timeout Error' = 598,
         'Network Connect Timeout Error' = 599
     }
-}
-
-declare namespace $ {
-    function $mol_error_fence<Data>(task: () => Data, fallback: (parent: Error) => Error | Data | PromiseLike<Data>, loading?: (parent: PromiseLike<Data>) => Error | Data | PromiseLike<Data>): Data;
 }
 
 declare namespace $ {
